@@ -1,5 +1,5 @@
 Package: bilis
-Title: An R package to calculate health indicators.
+Title: An R package to calculate health indicators
 Version: 0.0.0.9000
 Authors@R: 
     person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
