@@ -18,3 +18,24 @@ test_that("get sim with uf and sex works", {
   expect_equal("tbl_df", class(res)[1])
   expect_gt(nrow(res), 20)
 })
+
+test_that("get sim with uf and age less than works", {
+  res <- get_sim(agg = "uf_res", ano = 2010, idade_a = 10)
+
+  expect_equal("tbl_df", class(res)[1])
+  expect_gt(nrow(res), 20)
+})
+
+test_that("get sim with uf and age greater than works", {
+  res <- get_sim(agg = "uf_res", ano = 2010, idade_b = 10)
+
+  expect_equal("tbl_df", class(res)[1])
+  expect_gt(nrow(res), 20)
+})
+
+test_that("get sim with uf and age interval than works", {
+  res <- get_sim(agg = "uf_res", ano = 2010, idade_a = 10, idade_b = 30)
+
+  expect_equal("tbl_df", class(res)[1])
+  expect_gt(nrow(res), 20)
+})

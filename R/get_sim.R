@@ -1,4 +1,4 @@
-get_sim <- function(agg, ano, sexo = NULL){
+get_sim <- function(agg, ano, sexo = NULL, idade_a = NULL, idade_b = NULL){
 
   # Variable aggregation name
   if(agg == "uf_res"){
@@ -18,8 +18,20 @@ get_sim <- function(agg, ano, sexo = NULL){
   sql_group_by <- glue::glue("GROUP BY {agg}")
 
   # Adds to where partial
+  # Sexo
   if(!is.null(sexo)){
-    sql_where <- glue::glue(sql_where, " AND def_sexo = '{sexo}'")
+    sql_where <- glue::glue(sql_where, "AND def_sexo = '{sexo}'", .sep = " ")
+  }
+
+  # Idade
+  if(!is.null(idade_a) & is.null(idade_b)){
+    sql_where <- glue::glue(sql_where, "AND idade_obito_anos <= '{idade_a}'", .sep = " ")
+  }
+  if(!is.null(idade_b) & is.null(idade_a)){
+    sql_where <- glue::glue(sql_where, "AND idade_obito_anos >= '{idade_b}'", .sep = " ")
+  }
+  if(!is.null(idade_a) & !is.null(idade_b)){
+    sql_where <- glue::glue(sql_where, "AND idade_obito_anos >= '{idade_a}' AND idade_obito_anos <= '{idade_b}'", .sep = " ")
   }
 
   # Create SQL query string
@@ -28,10 +40,13 @@ get_sim <- function(agg, ano, sexo = NULL){
   # Create list with token and SQL query
   request_body <- list(token = list(token = pcdas_token), sql = list(sql = list(query = sql_query, fetch_size = 10000)))
 
+  # Request body as JSON
+  request_body_json <- jsonlite::toJSON(request_body, auto_unbox = TRUE)
+
   # Create request
   req <- httr2::request(base_url = pcdas_url) %>%
     httr2::req_url_path_append("sql_query") %>%
-    httr2::req_body_raw(jsonlite::toJSON(request_body, auto_unbox = TRUE)) %>%
+    httr2::req_body_raw(request_body_json) %>%
     httr2::req_throttle(10 / 60, realm = pcdas_url) %>%
     httr2::req_retry(max_tries = 3)
 
