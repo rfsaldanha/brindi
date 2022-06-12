@@ -11,3 +11,10 @@ test_that("get sim with uf works", {
   expect_equal("tbl_df", class(res)[1])
   expect_gt(nrow(res), 20)
 })
+
+test_that("get sim with uf and sex works", {
+  res <- get_sim(agg = "uf_res", ano = 2010, sexo = "Masculino")
+
+  expect_equal("tbl_df", class(res)[1])
+  expect_gt(nrow(res), 20)
+})

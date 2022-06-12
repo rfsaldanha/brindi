@@ -1,4 +1,4 @@
-get_sim <- function(agg, ano){
+get_sim <- function(agg, ano, sexo = NULL){
 
   # Variable aggregation name
   if(agg == "uf_res"){
@@ -11,11 +11,16 @@ get_sim <- function(agg, ano){
     agg <- "ocor_codigo_adotado"
   }
 
-  # SQL query partials
+  # SQL query basic partials
   sql_select <- glue::glue("SELECT {agg} AS agg, COUNT(1) AS freq")
   sql_from <- glue::glue("FROM \"datasus-sim\"")
   sql_where <- glue::glue("WHERE ano_obito = {ano}")
   sql_group_by <- glue::glue("GROUP BY {agg}")
+
+  # Adds to where partial
+  if(!is.null(sexo)){
+    sql_where <- glue::glue(sql_where, " AND def_sexo = '{sexo}'")
+  }
 
   # Create SQL query string
   sql_query <- glue::glue(sql_select, sql_from, sql_where, sql_group_by, .sep = " ")
