@@ -1,4 +1,4 @@
-get_sim <- function(agg, ano, sexo = NULL, idade_a = NULL, idade_b = NULL){
+get_sim <- function(agg, ano, sexo = NULL, idade_a = NULL, idade_b = NULL, cid = NULL){
 
   # Variable aggregation name
   if(agg == "uf_res"){
@@ -32,6 +32,11 @@ get_sim <- function(agg, ano, sexo = NULL, idade_a = NULL, idade_b = NULL){
   }
   if(!is.null(idade_a) & !is.null(idade_b)){
     sql_where <- glue::glue(sql_where, "AND idade_obito_anos >= '{idade_a}' AND idade_obito_anos <= '{idade_b}'", .sep = " ")
+  }
+
+  # CID codes
+  if(!is.null(cid)){
+    sql_where <- glue::glue(sql_where, "AND CAUSABAS LIKE '{cid}%'", .sep = " ")
   }
 
   # Create SQL query string

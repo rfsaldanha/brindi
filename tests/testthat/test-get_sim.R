@@ -39,3 +39,10 @@ test_that("get sim with uf and age interval than works", {
   expect_equal("tbl_df", class(res)[1])
   expect_gt(nrow(res), 20)
 })
+
+test_that("get sim with uf and cid works", {
+  res <- get_sim(agg = "uf_res", ano = 2010, cid = "I")
+
+  expect_equal("tbl_df", class(res)[1])
+  expect_gt(nrow(res), 20)
+})
