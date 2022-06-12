@@ -48,18 +48,8 @@ get_sim <- function(agg, ano, sexo = NULL, idade_a = NULL, idade_b = NULL, cid =
   # Request body as JSON
   request_body_json <- jsonlite::toJSON(request_body, auto_unbox = TRUE)
 
-  # Create request
-  req <- httr2::request(base_url = pcdas_url) %>%
-    httr2::req_url_path_append("sql_query") %>%
-    httr2::req_body_raw(request_body_json) %>%
-    httr2::req_throttle(10 / 60, realm = pcdas_url) %>%
-    httr2::req_retry(max_tries = 3)
-
-  # Perform request
-  resp <- httr2::req_perform(req = req)
-
-  # Get content
-  content <- httr2::resp_body_json(resp)
+  # Execute PCDaS API request
+  content <- pcdas_query_request(body = request_body_json)
 
   # Transform content to data.frame and tibble
   content_df <- convert_content_to_df(content) %>%
