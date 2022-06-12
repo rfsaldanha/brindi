@@ -46,3 +46,10 @@ test_that("get sim with uf and cid works", {
   expect_equal("tbl_df", class(res)[1])
   expect_gt(nrow(res), 20)
 })
+
+test_that("get sim with mun and all filters works", {
+  res <- get_sim(agg = "mun_res", ano = 2010, sexo = "Feminino", idade_a = 20, idade_b = 50, cid = "I2")
+
+  expect_equal("tbl_df", class(res)[1])
+  expect_gt(nrow(res), 1000)
+})
