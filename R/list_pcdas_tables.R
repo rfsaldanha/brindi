@@ -1,3 +1,9 @@
+#' List PCDaS tables
+#'
+#' List PCDaS indexes available through API token used.
+#'
+#' @return A vector.
+#'
 list_pcdas_tables <- function(){
   req <- httr2::request(base_url = pcdas_url) %>%
     httr2::req_url_path_append("show_tables") %>%
