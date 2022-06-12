@@ -9,14 +9,15 @@
 #' @param sexo character. Sex of the deceased. \code{Masculino} for males, \code{Feminino} for females and \code{Ignorado} for unknown.
 #' @param idade_a numeric. Maximum age of the deceased, in years.
 #' @param idade_b numeric. Minimum age of the deceased, in years.
-#' @param cid charater. CID-10 code of basic cause of death. Used with a \code{LIKE} operator.
+#' @param cid character. CID-10 code of basic cause of death. Used with a \code{LIKE} operator.
+#' @param more_filters character. Additional filters can be added by using this parameter, with a SQL query.
 #'
 #' @details
 #' If \code{idade_a} is supplied, the query will filter records with age less or equal. If \code{idade_b} is supplied, the query will filter records with age more or equal. If both are supplied, the query will filter records in the interval, closed on both sides.
 #'
 #' The \code{cid} value is used in the query with a \code{LIKE} operator.
 #'
-get_sim <- function(agg, ano, sexo = NULL, idade_a = NULL, idade_b = NULL, cid = NULL){
+get_sim <- function(agg, ano, sexo = NULL, idade_a = NULL, idade_b = NULL, cid = NULL, more_filters = NULL){
 
   # Variable aggregation name
   if(agg == "uf_res"){
@@ -35,7 +36,7 @@ get_sim <- function(agg, ano, sexo = NULL, idade_a = NULL, idade_b = NULL, cid =
   sql_where <- glue::glue("WHERE ano_obito = {ano}")
   sql_group_by <- glue::glue("GROUP BY {agg}")
 
-  # Adds to where partial
+  # Additions to where partial
   # Sexo
   if(!is.null(sexo)){
     sql_where <- glue::glue(sql_where, "AND def_sexo = '{sexo}'", .sep = " ")
@@ -55,6 +56,11 @@ get_sim <- function(agg, ano, sexo = NULL, idade_a = NULL, idade_b = NULL, cid =
   # CID codes
   if(!is.null(cid)){
     sql_where <- glue::glue(sql_where, "AND CAUSABAS LIKE '{cid}%'", .sep = " ")
+  }
+
+  # More filters
+  if(!is.null(more_filters)){
+    sql_where <- glue::glue(sql_where, "AND {more_filters}", .sep = " ")
   }
 
   # Create SQL query string

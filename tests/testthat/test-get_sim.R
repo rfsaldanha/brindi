@@ -53,3 +53,10 @@ test_that("get sim with mun and all filters works", {
   expect_equal("tbl_df", class(res)[1])
   expect_gt(nrow(res), 1000)
 })
+
+test_that("get sim with uf and other filters works", {
+  res <- get_sim(agg = "uf_res", ano = 2010, more_filters = "def_raca_cor = 'Preta' AND def_est_civil = 'Casado'")
+
+  expect_equal("tbl_df", class(res)[1])
+  expect_gt(nrow(res), 20)
+})
