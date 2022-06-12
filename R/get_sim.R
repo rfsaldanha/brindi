@@ -1,3 +1,21 @@
+#' Get mortality data from SIM
+#'
+#' Retrieves mortality data from PCDaS API.
+#'
+#' This function uses raw data from the Sistema de Informações de Mortalidade (SIM) available at the PCDaS API. A documentation about this data can be found at \url{https://pcdas.icict.fiocruz.br/conjunto-de-dados/sistema-de-informacoes-de-mortalidade-sim/}.
+#'
+#' @param agg character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.
+#' @param ano numeric. Year of death.
+#' @param sexo character. Sex of the deceased. \code{Masculino} for males, \code{Feminino} for females and \code{Ignorado} for unknown.
+#' @param idade_a numeric. Maximum age of the deceased, in years.
+#' @param idade_b numeric. Minimum age of the deceased, in years.
+#' @param cid charater. CID-10 code of basic cause of death. Used with a \code{LIKE} operator.
+#'
+#' @details
+#' If \code{idade_a} is supplied, the query will filter records with age less or equal. If \code{idade_b} is supplied, the query will filter records with age more or equal. If both are supplied, the query will filter records in the interval, closed on both sides.
+#'
+#' The \code{cid} value is used in the query with a \code{LIKE} operator.
+#'
 get_sim <- function(agg, ano, sexo = NULL, idade_a = NULL, idade_b = NULL, cid = NULL){
 
   # Variable aggregation name
