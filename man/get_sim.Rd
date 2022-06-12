@@ -4,7 +4,15 @@
 \alias{get_sim}
 \title{Get mortality data from SIM}
 \usage{
-get_sim(agg, ano, sexo = NULL, idade_a = NULL, idade_b = NULL, cid = NULL)
+get_sim(
+  agg,
+  ano,
+  sexo = NULL,
+  idade_a = NULL,
+  idade_b = NULL,
+  cid = NULL,
+  more_filters = NULL
+)
 }
 \arguments{
 \item{agg}{character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.}
@@ -17,7 +25,9 @@ get_sim(agg, ano, sexo = NULL, idade_a = NULL, idade_b = NULL, cid = NULL)
 
 \item{idade_b}{numeric. Minimum age of the deceased, in years.}
 
-\item{cid}{charater. CID-10 code of basic cause of death. Used with a \code{LIKE} operator.}
+\item{cid}{character. CID-10 code of basic cause of death. Used with a \code{LIKE} operator.}
+
+\item{more_filters}{character. Additional filters can be added by using this parameter, with a SQL query.}
 }
 \description{
 Retrieves mortality data from PCDaS API.
