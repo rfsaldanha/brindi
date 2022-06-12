@@ -36,8 +36,9 @@ get_sim <- function(agg, ano){
   # Get content
   content <- httr2::resp_body_json(resp)
 
-  # Transform content to data.frame
-  content_df <- convert_content_to_df(content)
+  # Transform content to data.frame and tibble
+  content_df <- convert_content_to_df(content) %>%
+    tibble::as_tibble()
 
   return(content_df)
 }
