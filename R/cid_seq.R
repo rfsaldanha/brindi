@@ -7,6 +7,9 @@
 #' @param a character. Starting CID code.
 #' @param b character. Ending CID code.
 #'
+#' @examples
+#' cid_seq(a = "I01", b = "I10")
+#'
 cid_seq <- function(a, b){
   a_letter <- stringr::str_extract(string = a, pattern = "[A-Z]")
   a_number <- stringr::str_extract(string = a, pattern = "(\\d)+")

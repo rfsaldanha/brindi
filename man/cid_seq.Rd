@@ -17,3 +17,7 @@ Helper function to create CID sequences.
 \details{
 'a' letter must be equal to 'b' letter.
 }
+\examples{
+cid_seq(a = "I01", b = "I10")
+
+}
