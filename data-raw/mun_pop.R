@@ -7,8 +7,10 @@ anos <- 1998:2019
 mun_pop <- tibble::tibble()
 
 for(ano in anos){
+  message(ano)
+
   # Query
-  sql_query <- glue::glue("SELECT * FROM \"datasus-pop\" WHERE ANO = {ano}")
+  sql_query <- glue::glue("SELECT codigo_adotado AS cod, ANO AS ano, POPULACAO AS pop FROM \"datasus-pop\" WHERE ANO = {ano}")
 
   # Create list with token and SQL query
   request_body <- list(token = list(token = pcdas_token), sql = list(sql = list(query = sql_query, fetch_size = 10000)))
