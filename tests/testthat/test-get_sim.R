@@ -1,12 +1,40 @@
-test_that("get sim with mun works", {
+test_that("get sim with mun residence works", {
   res <- get_sim(agg = "mun_res", ano = 2010)
 
   expect_equal("tbl_df", class(res)[1])
   expect_gt(nrow(res), 5000)
 })
 
-test_that("get sim with uf works", {
+test_that("get sim with uf residence works", {
   res <- get_sim(agg = "uf_res", ano = 2010)
+
+  expect_equal("tbl_df", class(res)[1])
+  expect_gt(nrow(res), 20)
+})
+
+test_that("get sim with reg saude residence works", {
+  res <- get_sim(agg = "regsaude_res", ano = 2010)
+
+  expect_equal("tbl_df", class(res)[1])
+  expect_gt(nrow(res), 20)
+})
+
+test_that("get sim with mun occurence works", {
+  res <- get_sim(agg = "mun_ocor", ano = 2010)
+
+  expect_equal("tbl_df", class(res)[1])
+  expect_gt(nrow(res), 5000)
+})
+
+test_that("get sim with uf occurence works", {
+  res <- get_sim(agg = "uf_ocor", ano = 2010)
+
+  expect_equal("tbl_df", class(res)[1])
+  expect_gt(nrow(res), 20)
+})
+
+test_that("get sim with reg saude occurence works", {
+  res <- get_sim(agg = "regsaude_ocor", ano = 2010)
 
   expect_equal("tbl_df", class(res)[1])
   expect_gt(nrow(res), 20)

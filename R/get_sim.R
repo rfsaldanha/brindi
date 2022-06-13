@@ -4,7 +4,7 @@
 #'
 #' This function uses raw data from the Sistema de Informações de Mortalidade (SIM) available at the PCDaS API. A documentation about this data can be found at \url{https://pcdas.icict.fiocruz.br/conjunto-de-dados/sistema-de-informacoes-de-mortalidade-sim/}.
 #'
-#' @param agg character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.
+#' @param agg character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saúde of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.
 #' @param ano numeric. Year of death.
 #' @param sexo character. Sex of the deceased. \code{Masculino} for males, \code{Feminino} for females and \code{Ignorado} for unknown.
 #' @param idade_a numeric. Maximum age of the deceased, in years.
@@ -29,6 +29,10 @@ get_sim <- function(agg, ano, sexo = NULL, idade_a = NULL, idade_b = NULL, cid =
     agg <- "res_codigo_adotado"
   } else if (agg == "mun_ocor"){
     agg <- "ocor_codigo_adotado"
+  } else if (agg == "regsaude_res"){
+    agg <- "res_RSAUDCOD"
+  } else if (agg == "regsaude_ocor"){
+    agg <- "ocor_RSAUDCOD"
   }
 
   # SQL query basic partials
