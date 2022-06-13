@@ -9,9 +9,11 @@
 #'
 #' @return A character vector.
 #'
-#' @example
+#' @examples
+#' # Creates a sequence
 #' cid_seq(a = "A01", b = "A10")
-#'
+#' @export
+
 cid_seq <- function(a, b){
   a_letter <- stringr::str_extract(string = a, pattern = "[A-Z]")
   a_number <- stringr::str_extract(string = a, pattern = "(\\d)+")
