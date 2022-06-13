@@ -10,7 +10,8 @@ get_sim(
   sexo = NULL,
   idade_a = NULL,
   idade_b = NULL,
-  cid = NULL,
+  cid_like = NULL,
+  cid_in = NULL,
   more_filters = NULL
 )
 }
@@ -25,7 +26,9 @@ get_sim(
 
 \item{idade_b}{numeric. Minimum age of the deceased, in years.}
 
-\item{cid}{character. CID-10 code of basic cause of death. Used with a \code{LIKE} operator.}
+\item{cid_like}{character. CID-10 code of basic cause of death. Used with a \code{LIKE} operator.}
+
+\item{cid_in}{character vector. CID-10 codes of basic cause of death. Used with a \code{IN} operator.}
 
 \item{more_filters}{character. Additional filters can be added by using this parameter, with a SQL query.}
 }
@@ -37,5 +40,5 @@ This function uses raw data from the Sistema de Informações de Mortalidade (SI
 
 If \code{idade_a} is supplied, the query will filter records with age less or equal. If \code{idade_b} is supplied, the query will filter records with age more or equal. If both are supplied, the query will filter records in the interval, closed on both sides.
 
-The \code{cid} value is used in the query with a \code{LIKE} operator.
+The \code{cid_like} value is used in the query with a \code{LIKE} operator.
 }

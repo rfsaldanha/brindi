@@ -17,6 +17,7 @@ Imports:
     keyring,
     magrittr,
     rlang,
+    stringr,
     tibble
 Suggests: 
     testthat (>= 3.0.0)
