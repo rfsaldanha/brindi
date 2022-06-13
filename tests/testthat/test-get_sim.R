@@ -16,7 +16,7 @@ test_that("get sim with reg saude residence works", {
   res <- get_sim(agg = "regsaude_res", ano = 2010)
 
   expect_equal("tbl_df", class(res)[1])
-  expect_gt(nrow(res), 20)
+  expect_gt(nrow(res), 30)
 })
 
 test_that("get sim with mun occurence works", {
@@ -37,7 +37,7 @@ test_that("get sim with reg saude occurence works", {
   res <- get_sim(agg = "regsaude_ocor", ano = 2010)
 
   expect_equal("tbl_df", class(res)[1])
-  expect_gt(nrow(res), 20)
+  expect_gt(nrow(res), 30)
 })
 
 test_that("get sim with uf and sex works", {
