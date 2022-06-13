@@ -18,6 +18,14 @@
 #'
 #' The \code{cid_like} value is used in the query with a \code{LIKE} operator.
 #'
+#' @example
+#' get_sim(agg = "mun_res", ano = 2010)
+#' get_sim(agg = "uf_ocor", ano = 2010)
+#' get_sim(agg = "uf_res", ano = 2010, idade_a = 10, idade_b = 30)
+#' get_sim(agg = "uf_res", ano = 2010, cid_like = "I")
+#' get_sim(agg = "uf_res", ano = 2010, cid_in = c("I219", "B342", "R98"))
+#' get_sim(agg = "uf_res", ano = 2010, cid_in = cid_seq("I01", "I10"))
+#'
 #' @importFrom rlang .data
 get_sim <- function(agg, ano, sexo = NULL, idade_a = NULL, idade_b = NULL, cid_like = NULL, cid_in = NULL, more_filters = NULL){
 
