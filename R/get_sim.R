@@ -17,6 +17,7 @@
 #'
 #' The \code{cid} value is used in the query with a \code{LIKE} operator.
 #'
+#' @importFrom rlang .data
 get_sim <- function(agg, ano, sexo = NULL, idade_a = NULL, idade_b = NULL, cid = NULL, more_filters = NULL){
 
   # Variable aggregation name
@@ -80,10 +81,10 @@ get_sim <- function(agg, ano, sexo = NULL, idade_a = NULL, idade_b = NULL, cid =
     tibble::as_tibble() %>%
     dplyr::mutate(
       ano = ano,
-      agg = as.numeric(agg),
-      freq = as.numeric(freq)
+      agg = as.numeric(.data$agg),
+      freq = as.numeric(.data$freq)
     ) %>%
-    dplyr::select(agg, ano, freq)
+    dplyr::select(.data$agg, .data$ano, .data$freq)
 
   return(content_df)
 }
