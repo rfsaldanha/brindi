@@ -3,12 +3,12 @@
 #' Execute PCDaS API query request.
 #'
 #' @param body Body of the request, in JSON format.
-#' @param throttle_rate Rate of requests per second allowed. Defaults to 10/60 (ten requests per minute).
+#' @param throttle_rate Rate of requests per second allowed. Defaults to 30/60 (thirty requests per minute).
 #' @param max_tries Max number of retries before fail. Defaults to 3.
 #'
 #' @return A list
 #'
-pcdas_query_request <- function(body, throttle_rate = 10/60, max_tries = 3){
+pcdas_query_request <- function(body, throttle_rate = 30, max_tries = 3){
   # Create request
   req <- httr2::request(base_url = pcdas_url) %>%
     httr2::req_url_path_append("sql_query") %>%

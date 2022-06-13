@@ -4,12 +4,12 @@
 \alias{pcdas_query_request}
 \title{Execute PCDaS query request}
 \usage{
-pcdas_query_request(body, throttle_rate = 10/60, max_tries = 3)
+pcdas_query_request(body, throttle_rate = 30, max_tries = 3)
 }
 \arguments{
 \item{body}{Body of the request, in JSON format.}
 
-\item{throttle_rate}{Rate of requests per second allowed. Defaults to 10/60 (ten requests per minute).}
+\item{throttle_rate}{Rate of requests per second allowed. Defaults to 30/60 (thirty requests per minute).}
 
 \item{max_tries}{Max number of retries before fail. Defaults to 3.}
 }
