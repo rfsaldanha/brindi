@@ -21,9 +21,9 @@ get_sim <- function(agg, ano, sexo = NULL, idade_a = NULL, idade_b = NULL, cid =
 
   # Variable aggregation name
   if(agg == "uf_res"){
-    agg <- "res_SIGLA_UF"
+    agg <- "res_CODIGO_UF"
   } else if (agg == "uf_ocor"){
-    agg <- "ocor_SIGLA_UF"
+    agg <- "ocor_CODIGO_UF"
   } else if (agg == "mun_res"){
     agg <- "res_codigo_adotado"
   } else if (agg == "mun_ocor"){
@@ -77,7 +77,13 @@ get_sim <- function(agg, ano, sexo = NULL, idade_a = NULL, idade_b = NULL, cid =
 
   # Transform content to data.frame and tibble
   content_df <- convert_content_to_df(content) %>%
-    tibble::as_tibble()
+    tibble::as_tibble() %>%
+    dplyr::mutate(
+      ano = ano,
+      agg = as.numeric(agg),
+      freq = as.numeric(freq)
+    ) %>%
+    dplyr::select(agg, ano, freq)
 
   return(content_df)
 }
