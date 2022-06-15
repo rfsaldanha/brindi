@@ -14,7 +14,7 @@ Imports:
     glue,
     httr2,
     jsonlite,
-    keyring,
+    getPass,
     magrittr,
     rlang,
     stringr,
