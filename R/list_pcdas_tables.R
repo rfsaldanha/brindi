@@ -6,6 +6,8 @@
 #'
 #' @export
 list_pcdas_tables <- function(){
+  pcdas_token <- Sys.getenv("pcdas_token")
+
   req <- httr2::request(base_url = pcdas_url) %>%
     httr2::req_url_path_append("show_tables") %>%
     httr2::req_body_json(data = list("token" = pcdas_token)) %>%

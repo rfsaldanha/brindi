@@ -17,6 +17,8 @@
 #' @export
 
 generic_pcdas_query <- function(sql_query){
+  pcdas_token <- Sys.getenv("pcdas_token")
+
   # Create list with token and SQL query
   request_body <- list(token = list(token = pcdas_token), sql = list(sql = list(query = sql_query, fetch_size = 10000)))
 
