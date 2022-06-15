@@ -30,6 +30,7 @@
 #' @importFrom rlang .data
 #' @export
 get_sim <- function(agg, ano, sexo = NULL, idade_a = NULL, idade_b = NULL, cid_like = NULL, cid_in = NULL, more_filters = NULL){
+  pcdas_token <- Sys.getenv("pcdas_token")
 
   # Variable aggregation name
   if(agg == "uf_res"){
