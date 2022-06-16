@@ -42,7 +42,7 @@ get_sim <- function(agg, ano, pcdas_token = NULL, sexo = NULL, idade_a = NULL, i
   checkmate::assert_vector(x = cid_in, null.ok = TRUE)
   checkmate::assert_string(x = more_filters, null.ok = TRUE)
 
-  # Try to get PCDaS API token from renviron of not provided
+  # Try to get PCDaS API token from renviron if not provided
   if(is.null(pcdas_token)){
     pcdas_token <- get_pcdas_token_renviron()
   }
