@@ -8,7 +8,7 @@
 #'
 #' @return A list
 #'
-pcdas_query_request <- function(body, throttle_rate = 30, max_tries = 3){
+pcdas_query_request <- function(body, throttle_rate = 30/60, max_tries = 3){
   # Create request
   req <- httr2::request(base_url = pcdas_url) %>%
     httr2::req_url_path_append("sql_query") %>%

@@ -4,7 +4,7 @@
 \alias{pcdas_query_request}
 \title{Execute PCDaS query request}
 \usage{
-pcdas_query_request(body, throttle_rate = 30, max_tries = 3)
+pcdas_query_request(body, throttle_rate = 30/60, max_tries = 3)
 }
 \arguments{
 \item{body}{Body of the request, in JSON format.}
