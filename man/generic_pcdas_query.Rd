@@ -4,9 +4,11 @@
 \alias{generic_pcdas_query}
 \title{Executes a generic PCDaS query}
 \usage{
-generic_pcdas_query(sql_query)
+generic_pcdas_query(pcdas_token = NULL, sql_query)
 }
 \arguments{
+\item{pcdas_token}{character. PCDaS API token. If not provided, the function will look for it on renvirom.}
+
 \item{sql_query}{character. SQL.}
 }
 \value{

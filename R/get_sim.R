@@ -6,6 +6,7 @@
 #'
 #' @param agg character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saúde of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.
 #' @param ano numeric. Year of death.
+#' @param pcdas_token character. PCDaS API token. If not provided, the function will look for it on renvirom.
 #' @param sexo character. Sex of the deceased. \code{Masculino} for males, \code{Feminino} for females and \code{Ignorado} for unknown.
 #' @param idade_a numeric. Maximum age of the deceased, in years.
 #' @param idade_b numeric. Minimum age of the deceased, in years.
@@ -29,8 +30,11 @@
 #'
 #' @importFrom rlang .data
 #' @export
-get_sim <- function(agg, ano, sexo = NULL, idade_a = NULL, idade_b = NULL, cid_like = NULL, cid_in = NULL, more_filters = NULL){
-  pcdas_token <- Sys.getenv("pcdas_token")
+get_sim <- function(agg, ano, pcdas_token = NULL, sexo = NULL, idade_a = NULL, idade_b = NULL, cid_like = NULL, cid_in = NULL, more_filters = NULL){
+  # Try to get PCDaS API token from renviron of not provided
+  if(is.null(pcdas_token)){
+    pcdas_token <- get_pcdas_token_renviron()
+  }
 
   # Variable aggregation name
   if(agg == "uf_res"){

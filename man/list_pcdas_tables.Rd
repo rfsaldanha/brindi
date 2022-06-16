@@ -4,7 +4,10 @@
 \alias{list_pcdas_tables}
 \title{List PCDaS tables}
 \usage{
-list_pcdas_tables()
+list_pcdas_tables(pcdas_token = NULL)
+}
+\arguments{
+\item{pcdas_token}{character. PCDaS API token. If not provided, the function will look for it on renvirom.}
 }
 \value{
 A vector.
