@@ -15,6 +15,10 @@
 #' @export
 
 cid_seq <- function(a, b){
+  # Function argument check
+  checkmate::assert_string(x = a)
+  checkmate::assert_string(x = b)
+
   a_letter <- stringr::str_extract(string = a, pattern = "[A-Z]")
   a_number <- stringr::str_extract(string = a, pattern = "(\\d)+")
 
