@@ -18,7 +18,8 @@ Imports:
     magrittr,
     rlang,
     stringr,
-    tibble
+    tibble,
+    checkmate
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

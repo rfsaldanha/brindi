@@ -31,6 +31,17 @@
 #' @importFrom rlang .data
 #' @export
 get_sim <- function(agg, ano, pcdas_token = NULL, sexo = NULL, idade_a = NULL, idade_b = NULL, cid_like = NULL, cid_in = NULL, more_filters = NULL){
+  # Function argument check
+  checkmate::assert_choice(x = agg, choices = c("uf_res", "uf_ocor", "mun_res", "mun_ocor", "regsaude_res", "regsaude_ocor"))
+  checkmate::assert_number(x = ano, lower = 1996)
+  checkmate::assert_string(x = pcdas_token, null.ok = TRUE)
+  checkmate::assert_choice(x = sexo, choices = c("Masculino", "Feminino", "Ignorado"), null.ok = TRUE)
+  checkmate::assert_number(x = idade_a, lower = 0, null.ok = TRUE)
+  checkmate::assert_number(x = idade_b, lower = 0, null.ok = TRUE)
+  checkmate::assert_string(x = cid_like, null.ok = TRUE)
+  checkmate::assert_vector(x = cid_in, null.ok = TRUE)
+  checkmate::assert_string(x = more_filters, null.ok = TRUE)
+
   # Try to get PCDaS API token from renviron of not provided
   if(is.null(pcdas_token)){
     pcdas_token <- get_pcdas_token_renviron()
