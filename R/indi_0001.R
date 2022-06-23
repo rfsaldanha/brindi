@@ -2,6 +2,7 @@
 #'
 #' @param agg character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saúde of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.
 #' @param ano numeric. Year of death.
+#' @param multi integer. Multiplicator for indicator.
 #' @param decimals integer. Number of decimals for indicator.
 #' @param pcdas_token character. PCDaS API token. If not provided, the function will look for it on renvirom.
 #'
@@ -12,7 +13,7 @@
 #' @importFrom rlang .data
 #' @importFrom foreach %dopar%
 #' @export
-indi_0001 <- function(agg, ano, decimals = 2, pcdas_token = NULL){
+indi_0001 <- function(agg, ano, multi = 100000, decimals = 2, pcdas_token = NULL){
 
   # Try to get PCDaS API token from renviron if not provided
   if(is.null(pcdas_token)){
@@ -48,7 +49,7 @@ indi_0001 <- function(agg, ano, decimals = 2, pcdas_token = NULL){
   # Join numerator and denominator, peform indicator calculus
   df <- dplyr::inner_join(x = numerador, y = denominador, by = c("agg" = "cod", "ano" = "ano")) %>%
     dplyr::mutate(indi = round(
-      x = .data$freq/.data$pop * 1000,
+      x = (.data$freq/.data$pop) * multi,
       digits = decimals
     ))
 

@@ -4,12 +4,14 @@
 \alias{indi_0001}
 \title{Indicator: Mortalidade por causas externas}
 \usage{
-indi_0001(agg, ano, decimals = 2, pcdas_token = NULL)
+indi_0001(agg, ano, multi = 1e+05, decimals = 2, pcdas_token = NULL)
 }
 \arguments{
 \item{agg}{character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saúde of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.}
 
 \item{ano}{numeric. Year of death.}
+
+\item{multi}{integer. Multiplicator for indicator.}
 
 \item{decimals}{integer. Number of decimals for indicator.}
 
