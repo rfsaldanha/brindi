@@ -35,7 +35,11 @@ indi_0001 <- function(agg, ano, multi = 100000, decimals = 2, pcdas_token = NULL
     # Get numerator in parallel
     a <- NULL
     numerador <- foreach::foreach(a = ano, .combine = dplyr::bind_rows) %dopar% {
-      get_sim(agg = agg, ano = a, pcdas_token = pcdas_token, more_filters = filter_query)
+      get_sim(
+        agg = agg, ano = a,
+        pcdas_token = pcdas_token,
+        more_filters = filter_query
+      )
     }
 
     # Stop cluster
