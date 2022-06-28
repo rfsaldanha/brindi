@@ -52,7 +52,10 @@ indi_0001 <- function(agg, ano, multi = 100000, decimals = 2, pcdas_token = NULL
     dplyr::mutate(indi = round(
       x = (.data$freq/.data$pop) * multi,
       digits = decimals
-    ))
+    )) %>%
+    dplyr::select(-.data$freq, -.data$pop) %>%
+    dplyr::mutate(name = "indi_0001") %>%
+    dplyr::relocate(.data$name, .after = .data$agg)
 
   return(df)
 }
