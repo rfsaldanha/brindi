@@ -43,8 +43,10 @@ indi_0001 <- function(agg, ano, multi = 100000, decimals = 2, pcdas_token = NULL
   }
 
   # Creates denominator
-  if(agg == "mun_res"){
+  if(agg %in% c("mun_res", "mun_ocor")){
     denominador <- bilis::mun_pop
+  } else if(agg %in% c("uf_res", "uf_ocor")){
+    denominador <- bilis::uf_pop
   }
 
   # Join numerator and denominator, peform indicator calculus
