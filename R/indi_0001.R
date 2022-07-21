@@ -47,14 +47,17 @@ indi_0001 <- function(agg, ano, multi = 100000, decimals = 2, pcdas_token = NULL
   }
 
   # Creates denominator
+
   if(agg %in% c("mun_res", "mun_ocor")){
-    denominador <- bilis::mun_pop
+    denominador <- brpop::mun_pop_totals() %>%
+      dplyr::rename(agg = .data$mun)
   } else if(agg %in% c("uf_res", "uf_ocor")){
-    denominador <- bilis::uf_pop
+    denominador <- brpop::uf_pop_totals() %>%
+      dplyr::rename(agg = .data$uf)
   }
 
   # Join numerator and denominator, peform indicator calculus
-  df <- dplyr::inner_join(x = numerador, y = denominador, by = c("agg" = "cod", "ano" = "ano")) %>%
+  df <- dplyr::inner_join(x = numerador, y = denominador, by = c("agg" = "agg", "ano" = "year")) %>%
     dplyr::mutate(indi = round(
       x = (.data$freq/.data$pop) * multi,
       digits = decimals
