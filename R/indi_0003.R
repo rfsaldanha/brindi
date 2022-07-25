@@ -17,7 +17,7 @@ indi_0003 <- function(agg, ano, multi = 100000, decimals = 2, pcdas_token = NULL
 
   # Try to get PCDaS API token from renviron if not provided
   if(is.null(pcdas_token)){
-    pcdas_token <- rpcdas:::get_pcdas_token_renviron()
+    pcdas_token <- rpcdas::get_pcdas_token_renviron()
   }
 
   # Creates numerator
