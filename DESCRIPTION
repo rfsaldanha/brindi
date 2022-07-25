@@ -11,14 +11,8 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
 Imports: 
     dplyr,
-    glue,
-    httr2,
-    jsonlite,
     magrittr,
     rlang,
-    stringr,
-    tibble,
-    checkmate,
     foreach,
     doParallel,
     brpop,
