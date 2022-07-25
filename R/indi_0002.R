@@ -17,12 +17,12 @@ indi_0002 <- function(agg, ano, multi = 100000, decimals = 2, pcdas_token = NULL
 
   # Try to get PCDaS API token from renviron if not provided
   if(is.null(pcdas_token)){
-    pcdas_token <- get_pcdas_token_renviron()
+    pcdas_token <- rpcdas:::get_pcdas_token_renviron()
   }
 
   # Creates numerator
   if(length(ano) == 1){
-    numerador <- get_sim(
+    numerador <- rpcdas::get_sim(
       agg = agg, ano = ano,
       pcdas_token = pcdas_token,
       cid_like = "I6"
@@ -34,7 +34,7 @@ indi_0002 <- function(agg, ano, multi = 100000, decimals = 2, pcdas_token = NULL
     # Get numerator in parallel
     a <- NULL
     numerador <- foreach::foreach(a = ano, .combine = dplyr::bind_rows) %dopar% {
-      get_sim(
+      rpcdas::get_sim(
         agg = agg, ano = a,
         pcdas_token = pcdas_token,
         cid_like = "I6"
