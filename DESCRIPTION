@@ -13,10 +13,10 @@ Imports:
     dplyr,
     magrittr,
     rlang,
-    foreach,
-    doParallel,
     brpop,
-    rpcdas
+    rpcdas,
+    furrr,
+    future
 Remotes:
     rfsaldanha/brpop,
     rfsaldanha/rpcdas

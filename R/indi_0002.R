@@ -11,7 +11,6 @@
 #' indi_0002(agg = "mun_res", ano = 2013)
 #'
 #' @importFrom rlang .data
-#' @importFrom foreach %dopar%
 #' @export
 indi_0002 <- function(agg, ano, multi = 100000, decimals = 2, pcdas_token = NULL){
 
@@ -20,33 +19,20 @@ indi_0002 <- function(agg, ano, multi = 100000, decimals = 2, pcdas_token = NULL
     pcdas_token <- rpcdas::get_pcdas_token_renviron()
   }
 
+  # Multisession plan
+  oplan <- future::plan(future::multisession)
+  on.exit(future::plan(oplan))
+
   # Creates numerator
-  if(length(ano) == 1){
-    numerador <- rpcdas::get_sim(
-      agg = agg, ano = ano,
-      pcdas_token = pcdas_token,
-      cid_like = "I6"
-    )
-  } else if(length(ano) > 1){
-    # Start parallel cluster
-    doParallel::registerDoParallel(parallel::detectCores() - 1)
-
-    # Get numerator in parallel
-    a <- NULL
-    numerador <- foreach::foreach(a = ano, .combine = dplyr::bind_rows) %dopar% {
-      rpcdas::get_sim(
-        agg = agg, ano = a,
-        pcdas_token = pcdas_token,
-        cid_like = "I6"
-      )
-    }
-
-    # Stop cluster
-    doParallel::stopImplicitCluster()
-  }
+  numerador <- furrr::future_map_dfr(
+    .x = ano,
+    .f = rpcdas::get_sim,
+    agg = agg,
+    pcdas_token = pcdas_token,
+    cid_like = "I6"
+  )
 
   # Creates denominator
-
   if(agg %in% c("mun_res", "mun_ocor")){
     denominador <- brpop::mun_pop_totals() %>%
       dplyr::rename(agg = .data$mun)
