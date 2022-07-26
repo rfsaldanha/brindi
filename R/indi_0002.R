@@ -43,13 +43,16 @@ indi_0002 <- function(agg, ano, multi = 100000, decimals = 2, pcdas_token = NULL
 
   # Join numerator and denominator, peform indicator calculus
   df <- dplyr::inner_join(x = numerador, y = denominador, by = c("agg" = "agg", "ano" = "year")) %>%
-    dplyr::mutate(indi = round(
+    dplyr::mutate(value = round(
       x = (.data$freq/.data$pop) * multi,
       digits = decimals
     )) %>%
     dplyr::select(-.data$freq, -.data$pop) %>%
     dplyr::mutate(name = "indi_0002") %>%
-    dplyr::relocate(.data$name, .after = .data$agg)
+    dplyr::rename(cod = agg) %>%
+    dplyr::mutate(agg = agg) %>%
+    dplyr::relocate(.data$agg, .before = .data$cod) %>%
+    dplyr::relocate(.data$value, .after = .data$name)
 
   return(df)
 }
