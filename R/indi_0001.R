@@ -19,16 +19,11 @@ indi_0001 <- function(agg, ano, multi = 100000, decimals = 2, pcdas_token = NULL
     pcdas_token <- rpcdas::get_pcdas_token_renviron()
   }
 
-  # Multisession plan
-  oplan <- future::plan(future::multisession)
-  on.exit(future::plan(oplan))
-
   # Creates numerator
   filter_query <- "LEFT(CAUSABAS, 1) IN ('V', 'W', 'X', 'Y')"
-  numerador <- furrr::future_map_dfr(
-    .x = ano,
-    .f = rpcdas::get_sim,
+  numerador <- rpcdas::get_sim(
     agg = agg,
+    ano = ano,
     pcdas_token = pcdas_token,
     more_filters = filter_query
   )
