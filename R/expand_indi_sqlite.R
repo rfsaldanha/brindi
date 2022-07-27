@@ -24,8 +24,17 @@ expand_indi_sqlite <- function(agg, anos, db, indi = "all", table_name = "indi")
     DBI::dbRemoveTable(conn = conn, table_name)
   }
 
+  # Creates progress bar
+  pb <- progress::progress_bar$new(
+    format = "Running: :what [:bar] :percent :elapsedfull",
+    clear = FALSE, total = length(indi_funs))
+
+  pb$tick(0)
+  Sys.sleep(1)
+
   # Expand indi_functions and write to table
   for(i in indi_funs){
+    pb$tick(tokens = list(what = i))
     tmp <- expand_indi(agg = agg, anos = anos, indi_fun = i)
     DBI::dbWriteTable(conn = conn, name = table_name, value = tmp, append = TRUE)
   }

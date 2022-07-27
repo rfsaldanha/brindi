@@ -20,7 +20,8 @@ Imports:
     tidyr,
     glue,
     DBI,
-    RSQLite
+    RSQLite,
+    progress
 Remotes:
     rfsaldanha/brpop,
     rfsaldanha/rpcdas
