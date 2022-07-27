@@ -29,16 +29,7 @@ indi_0001 <- function(agg, ano, multi = 100000, decimals = 2, pcdas_token = NULL
   )
 
   # Creates denominator
-  if(agg %in% c("mun_res", "mun_ocor")){
-    denominador <- brpop::mun_pop_totals() %>%
-      dplyr::rename(agg = .data$mun)
-  } else if(agg %in% c("uf_res", "uf_ocor")){
-    denominador <- brpop::uf_pop_totals() %>%
-      dplyr::rename(agg = .data$uf)
-  } else if(agg %in% c("regsaude_res", "regsaude_ocor")){
-    denominador <- brpop::regsaude_pop_totals() %>%
-      dplyr::rename(agg = .data$regsaude)
-  }
+  denominador <- denominator_pop(agg = agg)
 
   # Join numerator and denominator, peform indicator calculus
   df <- dplyr::inner_join(x = numerador, y = denominador, by = c("agg" = "agg", "ano" = "year")) %>%
