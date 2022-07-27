@@ -11,13 +11,13 @@ expand_indi(agg, anos, indi_fun)
 
 \item{anos}{numeric vector. Years}
 
-\item{indi_fun}{Function, like \code{indi_0001} or \code{indi_0002}.}
+\item{indi_fun}{character function names vector.}
 }
 \description{
 Expand indicator results with arguments with parallel processing
 }
 \examples{
 # Some examples
-expand_indi(agg = c("uf_res", "uf_ocor"), anos = c(2013, 2014, 2015), indi_fun = indi_0001)
+expand_indi(agg = c("uf_res", "uf_ocor"), anos = c(2013, 2014, 2015), indi_fun = "indi_0001")
 
 }

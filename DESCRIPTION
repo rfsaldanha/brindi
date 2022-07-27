@@ -18,7 +18,9 @@ Imports:
     furrr,
     future,
     tidyr,
-    glue
+    glue,
+    DBI,
+    RSQLite
 Remotes:
     rfsaldanha/brpop,
     rfsaldanha/rpcdas
