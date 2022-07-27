@@ -17,7 +17,8 @@ Imports:
     rpcdas,
     furrr,
     future,
-    tidyr
+    tidyr,
+    glue
 Remotes:
     rfsaldanha/brpop,
     rfsaldanha/rpcdas
