@@ -1,4 +1,4 @@
-#' Indicator: Mortalidade por neoplasia maligna da colo de utero
+#' Indicator: Mortalidade por neoplasia maligna de prostata
 #'
 #' @param agg character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saúde of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.
 #' @param ano numeric. Year of death.
@@ -8,11 +8,11 @@
 #'
 #' @examples
 #' # Some examples
-#' indi_0007(agg = "mun_res", ano = 2013)
+#' indi_0008(agg = "mun_res", ano = 2013)
 #'
 #' @importFrom rlang .data
 #' @export
-indi_0007 <- function(agg, ano, multi = 100000, decimals = 2, pcdas_token = NULL){
+indi_0008 <- function(agg, ano, multi = 100000, decimals = 2, pcdas_token = NULL){
 
   # Try to get PCDaS API token from renviron if not provided
   if(is.null(pcdas_token)){
@@ -24,11 +24,11 @@ indi_0007 <- function(agg, ano, multi = 100000, decimals = 2, pcdas_token = NULL
     agg = agg,
     ano = ano,
     pcdas_token = pcdas_token,
-    cid_like = "C53"
+    cid_like = "C61"
   )
 
   # Creates denominator
-  denominador<-denominator_pop(agg = agg, sex = "female")
+  denominador<-denominator_pop(agg = agg, sex = "male")
 
   # Join numerator and denominator, peform indicator calculus
   df <- dplyr::inner_join(x = numerador, y = denominador, by = c("agg" = "agg", "ano" = "year")) %>%
@@ -37,7 +37,7 @@ indi_0007 <- function(agg, ano, multi = 100000, decimals = 2, pcdas_token = NULL
       digits = decimals
     )) %>%
     dplyr::select(-.data$freq, -.data$pop) %>%
-    dplyr::mutate(name = "indi_0007") %>%
+    dplyr::mutate(name = "indi_0008") %>%
     dplyr::rename(cod = agg) %>%
     dplyr::mutate(agg = agg) %>%
     dplyr::relocate(.data$agg, .before = .data$cod) %>%
