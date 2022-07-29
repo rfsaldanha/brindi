@@ -7,9 +7,9 @@
 #'
 #' @importFrom rlang .data
 #' @export
-denominator_pop <- function(agg, sex = "all"){
+denominator_pop <- function(agg, sex = "all", age_group = "totals"){
 
-  if(sex == "all"){
+  if(sex == "all" & age_group == "totals"){
     if(agg %in% c("mun_res", "mun_ocor")){
       denominador <- brpop::mun_pop_totals() %>%
         dplyr::rename(agg = .data$mun)
@@ -20,7 +20,7 @@ denominator_pop <- function(agg, sex = "all"){
       denominador <- brpop::regsaude_pop_totals() %>%
         dplyr::rename(agg = .data$regsaude)
     }
-  } else if(sex == "male"){
+  } else if(sex == "male" & age_group == "totals"){
     if(agg %in% c("mun_res", "mun_ocor")){
       denominador <- brpop::mun_male_pop_totals() %>%
         dplyr::rename(agg = .data$mun)
@@ -31,7 +31,7 @@ denominator_pop <- function(agg, sex = "all"){
       denominador <- brpop::regsaude_male_pop_totals() %>%
         dplyr::rename(agg = .data$regsaude)
     }
-  } else if(sex == "female"){
+  } else if(sex == "female" & age_group == "totals"){
     if(agg %in% c("mun_res", "mun_ocor")){
       denominador <- brpop::mun_female_pop_totals() %>%
         dplyr::rename(agg = .data$mun)
@@ -40,6 +40,48 @@ denominator_pop <- function(agg, sex = "all"){
         dplyr::rename(agg = .data$uf)
     } else if(agg %in% c("regsaude_res", "regsaude_ocor")){
       denominador <- brpop::regsaude_female_pop_totals() %>%
+        dplyr::rename(agg = .data$regsaude)
+    }
+  } else if(sex == "all" & age_group != "totals"){
+    if(agg %in% c("mun_res", "mun_ocor")){
+      denominador <- brpop::mun_pop() %>%
+        dplyr::filter(.data$age_group == age_group) %>%
+        dplyr::rename(agg = .data$mun)
+    } else if(agg %in% c("uf_res", "uf_ocor")){
+      denominador <- brpop::uf_pop() %>%
+        dplyr::filter(.data$age_group == age_group) %>%
+        dplyr::rename(agg = .data$uf)
+    } else if(agg %in% c("regsaude_res", "regsaude_ocor")){
+      denominador <- brpop::regsaude_pop() %>%
+        dplyr::filter(.data$age_group == age_group) %>%
+        dplyr::rename(agg = .data$regsaude)
+    }
+  } else if(sex == "male" & age_group != "totals"){
+    if(agg %in% c("mun_res", "mun_ocor")){
+      denominador <- brpop::mun_male_pop %>%
+        dplyr::filter(.data$age_group == age_group) %>%
+        dplyr::rename(agg = .data$mun)
+    } else if(agg %in% c("uf_res", "uf_ocor")){
+      denominador <- brpop::uf_male_pop %>%
+        dplyr::filter(.data$age_group == age_group) %>%
+        dplyr::rename(agg = .data$uf)
+    } else if(agg %in% c("regsaude_res", "regsaude_ocor")){
+      denominador <- brpop::regsaude_male_pop() %>%
+        dplyr::filter(.data$age_group == age_group) %>%
+        dplyr::rename(agg = .data$regsaude)
+    }
+  } else if(sex == "female" & age_group != "totals"){
+    if(agg %in% c("mun_res", "mun_ocor")){
+      denominador <- brpop::mun_female_pop %>%
+        dplyr::filter(.data$age_group == age_group) %>%
+        dplyr::rename(agg = .data$mun)
+    } else if(agg %in% c("uf_res", "uf_ocor")){
+      denominador <- brpop::uf_female_pop %>%
+        dplyr::filter(.data$age_group == age_group) %>%
+        dplyr::rename(agg = .data$uf)
+    } else if(agg %in% c("regsaude_res", "regsaude_ocor")){
+      denominador <- brpop::regsaude_female_pop() %>%
+        dplyr::filter(.data$age_group == age_group) %>%
         dplyr::rename(agg = .data$regsaude)
     }
   }
