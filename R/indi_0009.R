@@ -12,7 +12,7 @@
 #'
 #' @importFrom rlang .data
 #' @export
-indi_0009 <- function(agg, ano, multi = 100000, decimals = 2, pcdas_token = NULL){
+indi_0009 <- function(agg, ano, multi = 100, decimals = 2, pcdas_token = NULL){
 
   # Try to get PCDaS API token from renviron if not provided
   if(is.null(pcdas_token)){
@@ -20,27 +20,33 @@ indi_0009 <- function(agg, ano, multi = 100000, decimals = 2, pcdas_token = NULL
   }
 
   # Creates numerator
-  Q1 <- glue::glue_collapse(sQuote(rpcdas::cid_seq("A00","A09"), q = FALSE), sep = ", ")
 
   numerador <- rpcdas::get_sim(
     agg = agg,
     ano = ano,
-    idade_a = 0,
-    idade_b = 4,
+    idade_a = 00,
+    idade_b = 04,
     pcdas_token = pcdas_token,
-    more_filters = Q1
+    cid_in = cid_seq("A00", "A09"),
+
   )
 
   # Creates denominator
-  denominador <- denominator_pop(agg = agg, age_group_vec = "0 to 4 years")
+  denominador <- rpcdas::get_sim(
+    agg = agg,
+    ano = ano,
+    idade_a = 00,
+    idade_b = 04,
+    pcdas_token = pcdas_token
+  )
 
   # Join numerator and denominator, peform indicator calculus
-  df <- dplyr::inner_join(x = numerador, y = denominador, by = c("agg" = "agg", "ano" = "year")) %>%
+  df <- dplyr::inner_join(x = numerador, y = denominador, by = c("agg" = "agg", "ano" = "ano")) %>%
     dplyr::mutate(value = round(
-      x = (.data$freq/.data$pop) * multi,
+      x = (.data$freq.x/.data$freq.y) * multi,
       digits = decimals
     )) %>%
-    dplyr::select(-.data$freq, -.data$pop) %>%
+    dplyr::select(-.data$freq.x, -.data$freq.y) %>%
     dplyr::mutate(name = "indi_0009") %>%
     dplyr::rename(cod = agg) %>%
     dplyr::mutate(agg = agg) %>%
