@@ -9,6 +9,7 @@
 #' @export
 denominator_pop <- function(agg, sex = "all", age_group_vec = "totals"){
 
+  # Sex ALL and age TOTALS
   if(sex == "all" & "totals" %in% age_group_vec){
     if(agg %in% c("mun_res", "mun_ocor")){
       denominador <- brpop::mun_pop_totals() %>%
@@ -20,6 +21,7 @@ denominator_pop <- function(agg, sex = "all", age_group_vec = "totals"){
       denominador <- brpop::regsaude_pop_totals() %>%
         dplyr::rename(agg = .data$regsaude)
     }
+    # Sex MALE and age TOTALS
   } else if(sex == "male" & "totals" %in% age_group_vec){
     if(agg %in% c("mun_res", "mun_ocor")){
       denominador <- brpop::mun_male_pop_totals() %>%
@@ -31,6 +33,7 @@ denominator_pop <- function(agg, sex = "all", age_group_vec = "totals"){
       denominador <- brpop::regsaude_male_pop_totals() %>%
         dplyr::rename(agg = .data$regsaude)
     }
+    # Sex FEMALE and age TOTALS
   } else if(sex == "female" & "totals" %in% age_group_vec){
     if(agg %in% c("mun_res", "mun_ocor")){
       denominador <- brpop::mun_female_pop_totals() %>%
@@ -42,6 +45,7 @@ denominator_pop <- function(agg, sex = "all", age_group_vec = "totals"){
       denominador <- brpop::regsaude_female_pop_totals() %>%
         dplyr::rename(agg = .data$regsaude)
     }
+    # Sex ALL and age NOT TOTALS
   } else if(sex == "all" & !("totals" %in% age_group_vec)){
     if(agg %in% c("mun_res", "mun_ocor")){
       denominador <- brpop::mun_pop() %>%
@@ -62,6 +66,7 @@ denominator_pop <- function(agg, sex = "all", age_group_vec = "totals"){
         dplyr::summarise(pop = sum(.data$pop, na.rm = TRUE)) %>%
         dplyr::rename(agg = .data$regsaude)
     }
+    # Sex MALE and age NOT TOTALS
   } else if(sex == "male" & !("totals" %in% age_group_vec)){
     if(agg %in% c("mun_res", "mun_ocor")){
       denominador <- brpop::mun_male_pop %>%
@@ -82,6 +87,7 @@ denominator_pop <- function(agg, sex = "all", age_group_vec = "totals"){
         dplyr::summarise(pop = sum(.data$pop, na.rm = TRUE)) %>%
         dplyr::rename(agg = .data$regsaude)
     }
+    # Sex FEMALE and age NOT TOTALS
   } else if(sex == "female" & !("totals" %in% age_group_vec)){
     if(agg %in% c("mun_res", "mun_ocor")){
       denominador <- brpop::mun_female_pop %>%
