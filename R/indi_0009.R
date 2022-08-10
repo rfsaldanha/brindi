@@ -27,8 +27,7 @@ indi_0009 <- function(agg, ano, multi = 100, decimals = 2, pcdas_token = NULL){
     idade_a = 00,
     idade_b = 04,
     pcdas_token = pcdas_token,
-    cid_in = cid_seq("A00", "A09"),
-
+    cid_in = rpcdas::cid_seq("A00", "A09")
   )
 
   # Creates denominator
