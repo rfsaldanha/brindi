@@ -9,7 +9,7 @@ test_that("indi_0008 works with mun ocor", {
   res <- indi_0008(agg = "mun_ocor", ano = 2013)
 
   expect_equal("tbl_df", class(res)[1])
-  expect_gt(nrow(res), 3000)
+  expect_gt(nrow(res), 2500)
 })
 
 test_that("indi_0008 works with uf res", {
