@@ -30,18 +30,15 @@ indi_0006 <- function(agg, ano, multi = 100000, decimals = 2, pcdas_token = NULL
   # Creates denominator
   denominador<-denominator_pop(agg = agg, sex = "female")
 
-  # Join numerator and denominator, peform indicator calculus
-  df <- dplyr::inner_join(x = numerador, y = denominador, by = c("agg" = "agg", "ano" = "year")) %>%
-    dplyr::mutate(value = round(
-      x = (.data$freq/.data$pop) * multi,
-      digits = decimals
-    )) %>%
-    dplyr::select(-.data$freq, -.data$pop) %>%
-    dplyr::mutate(name = "indi_0006") %>%
-    dplyr::rename(cod = agg) %>%
-    dplyr::mutate(agg = agg) %>%
-    dplyr::relocate(.data$agg, .before = .data$cod) %>%
-    dplyr::relocate(.data$value, .after = .data$name)
+  # Perform indicator calculus
+  res <- indicator_raw(
+    numerador = numerador,
+    denominador = denominador,
+    multi = multi,
+    decimals = decimals,
+    nome = "indi_0006",
+    agg = agg
+  )
 
-  return(df)
+  return(res)
 }

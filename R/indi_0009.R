@@ -20,7 +20,6 @@ indi_0009 <- function(agg, ano, multi = 100, decimals = 2, pcdas_token = NULL){
   }
 
   # Creates numerator
-
   numerador <- rpcdas::get_sim(
     agg = agg,
     ano = ano,
@@ -37,21 +36,19 @@ indi_0009 <- function(agg, ano, multi = 100, decimals = 2, pcdas_token = NULL){
     idade_a = 00,
     idade_b = 04,
     pcdas_token = pcdas_token
+  ) %>%
+    dplyr::rename(year = .data$ano, pop = .data$freq)
+
+  # Perform indicator calculus
+  res <- indicator_raw(
+    numerador = numerador,
+    denominador = denominador,
+    multi = multi,
+    decimals = decimals,
+    nome = "indi_0001",
+    agg = agg
   )
 
-  # Join numerator and denominator, peform indicator calculus
-  df <- dplyr::inner_join(x = numerador, y = denominador, by = c("agg" = "agg", "ano" = "ano")) %>%
-    dplyr::mutate(value = round(
-      x = (.data$freq.x/.data$freq.y) * multi,
-      digits = decimals
-    )) %>%
-    dplyr::select(-.data$freq.x, -.data$freq.y) %>%
-    dplyr::mutate(name = "indi_0009") %>%
-    dplyr::rename(cod = agg) %>%
-    dplyr::mutate(agg = agg) %>%
-    dplyr::relocate(.data$agg, .before = .data$cod) %>%
-    dplyr::relocate(.data$value, .after = .data$name)
-
-  return(df)
+  return(res)
 }
 

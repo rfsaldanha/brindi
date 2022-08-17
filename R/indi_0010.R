@@ -36,19 +36,16 @@ indi_0010 <- function(agg, ano, multi = 100, decimals = 2, pcdas_token = NULL){
     pcdas_token = pcdas_token
   )
 
-  # Join numerator and denominator, peform indicator calculus
-  df <- dplyr::inner_join(x = numerador, y = denominador, by = c("agg" = "agg", "ano" = "ano")) %>%
-    dplyr::mutate(value = round(
-      x = (.data$freq.x/.data$freq.y) * multi,
-      digits = decimals
-    )) %>%
-    dplyr::select(-.data$freq.x, -.data$freq.y) %>%
-    dplyr::mutate(name = "indi_0010") %>%
-    dplyr::rename(cod = agg) %>%
-    dplyr::mutate(agg = agg) %>%
-    dplyr::relocate(.data$agg, .before = .data$cod) %>%
-    dplyr::relocate(.data$value, .after = .data$name)
+  # Perform indicator calculus
+  res <- indicator_raw(
+    numerador = numerador,
+    denominador = denominador,
+    multi = multi,
+    decimals = decimals,
+    nome = "indi_0010",
+    agg = agg
+  )
 
-  return(df)
+  return(res)
 }
 
