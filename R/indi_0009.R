@@ -23,21 +23,20 @@ indi_0009 <- function(agg, ano, multi = 100, decimals = 2, pcdas_token = NULL){
   numerador <- rpcdas::get_sim(
     agg = agg,
     ano = ano,
-    idade_a = 00,
-    idade_b = 04,
-    pcdas_token = pcdas_token,
-    cid_like = "A0"
+    idade_a = 0, idade_b = 4,
+    cid_like = "A0",
+    pcdas_token = pcdas_token
   )
 
   # Creates denominator
   denominador <- rpcdas::get_sim(
     agg = agg,
     ano = ano,
-    idade_a = 00,
-    idade_b = 04,
+    idade_a = 0, idade_b = 4,
     pcdas_token = pcdas_token
-  ) %>%
+  )%>%
     dplyr::rename(year = .data$ano, pop = .data$freq)
+
 
   # Perform indicator calculus
   res <- indicator_raw(
@@ -45,7 +44,7 @@ indi_0009 <- function(agg, ano, multi = 100, decimals = 2, pcdas_token = NULL){
     denominador = denominador,
     multi = multi,
     decimals = decimals,
-    nome = "indi_0001",
+    nome = "indi_0009",
     agg = agg
   )
 
