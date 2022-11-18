@@ -1,4 +1,4 @@
-#' Indicator: Mortalidade Infantil
+#' Indicator: Taxa de Mortalidade Infantil
 #'
 #' @param agg character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saúde of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.
 #' @param ano numeric. Year of death.
@@ -12,7 +12,7 @@
 #'
 #' @importFrom rlang .data
 #' @export
-indi_0010 <- function(agg, ano, multi = 100, decimals = 2, pcdas_token = NULL){
+indi_0010 <- function(agg, ano, multi = 1000, decimals = 2, pcdas_token = NULL){
 
   # Try to get PCDaS API token from renviron if not provided
   if(is.null(pcdas_token)){
@@ -24,8 +24,8 @@ indi_0010 <- function(agg, ano, multi = 100, decimals = 2, pcdas_token = NULL){
   numerador <- rpcdas::get_sim(
     agg = agg,
     ano = ano,
-    idade_a = 00,
-    idade_b = 01,
+    idade_a = 0,
+    idade_b = 1,
     pcdas_token = pcdas_token
   )
 
@@ -34,7 +34,8 @@ indi_0010 <- function(agg, ano, multi = 100, decimals = 2, pcdas_token = NULL){
     agg = agg,
     ano = ano,
     pcdas_token = pcdas_token
-  )
+  )%>%
+    dplyr::rename(year = .data$ano, pop = .data$freq)
 
   # Perform indicator calculus
   res <- indicator_raw(
