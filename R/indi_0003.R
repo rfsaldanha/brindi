@@ -37,7 +37,7 @@ indi_0003 <- function(agg, ano, multi = 100000, decimals = 2, pcdas_token = NULL
     denominador = denominador,
     multi = multi,
     decimals = decimals,
-    nome = "indi_0002",
+    nome = "indi_0003",
     agg = agg
   )
 
