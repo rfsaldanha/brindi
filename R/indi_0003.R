@@ -43,4 +43,3 @@ indi_0003 <- function(agg, ano, multi = 100000, decimals = 2, pcdas_token = NULL
 
   return(res)
 }
-
