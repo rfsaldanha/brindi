@@ -111,5 +111,7 @@ denominator_pop <- function(agg, sex = "all", age_group_vec = "totals"){
     }
   }
 
+  denominador <- dplyr::select(denominador, -dplyr::any_of(c("age_group")))
+
   return(denominador)
 }
