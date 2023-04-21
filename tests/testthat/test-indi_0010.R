@@ -34,7 +34,7 @@ test_that("indi_0010 works with regsaude res", {
 })
 
 test_that("indi_0010 works with regsaude ocor", {
-  res <- indi_0010(agg = "regsaude_res", ano = 2013)
+  res <- indi_0010(agg = "regsaude_ocor", ano = 2013)
 
   expect_equal("tbl_df", class(res)[1])
   expect_gt(nrow(res), 20)
