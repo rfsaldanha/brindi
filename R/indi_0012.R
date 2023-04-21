@@ -24,7 +24,7 @@ indi_0012 <- function(agg, ano, multi = 100, decimals = 2, pcdas_token = NULL){
     agg = agg,
     ano = ano,
     idade_a = 0, idade_b = 4,
-    cid_in = cid_seq("J00", "J22"),
+    cid_in = rpcdas::cid_seq("J00", "J22"),
     pcdas_token = pcdas_token
   )
 
