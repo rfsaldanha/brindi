@@ -10,8 +10,12 @@
 expand_indi_sqlite <- function(agg, anos, db, indi = "all", table_name = "indi"){
 
   # List indi_ functions or use supplied vector
-  if(indi == "all"){
-    indi_funs <- grep("^indi_", ls(getNamespace("bilis")), value = TRUE)
+  if(length(indi) == 1){
+    if(indi == "all"){
+      indi_funs <- grep("^indi_", ls(getNamespace("bilis")), value = TRUE)
+    } else {
+      indi_funs <- c(indi)
+    }
   } else {
     indi_funs <- c(indi)
   }

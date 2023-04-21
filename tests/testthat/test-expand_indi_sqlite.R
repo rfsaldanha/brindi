@@ -5,6 +5,7 @@ test_that("expand_indi_sqlite works", {
   expand_indi_sqlite(
     agg = c("uf_res", "uf_ocor"),
     anos = 2011:2013,
+    indi = c("indi_0001", "indi_0002"),
     db = tmp_db
   )
 
