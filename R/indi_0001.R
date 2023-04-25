@@ -13,7 +13,7 @@
 #'
 #' @importFrom rlang .data
 #' @export
-indi_0001 <- function(agg, agg_time, ano, multi = 100000, decimals = 2, pcdas_token = NULL){
+indi_0001 <- function(agg, agg_time = "year", ano, multi = 100000, decimals = 2, pcdas_token = NULL){
 
   # Try to get PCDaS API token from renviron if not provided
   if(is.null(pcdas_token)){
