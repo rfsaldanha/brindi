@@ -4,20 +4,19 @@
 \alias{expand_indi}
 \title{Expand indicator results with arguments with parallel processing}
 \usage{
-expand_indi(agg, anos, indi_fun)
+expand_indi(agg, agg_time, anos, indi_fun, save_args = TRUE)
 }
 \arguments{
-\item{agg}{character vector. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saúde of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.}
+\item{agg}{character vector. Spatial aggregation levell. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saúde of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.}
 
-\item{anos}{numeric vector. Years}
+\item{agg_time}{character vector. Time aggregation levels. \code{year} for yearly data. \code{month} for monthly data. \code{week} for weekly data. Defaults to \code{year}.}
 
-\item{indi_fun}{character function names vector.}
+\item{anos}{numeric vector. Years.}
+
+\item{indi_fun}{character. Function name.}
+
+\item{save_args}{logical. Save \code{agg} and \code{agg_time} arguments on results table.}
 }
 \description{
 Expand indicator results with arguments with parallel processing
-}
-\examples{
-# Some examples
-expand_indi(agg = c("uf_res", "uf_ocor"), anos = c(2013, 2014, 2015), indi_fun = "indi_0001")
-
 }

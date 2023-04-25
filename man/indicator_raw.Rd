@@ -4,12 +4,22 @@
 \alias{indicator_raw}
 \title{Raw indicator calculus}
 \usage{
-indicator_raw(numerador, denominador, nome, agg, multi, decimals)
+indicator_raw(
+  numerador,
+  denominador,
+  denominador_type = "pop",
+  nome,
+  agg,
+  multi,
+  decimals
+)
 }
 \arguments{
 \item{numerador}{character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saúde of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.}
 
 \item{denominador}{numeric. Year of death.}
+
+\item{denominador_type}{character. Type of denominator. \code{pop} or \code{arbitrary}.}
 
 \item{nome}{character. PCDaS API token. If not provided, the function will look for it on renvirom.}
 

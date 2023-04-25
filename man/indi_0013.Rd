@@ -4,16 +4,28 @@
 \alias{indi_0013}
 \title{Taxa de mortalidade específica por doenças do aparelho circulatório}
 \usage{
-indi_0013(agg, ano, multi = 1e+05, decimals = 2, pcdas_token = NULL)
+indi_0013(
+  agg,
+  agg_time = "year",
+  ano,
+  multi = 1e+05,
+  decimals = 2,
+  save_args = FALSE,
+  pcdas_token = NULL
+)
 }
 \arguments{
 \item{agg}{character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saúde of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.}
+
+\item{agg_time}{character. Time aggregation level. \code{year} for yearly data. \code{month} for monthly data. \code{week} for weekly data. Defaults to \code{year}.}
 
 \item{ano}{numeric. Year of death.}
 
 \item{multi}{integer. Multiplicator for indicator.}
 
 \item{decimals}{integer. Number of decimals for indicator.}
+
+\item{save_args}{logical. Save \code{agg} and \code{agg_time} arguments on results table.}
 
 \item{pcdas_token}{character. PCDaS API token. If not provided, the function will look for it on renvirom.}
 }

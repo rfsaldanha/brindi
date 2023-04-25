@@ -2,7 +2,7 @@ test_that("indi_0009 works with mun res", {
   res <- indi_0009(agg = "mun_res", ano = 2013)
 
   expect_equal("tbl_df", class(res)[1])
-  expect_gt(nrow(res), 480)
+  expect_gt(nrow(res), 500)
 })
 
 test_that("indi_0009 works with mun ocor", {
@@ -30,13 +30,33 @@ test_that("indi_0009 works with regsaude res", {
   res <- indi_0009(agg = "regsaude_res", ano = 2013)
 
   expect_equal("tbl_df", class(res)[1])
-  expect_gt(nrow(res), 20)
+  expect_gt(nrow(res), 230)
 })
 
 test_that("indi_0009 works with regsaude ocor", {
   res <- indi_0009(agg = "regsaude_ocor", ano = 2013)
 
   expect_equal("tbl_df", class(res)[1])
-  expect_gt(nrow(res), 20)
+  expect_gt(nrow(res), 190)
 })
 
+test_that("indi_0009 works with uf res and month aggregation", {
+  res <- indi_0009(agg = "uf_res", agg_time = "month", ano = 2013)
+
+  expect_equal("tbl_df", class(res)[1])
+  expect_gt(nrow(res), 240)
+})
+
+test_that("indi_0009 works with uf res and week aggregation", {
+  res <- indi_0009(agg = "uf_res", agg_time = "week", ano = 2013)
+
+  expect_equal("tbl_df", class(res)[1])
+  expect_gt(nrow(res), 500)
+})
+
+test_that("indi_0009 works with uf res and multiple years", {
+  res <- indi_0009(agg = "uf_res", ano = c(2013, 2015))
+
+  expect_equal("tbl_df", class(res)[1])
+  expect_gt(nrow(res), 50)
+})
