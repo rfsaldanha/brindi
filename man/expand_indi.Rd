@@ -20,8 +20,3 @@ expand_indi(agg, agg_time, anos, indi_fun, save_args = TRUE)
 \description{
 Expand indicator results with arguments with parallel processing
 }
-\examples{
-# Some examples
-expand_indi(agg = c("uf_res", "uf_ocor"), anos = c(2013, 2014, 2015), indi_fun = "indi_0001")
-
-}

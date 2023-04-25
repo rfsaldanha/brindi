@@ -6,10 +6,6 @@
 #' @param indi_fun character. Function name.
 #' @param save_args logical. Save \code{agg} and \code{agg_time} arguments on results table.
 #'
-#' @examples
-#' # Some examples
-#' expand_indi(agg = c("uf_res", "uf_ocor"), anos = c(2013, 2014, 2015), indi_fun = "indi_0001")
-#'
 #' @export
 expand_indi <- function(agg, agg_time, anos, indi_fun, save_args = TRUE){
   # Start parallel enviroment
