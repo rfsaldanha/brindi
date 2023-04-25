@@ -4,10 +4,19 @@
 \alias{indi_0011}
 \title{Indicator: Taxa de Mortalidade em menores de 5 anos}
 \usage{
-indi_0011(agg, ano, multi = 1000, decimals = 2, pcdas_token = NULL)
+indi_0011(
+  agg,
+  agg_time = "year",
+  ano,
+  multi = 1000,
+  decimals = 2,
+  pcdas_token = NULL
+)
 }
 \arguments{
 \item{agg}{character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saúde of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.}
+
+\item{agg_time}{character. Time aggregation level. \code{year} for yearly data. \code{month} for monthly data. \code{week} for weekly data. Defaults to \code{year}.}
 
 \item{ano}{numeric. Year of death.}
 
