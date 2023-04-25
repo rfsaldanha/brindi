@@ -13,7 +13,7 @@ indicator_raw <- function(numerador, denominador, denominador_type = "pop", nome
 
   if(denominador_type == "pop"){
     numerador <- numerador %>%
-      dplyr::mutate(year = as.numeric(substring(agg_time, 0, 4)))
+      dplyr::mutate(year = as.numeric(substring(.data$agg_time, 0, 4)))
 
     res <- dplyr::inner_join(x = numerador, y = denominador, by = c("agg" = "agg", "year" = "year")) %>%
       dplyr::mutate(value = round(
