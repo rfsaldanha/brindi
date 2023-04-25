@@ -5,7 +5,12 @@ Authors@R: c(
     person("Raphael", "Saldanha", email = "raphael.de-freitas-saldanha@inria.fr", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-0652-8466")),
     person("Diego", "Xavier", , "diego.ricardo@icict.fiocruz.br", role = c("aut"),
-           comment = c(ORCID = "0000-0001-5259-7732")))       
+           comment = c(ORCID = "0000-0001-5259-7732")),
+    person("Vanderlei", "Pascoal", , "vanderlei.pascoal@icict.fiocruz.br", role = c("aut")),
+    person("Heglaucio", "Barros", , "heglaucio@gmail.com", role = c("aut")),
+    person("Renata", "Gracie", , "renata.gracie@icict.fiocruz.br", role = c("aut")),
+    person("Monica", "Magalhães", , "monica.magalhaes@icict.fiocruz.br", role = c("aut")),
+    person("Christovam", "Barcellos", , "christovam.barcellos@icict.fiocruz.br", role = c("aut")))
 Description: An R package to calculate health indicators using raw data from PCDaS ElasticSearch cluster and other sources. BILIS stands for Banco de Indicadores do Laboratorio de Informacao de Saude.
 License: MIT + file LICENSE
 Encoding: UTF-8
