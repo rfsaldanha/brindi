@@ -30,7 +30,7 @@ indi_0008 <- function(agg, agg_time = "year", ano, multi = 100000, decimals = 2,
   )
 
   # Creates denominator
-  denominador<-denominator_pop(agg = agg, sex = "male")
+  denominador <- denominator_pop(agg = agg, sex = "male")
 
   # Perform indicator calculus
   res <- indicator_raw(
