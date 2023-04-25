@@ -10,6 +10,7 @@ indi_0003(
   ano,
   multi = 1e+05,
   decimals = 2,
+  save_args = FALSE,
   pcdas_token = NULL
 )
 }
@@ -23,6 +24,8 @@ indi_0003(
 \item{multi}{integer. Multiplicator for indicator.}
 
 \item{decimals}{integer. Number of decimals for indicator.}
+
+\item{save_args}{logical. Save \code{agg} and \code{agg_time} arguments on results table.}
 
 \item{pcdas_token}{character. PCDaS API token. If not provided, the function will look for it on renvirom.}
 }
