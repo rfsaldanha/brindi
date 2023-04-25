@@ -32,8 +32,3 @@ indi_0004(
 \description{
 Indicator: Mortalidade por Acidentes de transportes terrestres
 }
-\examples{
-# Some examples
-indi_0004(agg = "mun_res", ano = 2013)
-
-}

@@ -32,8 +32,3 @@ indi_0005(
 \description{
 Indicator: Mortalidade por suicidio
 }
-\examples{
-# Some examples
-indi_0005(agg = "mun_res", ano = 2013)
-
-}

@@ -32,8 +32,3 @@ indi_0012(
 \description{
 Indicator: Mortalidade proporcional por infecção respiratória aguda em menores de 5 anos de idade
 }
-\examples{
-# Some examples
-indi_0012(agg = "mun_res", ano = 2013)
-
-}

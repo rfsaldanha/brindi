@@ -32,8 +32,3 @@ indi_0007(
 \description{
 Indicator: Mortalidade por neoplasia maligna da colo de utero
 }
-\examples{
-# Some examples
-indi_0007(agg = "mun_res", ano = 2013)
-
-}

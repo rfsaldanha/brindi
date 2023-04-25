@@ -32,8 +32,3 @@ indi_0008(
 \description{
 Indicator: Mortalidade por neoplasia maligna de prostata
 }
-\examples{
-# Some examples
-indi_0008(agg = "mun_res", ano = 2013)
-
-}

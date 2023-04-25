@@ -32,8 +32,3 @@ indi_0010(
 \description{
 Indicator: Taxa de Mortalidade Infantil
 }
-\examples{
-# Some examples
-indi_0010(agg = "mun_res", ano = 2013)
-
-}

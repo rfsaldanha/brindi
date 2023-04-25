@@ -32,8 +32,3 @@ indi_0009(
 \description{
 Indicator: Mortalidade proporcional por doença diarreica aguda em menores de 5 anos
 }
-\examples{
-# Some examples
-indi_0009(agg = "mun_res", ano = 2013)
-
-}

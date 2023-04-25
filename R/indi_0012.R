@@ -8,10 +8,6 @@
 #' @param save_args logical. Save \code{agg} and \code{agg_time} arguments on results table.
 #' @param pcdas_token character. PCDaS API token. If not provided, the function will look for it on renvirom.
 #'
-#' @examples
-#' # Some examples
-#' indi_0012(agg = "mun_res", ano = 2013)
-#'
 #' @importFrom rlang .data
 #' @export
 indi_0012 <- function(agg, agg_time = "year", ano, multi = 100, decimals = 2, save_args = FALSE, pcdas_token = NULL){

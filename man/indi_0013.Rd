@@ -2,7 +2,7 @@
 % Please edit documentation in R/indi_0013.R
 \name{indi_0013}
 \alias{indi_0013}
-\title{Taxa de mortalidade específica por doenças do aparelho circulatório}
+\title{Indicator: Taxa de mortalidade específica por doenças do aparelho circulatório}
 \usage{
 indi_0013(
   agg,
@@ -30,10 +30,5 @@ indi_0013(
 \item{pcdas_token}{character. PCDaS API token. If not provided, the function will look for it on renvirom.}
 }
 \description{
-Taxa de mortalidade específica por doenças do aparelho circulatório
-}
-\examples{
-# Some examples
-indi_0013(agg = "mun_res", ano = 2013)
-
+Indicator: Taxa de mortalidade específica por doenças do aparelho circulatório
 }

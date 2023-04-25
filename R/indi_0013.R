@@ -1,4 +1,4 @@
-#' Taxa de mortalidade específica por doenças do aparelho circulatório
+#' Indicator: Taxa de mortalidade específica por doenças do aparelho circulatório
 #'
 #' @param agg character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saúde of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.
 #' @param agg_time character. Time aggregation level. \code{year} for yearly data. \code{month} for monthly data. \code{week} for weekly data. Defaults to \code{year}.
@@ -7,10 +7,6 @@
 #' @param decimals integer. Number of decimals for indicator.
 #' @param save_args logical. Save \code{agg} and \code{agg_time} arguments on results table.
 #' @param pcdas_token character. PCDaS API token. If not provided, the function will look for it on renvirom.
-#'
-#' @examples
-#' # Some examples
-#' indi_0013(agg = "mun_res", ano = 2013)
 #'
 #' @importFrom rlang .data
 #' @export

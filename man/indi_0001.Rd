@@ -32,8 +32,3 @@ indi_0001(
 \description{
 Indicator: Mortalidade por causas externas
 }
-\examples{
-# Some examples
-indi_0001(agg = "mun_res", ano = 2013)
-
-}

@@ -32,8 +32,3 @@ indi_0006(
 \description{
 Indicator: Mortalidade por neoplasia maligna da mama
 }
-\examples{
-# Some examples
-indi_0006(agg = "mun_res", ano = 2013)
-
-}

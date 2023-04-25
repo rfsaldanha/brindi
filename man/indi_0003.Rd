@@ -32,8 +32,3 @@ indi_0003(
 \description{
 Indicator: Mortalidade por doencas isquemicas do coracao
 }
-\examples{
-# Some examples
-indi_0003(agg = "mun_res", ano = 2013)
-
-}

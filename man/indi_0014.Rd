@@ -2,7 +2,7 @@
 % Please edit documentation in R/indi_0014.R
 \name{indi_0014}
 \alias{indi_0014}
-\title{Taxa de mortalidade por dengue}
+\title{Indicator: Taxa de mortalidade por dengue}
 \usage{
 indi_0014(
   agg,
@@ -30,10 +30,5 @@ indi_0014(
 \item{pcdas_token}{character. PCDaS API token. If not provided, the function will look for it on renvirom.}
 }
 \description{
-Taxa de mortalidade por dengue
-}
-\examples{
-# Some examples
-indi_0014(agg = "mun_res", ano = 2013)
-
+Indicator: Taxa de mortalidade por dengue
 }
