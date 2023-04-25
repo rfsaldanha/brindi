@@ -5,6 +5,7 @@
 #' @param ano numeric. Year of death.
 #' @param multi integer. Multiplicator for indicator.
 #' @param decimals integer. Number of decimals for indicator.
+#' @param save_args logical. Save \code{agg} and \code{agg_time} arguments on results table.
 #' @param pcdas_token character. PCDaS API token. If not provided, the function will look for it on renvirom.
 #'
 #' @examples
@@ -13,7 +14,7 @@
 #'
 #' @importFrom rlang .data
 #' @export
-indi_0009 <- function(agg, agg_time = "year", ano, multi = 100, decimals = 2, pcdas_token = NULL){
+indi_0009 <- function(agg, agg_time = "year", ano, multi = 100, decimals = 2, save_args = FALSE, pcdas_token = NULL){
 
   # Try to get PCDaS API token from renviron if not provided
   if(is.null(pcdas_token)){
@@ -50,6 +51,16 @@ indi_0009 <- function(agg, agg_time = "year", ano, multi = 100, decimals = 2, pc
     nome = "indi_0009",
     agg = agg
   )
+
+  # Save arguments
+  if(save_args == TRUE){
+    res <- res %>%
+      dplyr::mutate(
+        agg = agg,
+        agg_time = agg_time
+      ) %>%
+      dplyr::relocate(.data$agg, .data$agg_time, .after = .data$name)
+  }
 
   return(res)
 }
