@@ -4,10 +4,12 @@
 \alias{expand_indi_sqlite}
 \title{Expand indicator results to SQLite}
 \usage{
-expand_indi_sqlite(agg, anos, db, indi = "all", table_name = "indi")
+expand_indi_sqlite(agg, agg_time, anos, db, indi = "all", table_name = "indi")
 }
 \arguments{
 \item{agg}{character vector. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saúde of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.}
+
+\item{agg_time}{character vector. Time aggregation levels. \code{year} for yearly data. \code{month} for monthly data. \code{week} for weekly data. Defaults to \code{year}.}
 
 \item{anos}{numeric vector. Years}
 
