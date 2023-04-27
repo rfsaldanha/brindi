@@ -8,6 +8,7 @@ indicator_raw(
   numerador,
   denominador,
   denominador_type = "pop",
+  keep_raw_values = FALSE,
   nome,
   agg,
   multi,
@@ -20,6 +21,8 @@ indicator_raw(
 \item{denominador}{numeric. Year of death.}
 
 \item{denominador_type}{character. Type of denominator. \code{pop} or \code{arbitrary}.}
+
+\item{keep_raw_values}{logical. Keep numerator and denominator values on results.}
 
 \item{nome}{character. PCDaS API token. If not provided, the function will look for it on renvirom.}
 
