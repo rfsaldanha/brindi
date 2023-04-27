@@ -53,7 +53,8 @@ indi_0001 <- function(agg, agg_time = "year", ano, multi = 100000, decimals = 2,
 
   # Complete with zeros
   if(complete_with_zeros == TRUE){
-    res <- complete_with_zeros(res = res, agg = agg, agg_time = agg_time, ano = ano, save_args = save_args)
+    res <- complete_with_zeros(res = res, agg = agg, agg_time = agg_time,
+                               ano = ano, save_args = save_args)
   }
 
   return(res)
