@@ -50,6 +50,7 @@
 <span>  <span class="va">denominador</span>,</span>
 <span>  denominador_type <span class="op">=</span> <span class="st">"pop"</span>,</span>
 <span>  keep_raw_values <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  treat_inf_values <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">nome</span>,</span>
 <span>  <span class="va">agg</span>,</span>
 <span>  <span class="va">multi</span>,</span>
@@ -72,7 +73,11 @@
 
 
 <dt>keep_raw_values</dt>
-<dd><p>logical. Keep numerator and denominator values on results.</p></dd>
+<dd><p>logical. Keep numerator and denominator values on results. Defaults to <code>FALSE</code>.</p></dd>
+
+
+<dt>treat_inf_values</dt>
+<dd><p>logical. Treat positive infinite values caused by denominators equals to zero as NA. Defaults to <code>TRUE</code>.</p></dd>
 
 
 <dt>nome</dt>
