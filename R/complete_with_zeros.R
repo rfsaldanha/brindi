@@ -33,14 +33,14 @@ complete_with_zeros <- function(res, agg, agg_time, ano, save_args){
       year = ano,
       month = 1:12
     ) %>%
-      dplyr::mutate(date = paste0(year, "-", stringr::str_pad(month, 2, pad = 0))) %>%
+      dplyr::mutate(date = paste0(.data$year, "-", stringr::str_pad(.data$month, 2, pad = 0))) %>%
       dplyr::select(date)
   } else if(agg_time == "week"){
     date_full <- tidyr::crossing(
       year = ano,
       week = 1:53
     ) %>%
-      dplyr::mutate(date = paste0(year, "-", stringr::str_pad(week, 2, pad = 0))) %>%
+      dplyr::mutate(date = paste0(.data$year, "-", stringr::str_pad(.data$week, 2, pad = 0))) %>%
       dplyr::select(date)
   }
 
