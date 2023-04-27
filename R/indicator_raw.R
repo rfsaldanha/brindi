@@ -3,13 +3,14 @@
 #' @param numerador character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saúde of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.
 #' @param denominador numeric. Year of death.
 #' @param denominador_type character. Type of denominator. \code{pop} or \code{arbitrary}.
+#' @param keep_raw_values logical. Keep numerator and denominator values on results.
 #' @param nome character. PCDaS API token. If not provided, the function will look for it on renvirom.
 #' @param agg character. Aggregation acronymin.
 #' @param multi integer. Multiplicator for indicator.
 #' @param decimals integer. Number of decimals for indicator.
 #'
 #' @importFrom rlang .data
-indicator_raw <- function(numerador, denominador, denominador_type = "pop", nome, agg, multi, decimals){
+indicator_raw <- function(numerador, denominador, denominador_type = "pop", keep_raw_values = FALSE, nome, agg, multi, decimals){
 
   if(denominador_type == "pop"){
     numerador <- numerador %>%
@@ -22,19 +23,32 @@ indicator_raw <- function(numerador, denominador, denominador_type = "pop", nome
       ))
   } else if(denominador_type == "arbitrary"){
     res <- dplyr::inner_join(x = numerador, y = denominador, by = c("agg" = "agg", "agg_time" = "agg_time")) %>%
+      dplyr::rename(freq = .data$freq.x, pop = .data$freq.y) %>%
       dplyr::mutate(value = round(
-        x = (.data$freq.x/.data$freq.y) * multi,
+        x = (.data$freq/.data$pop) * multi,
         digits = decimals
       ))
   }
 
-  res <- res %>%
+  if(keep_raw_values == FALSE){
+    res <- res %>%
     dplyr::mutate(name = nome) %>%
     dplyr::rename(cod = agg) %>%
     dplyr::mutate(agg = agg) %>%
     dplyr::relocate(.data$agg, .before = .data$cod) %>%
     dplyr::relocate(.data$value, .after = .data$name) %>%
     dplyr::select(.data$name, .data$cod, date = .data$agg_time, .data$value)
+  } else if(keep_raw_values == TRUE){
+    res <- res %>%
+      dplyr::mutate(name = nome) %>%
+      dplyr::rename(cod = agg) %>%
+      dplyr::mutate(agg = agg) %>%
+      dplyr::relocate(.data$agg, .before = .data$cod) %>%
+      dplyr::relocate(.data$value, .after = .data$name) %>%
+      dplyr::select(.data$name, .data$cod, date = .data$agg_time, numerator = .data$freq, denominator = .data$pop, .data$value)
+  }
+
+
 
   return(res)
 }
