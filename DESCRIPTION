@@ -40,4 +40,5 @@ Config/testthat/edition: 3
 Depends: 
     R (>= 2.10)
 LazyData: true
-URL: https://rfsaldanha.github.io/bilis/
+URL: https://rfsaldanha.github.io/bilis/,
+     https://github.com/rfsaldanha/bilis
