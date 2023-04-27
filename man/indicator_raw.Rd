@@ -9,6 +9,7 @@ indicator_raw(
   denominador,
   denominador_type = "pop",
   keep_raw_values = FALSE,
+  treat_inf_values = TRUE,
   nome,
   agg,
   multi,
@@ -22,7 +23,9 @@ indicator_raw(
 
 \item{denominador_type}{character. Type of denominator. \code{pop} or \code{arbitrary}.}
 
-\item{keep_raw_values}{logical. Keep numerator and denominator values on results.}
+\item{keep_raw_values}{logical. Keep numerator and denominator values on results. Defaults to \code{FALSE}.}
+
+\item{treat_inf_values}{logical. Treat positive infinite values caused by denominators equals to zero as NA. Defaults to \code{TRUE}.}
 
 \item{nome}{character. PCDaS API token. If not provided, the function will look for it on renvirom.}
 
