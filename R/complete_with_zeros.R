@@ -2,13 +2,14 @@
 #'
 #' Complete indicator result with zeros considering combinations of spatial and temporal aggregation without results.
 #'
+#' @param res tibble. Indicator results table.
 #' @param agg character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saúde of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.
 #' @param agg_time character. Time aggregation level. \code{year} for yearly data. \code{month} for monthly data. \code{week} for weekly data. Defaults to \code{year}.
 #' @param ano numeric. Year of death.
 #' @param save_args logical. Save \code{agg} and \code{agg_time} arguments on results table.
 #'
 #' @importFrom rlang .data
-complete_with_zeros <- function(agg, agg_time, ano, save_args){
+complete_with_zeros <- function(res, agg, agg_time, ano, save_args){
   # Spatial aggregation reference table of cods
   if(agg %in% c("mun_res", "mun_ocor")){
     cod_full <- brpop::mun_pop_totals() %>%
