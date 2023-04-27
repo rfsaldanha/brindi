@@ -2,7 +2,7 @@
 % Please edit documentation in R/expand_indi_sqlite.R
 \name{expand_indi_sqlite}
 \alias{expand_indi_sqlite}
-\title{Expand indicator results to SQLite}
+\title{Expand several indicators results to SQLite}
 \usage{
 expand_indi_sqlite(agg, agg_time, anos, db, indi = "all", table_name = "indi")
 }
@@ -20,5 +20,5 @@ expand_indi_sqlite(agg, agg_time, anos, db, indi = "all", table_name = "indi")
 \item{table_name}{character. Indicators table name.}
 }
 \description{
-Expand indicator results to SQLite
+Expand several indicators results to SQLite
 }

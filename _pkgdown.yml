@@ -11,7 +11,8 @@ reference:
   desc: "Functions to calculate indicators individually"
   contents:
   - starts_with("indi_")
-- title: "Calculate indicators in batch"
+- title: "Batch calculation"
+  desc: "Calculate several indicators in batch"
   contents:
   - starts_with("expand")
 - title: "Auxiliary functions"

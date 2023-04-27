@@ -2,7 +2,7 @@
 % Please edit documentation in R/expand_indi.R
 \name{expand_indi}
 \alias{expand_indi}
-\title{Expand indicator results with arguments with parallel processing}
+\title{Expand one indicator results with combination of arguments}
 \usage{
 expand_indi(agg, agg_time, anos, indi_fun, save_args = TRUE)
 }
@@ -18,5 +18,5 @@ expand_indi(agg, agg_time, anos, indi_fun, save_args = TRUE)
 \item{save_args}{logical. Save \code{agg} and \code{agg_time} arguments on results table.}
 }
 \description{
-Expand indicator results with arguments with parallel processing
+With parallel processing.
 }
