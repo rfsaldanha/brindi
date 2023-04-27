@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">bilis</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,6 +52,7 @@
 <span>  multi <span class="op">=</span> <span class="fl">1e+05</span>,</span>
 <span>  decimals <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>  complete_with_zeros <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  keep_raw_values <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  save_args <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  pcdas_token <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -81,6 +82,10 @@
 
 <dt>complete_with_zeros</dt>
 <dd><p>logical. Complete indicator result with zeros considering combinations of spatial and temporal aggregation without results.</p></dd>
+
+
+<dt>keep_raw_values</dt>
+<dd><p>logical. Keep numerator and denominator values on results.</p></dd>
 
 
 <dt>save_args</dt>
