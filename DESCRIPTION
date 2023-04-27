@@ -28,7 +28,8 @@ Imports:
     glue,
     DBI,
     RSQLite,
-    progress
+    progress,
+    stringr
 Remotes:
     rfsaldanha/brpop,
     rfsaldanha/rpcdas
