@@ -10,6 +10,7 @@ indi_0007(
   ano,
   multi = 1e+05,
   decimals = 2,
+  complete_with_zeros = TRUE,
   save_args = FALSE,
   pcdas_token = NULL
 )
@@ -24,6 +25,8 @@ indi_0007(
 \item{multi}{integer. Multiplicator for indicator.}
 
 \item{decimals}{integer. Number of decimals for indicator.}
+
+\item{complete_with_zeros}{logical. Complete indicator result with zeros considering combinations of spatial and temporal aggregation without results.}
 
 \item{save_args}{logical. Save \code{agg} and \code{agg_time} arguments on results table.}
 
