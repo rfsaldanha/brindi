@@ -1,3 +1,6 @@
+# bilis 0.1.1
+* Complete with zeros argument to calculate indicators including zero values when then numerator for a specific space/time aggregation does not have results.
+
 # bilis 0.1.0
 * Calculate indicators with different spatial and time aggregations.
 
