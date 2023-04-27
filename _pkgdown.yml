@@ -2,3 +2,20 @@ url: https://rfsaldanha.github.io/bilis/
 template:
   bootstrap: 5
 
+navbar:
+  structure:
+    right: [github]
+
+reference:
+- title: "Indicators"
+  desc: "Functions to calculate indicators individually"
+  contents:
+  - starts_with("indi_")
+- title: "Calculate indicators in batch"
+  contents:
+  - starts_with("expand")
+- title: "Auxiliary functions"
+  contents:
+  - complete_with_zeros
+  - denominator_pop
+  - indicator_raw
