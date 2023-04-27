@@ -5,12 +5,13 @@
 #' @param ano numeric. Year of death.
 #' @param multi integer. Multiplicator for indicator.
 #' @param decimals integer. Number of decimals for indicator.
+#' @param complete_with_zeros logical. Complete indicator result with zeros considering combinations of spatial and temporal aggregation without results.
 #' @param save_args logical. Save \code{agg} and \code{agg_time} arguments on results table.
 #' @param pcdas_token character. PCDaS API token. If not provided, the function will look for it on renvirom.
 #'
 #' @importFrom rlang .data
 #' @export
-indi_0001 <- function(agg, agg_time = "year", ano, multi = 100000, decimals = 2, save_args = FALSE, pcdas_token = NULL){
+indi_0001 <- function(agg, agg_time = "year", ano, multi = 100000, decimals = 2, complete_with_zeros = TRUE, save_args = FALSE, pcdas_token = NULL){
 
   # Try to get PCDaS API token from renviron if not provided
   if(is.null(pcdas_token)){
@@ -48,6 +49,11 @@ indi_0001 <- function(agg, agg_time = "year", ano, multi = 100000, decimals = 2,
         agg_time = agg_time
       ) %>%
       dplyr::relocate(.data$agg, .data$agg_time, .after = .data$name)
+  }
+
+  # Complete with zeros
+  if(complete_with_zeros == TRUE){
+    res <- complete_with_zeros(res = res, agg = agg, agg_time = agg_time, ano = ano, save_args = save_args)
   }
 
   return(res)
