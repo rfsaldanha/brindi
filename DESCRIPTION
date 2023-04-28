@@ -29,7 +29,8 @@ Imports:
     DBI,
     RSQLite,
     progress,
-    stringr
+    stringr,
+    RPostgres
 Remotes:
     rfsaldanha/brpop,
     rfsaldanha/rpcdas

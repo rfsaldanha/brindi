@@ -24,6 +24,9 @@ expand_indi_sqlite <- function(agg, agg_time, anos, db, indi = "all", table_name
   # Creates database connection
   conn <- DBI::dbConnect(RSQLite::SQLite(), db)
 
+  # Close connection
+  on.exit(DBI::dbDisconnect(conn = conn))
+
   # Remove table if exists
   if(DBI::dbExistsTable(conn = conn, name = table_name)){
     DBI::dbRemoveTable(conn = conn, table_name)
@@ -31,7 +34,7 @@ expand_indi_sqlite <- function(agg, agg_time, anos, db, indi = "all", table_name
 
   # Creates progress bar
   pb <- progress::progress_bar$new(
-    format = "Running: :what [:bar] :percent :elapsedfull",
+    format = ":spin :current/:total [:bar] :percent in :elapsed ETA: :eta",
     clear = FALSE, total = length(indi_funs))
 
   pb$tick(0)
@@ -43,7 +46,4 @@ expand_indi_sqlite <- function(agg, agg_time, anos, db, indi = "all", table_name
     tmp <- expand_indi(agg = agg, agg_time = agg_time, anos = anos, indi_fun = i)
     DBI::dbWriteTable(conn = conn, name = table_name, value = tmp, append = TRUE)
   }
-
-  # Close connection
-  DBI::dbDisconnect(conn = conn)
 }

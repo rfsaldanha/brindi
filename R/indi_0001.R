@@ -36,11 +36,11 @@ indi_0001 <- function(agg, agg_time = "year", ano, multi = 100000, decimals = 2,
   res <- indicator_raw(
     numerador = numerador,
     denominador = denominador,
-    multi = multi,
-    decimals = decimals,
     keep_raw_values = keep_raw_values,
     nome = "indi_0001",
-    agg = agg
+    agg = agg,
+    multi = multi,
+    decimals = decimals
   )
 
   # Save arguments
