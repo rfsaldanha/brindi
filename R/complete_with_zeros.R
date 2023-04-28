@@ -49,7 +49,7 @@ complete_with_zeros <- function(res, agg, agg_time, ano, save_args){
     tidyr::complete(
       cod = cod_full$cod,
       date = date_full$date,
-      name = "indi_0001",
+      name = res$name[1],
       fill = list(value = 0),
       explicit = FALSE
     )
