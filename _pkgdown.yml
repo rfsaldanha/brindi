@@ -20,3 +20,4 @@ reference:
   - complete_with_zeros
   - denominator_pop
   - indicator_raw
+  - starts_with("get_")
