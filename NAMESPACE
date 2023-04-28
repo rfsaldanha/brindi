@@ -3,6 +3,7 @@
 export("%>%")
 export(denominator_pop)
 export(expand_indi)
+export(expand_indi_psql)
 export(expand_indi_sqlite)
 export(indi_0001)
 export(indi_0002)
