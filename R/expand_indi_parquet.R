@@ -7,7 +7,7 @@
 #' @param indi character function names vector. Defaults to `all` for all indi_ functions.
 #'
 #' @export
-expand_indi_parquet <- function(agg, agg_time, anos, dir, indi = "all", table_name = "indi"){
+expand_indi_parquet <- function(agg, agg_time, anos, dir, indi = "all"){
 
   # List indi_ functions or use supplied vector
   if(length(indi) == 1){

@@ -4,14 +4,7 @@
 \alias{expand_indi_parquet}
 \title{Expand several indicators results to SQLite}
 \usage{
-expand_indi_parquet(
-  agg,
-  agg_time,
-  anos,
-  dir,
-  indi = "all",
-  table_name = "indi"
-)
+expand_indi_parquet(agg, agg_time, anos, dir, indi = "all")
 }
 \arguments{
 \item{agg}{character vector. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saúde of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.}
