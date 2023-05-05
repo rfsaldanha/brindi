@@ -17,13 +17,17 @@ expand_indi <- function(agg, agg_time, anos, indi_fun, save_args = TRUE){
   # Plan tasks
   job <- tidyr::crossing(
     agg = agg,
-    agg_time = agg_time
+    agg_time = agg_time,
+    ano = anos
   )
 
   # Execute
-  res <- furrr::future_map2_dfr(
-    .x = job$agg,
-    .y = job$agg_time,
+  res <- furrr::future_pmap_dfr(
+    .l = list(
+      job$agg,
+      job$agg_time,
+      job$ano
+    ),
     .f = get(indi_fun),
     ano = anos,
     save_args = save_args,
