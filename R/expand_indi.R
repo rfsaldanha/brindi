@@ -17,18 +17,31 @@ expand_indi <- function(agg, agg_time, anos, indi_fun, save_args = TRUE){
   # Plan tasks
   job <- tidyr::crossing(
     agg = agg,
-    agg_time = agg_time
+    agg_time = agg_time,
+    anos = anos,
+    indi = indi_fun
   )
 
   # Execute
-  res <- furrr::future_map2_dfr(
-    .x = job$agg,
-    .y = job$agg_time,
-    .f = get(indi_fun),
-    ano = anos,
-    save_args = save_args,
-    .options = furrr::furrr_options(seed = TRUE)
-  )
+  progressr::with_progress({
+    p <- progressr::progressor(steps = nrow(job))
+    res <- furrr::future_pmap(
+      .l = list(
+        indi = job$indi,
+        agg = job$agg,
+        agg_time = job$agg_time,
+        ano = job$anos
+      ),
+      save_args = save_args,
+      engine = "psql",
+      psql_args = list(psql_db = "harmo", psql_host = "localhost", psql_port = 5432, psql_schema = "public", psql_table = "teste", psql_user = NULL, psql_pwd = NULL),
+      p = p,
+      .f = do_call_indi,
+      .options = furrr::furrr_options(seed = TRUE)
+    )
+  })
+
+
 
   return(res)
 }
