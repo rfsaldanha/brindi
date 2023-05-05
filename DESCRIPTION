@@ -31,7 +31,8 @@ Imports:
     RSQLite,
     progress,
     stringr,
-    RPostgres
+    RPostgres,
+    arrow
 Remotes:
     rfsaldanha/brpop,
     rfsaldanha/rpcdas,
