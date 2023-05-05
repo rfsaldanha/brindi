@@ -26,7 +26,8 @@ expand_indi <- function(agg, agg_time, anos, indi_fun, save_args = TRUE){
     .y = job$agg_time,
     .f = get(indi_fun),
     ano = anos,
-    save_args = save_args
+    save_args = save_args,
+    .options = furrr_options(seed = TRUE)
   )
 
   return(res)
