@@ -41,7 +41,7 @@ indi_0015 <- function(agg, agg_time = "year", ano, multi = 100000, decimals = 2,
         agg = agg,
         agg_time = agg_time
       ) %>%
-      dplyr::relocate(.data$agg, .data$agg_time, .after = .data$name)
+      dplyr::relocate("agg", "agg_time", .after = "name")
   }
 
   # Complete with zeros
