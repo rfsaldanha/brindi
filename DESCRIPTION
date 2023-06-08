@@ -46,3 +46,4 @@ Depends:
 LazyData: true
 URL: https://rfsaldanha.github.io/bilis/,
      https://github.com/rfsaldanha/bilis
+Config/Needs/website: rmarkdown
