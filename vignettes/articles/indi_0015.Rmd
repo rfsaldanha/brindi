@@ -1,0 +1,33 @@
+---
+title: "indi_0015"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Taxa de incidência de dengue clássico
+
+## Definição
+
+Total de casos de dengue na população residente em determinado espaço geográfico, no ano considerado.
+
+## Limitações 
+
+O sistema de informação utilizado pode não detectar inconsistências na classificação da causa informada. AIH reapresentada por ter sido rejeitada em algum processamento anterior; AIH apresentada com atraso; AIH referentes a internações de longa permanência; são apresentadas, neste caso, várias AIH para uma mesma internação em meses consecutivos.
+
+## Agregações
+
+* Município de residência, região de saúde de residência (449 unidades), UF de residência.
+* Ano, mês e semana.
+
+## Método de cálculo
+
+* Numerador: Número de casos confirmados. Fonte: SINAN, DataSUS.
+* Denominador: População Total Residente. Fonte: Estimativas populacionais, DataSUS
+* Multiplicador: 100.000
+
+
