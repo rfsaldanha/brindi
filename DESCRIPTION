@@ -1,5 +1,5 @@
-Package: bilis
-Title: An R package to calculate health indicators
+Package: brindi
+Title: An R package to calculate health and climate indicators
 Version: 0.2.0
 Authors@R: c(
     person("Raphael", "Saldanha", email = "raphael.de-freitas-saldanha@inria.fr", role = c("aut", "cre"),
@@ -11,11 +11,11 @@ Authors@R: c(
     person("Renata", "Gracie", , "renata.gracie@icict.fiocruz.br", role = c("aut")),
     person("Monica", "Magalhães", , "monica.magalhaes@icict.fiocruz.br", role = c("aut")),
     person("Christovam", "Barcellos", , "christovam.barcellos@icict.fiocruz.br", role = c("aut")))
-Description: An R package to calculate health indicators using raw data from PCDaS ElasticSearch cluster and other sources. BILIS stands for Banco de Indicadores do Laboratorio de Informacao de Saude.
+Description: An R package to calculate health and climate indicators using data from 'PCDaS' 'ElasticSearch' cluster and other sources.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Imports: 
     dplyr,
     magrittr,
@@ -44,6 +44,6 @@ Config/testthat/edition: 3
 Depends: 
     R (>= 2.10)
 LazyData: true
-URL: https://rfsaldanha.github.io/bilis/,
-     https://github.com/rfsaldanha/bilis
+URL: https://rfsaldanha.github.io/brindi/,
+     https://github.com/rfsaldanha/brindi
 Config/Needs/website: rmarkdown
