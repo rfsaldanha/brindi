@@ -20,10 +20,10 @@ denominator_pop <- function(agg, sex = "all", age_group_vec = "totals"){
         dplyr::rename(agg = .data$uf)
     } else if(agg %in% c("regsaude_res", "regsaude_ocor")){
       denominador <- brpop::regsaude_pop_totals() %>%
-        dplyr::rename(agg = .data$regsaude)
+        dplyr::rename(agg = .data$codi_reg_saude)
     } else if(agg %in% c("regsaude_449_res", "regsaude_449_ocor")){
       denominador <- brpop::regsaude_pop_totals(type = "reg_saude_449") %>%
-        dplyr::rename(agg = .data$regsaude)
+        dplyr::rename(agg = .data$codi_reg_saude)
     }
     # Sex MALE and age TOTALS
   } else if(sex == "male" & "totals" %in% age_group_vec){
@@ -35,10 +35,10 @@ denominator_pop <- function(agg, sex = "all", age_group_vec = "totals"){
         dplyr::rename(agg = .data$uf)
     } else if(agg %in% c("regsaude_res", "regsaude_ocor")){
       denominador <- brpop::regsaude_male_pop_totals() %>%
-        dplyr::rename(agg = .data$regsaude)
+        dplyr::rename(agg = .data$codi_reg_saude)
     } else if(agg %in% c("regsaude_449_res", "regsaude_449_ocor")){
       denominador <- brpop::regsaude_male_pop_totals(type = "reg_saude_449") %>%
-        dplyr::rename(agg = .data$regsaude)
+        dplyr::rename(agg = .data$codi_reg_saude)
     }
     # Sex FEMALE and age TOTALS
   } else if(sex == "female" & "totals" %in% age_group_vec){
@@ -50,10 +50,10 @@ denominator_pop <- function(agg, sex = "all", age_group_vec = "totals"){
         dplyr::rename(agg = .data$uf)
     } else if(agg %in% c("regsaude_res", "regsaude_ocor")){
       denominador <- brpop::regsaude_female_pop_totals() %>%
-        dplyr::rename(agg = .data$regsaude)
+        dplyr::rename(agg = .data$codi_reg_saude)
     } else if(agg %in% c("regsaude_449_res", "regsaude_449_ocor")){
       denominador <- brpop::regsaude_female_pop_totals(type = "reg_saude_449") %>%
-        dplyr::rename(agg = .data$regsaude)
+        dplyr::rename(agg = .data$codi_reg_saude)
     }
     # Sex ALL and age NOT TOTALS
   } else if(sex == "all" & !("totals" %in% age_group_vec)){
@@ -72,15 +72,15 @@ denominator_pop <- function(agg, sex = "all", age_group_vec = "totals"){
     } else if(agg %in% c("regsaude_res", "regsaude_ocor")){
       denominador <- brpop::regsaude_pop() %>%
         dplyr::filter(.data$age_group %in% age_group_vec) %>%
-        dplyr::group_by(.data$regsaude, .data$year, .data$pop) %>%
+        dplyr::group_by(.data$codi_reg_saude, .data$year, .data$pop) %>%
         dplyr::summarise(pop = sum(.data$pop, na.rm = TRUE)) %>%
-        dplyr::rename(agg = .data$regsaude)
+        dplyr::rename(agg = .data$codi_reg_saude)
     } else if(agg %in% c("regsaude_449_res", "regsaude_449_ocor")){
       denominador <- brpop::regsaude_pop(type = "reg_saude_449") %>%
         dplyr::filter(.data$age_group %in% age_group_vec) %>%
-        dplyr::group_by(.data$regsaude, .data$year, .data$pop) %>%
+        dplyr::group_by(.data$codi_reg_saude, .data$year, .data$pop) %>%
         dplyr::summarise(pop = sum(.data$pop, na.rm = TRUE)) %>%
-        dplyr::rename(agg = .data$regsaude)
+        dplyr::rename(agg = .data$codi_reg_saude)
     }
     # Sex MALE and age NOT TOTALS
   } else if(sex == "male" & !("totals" %in% age_group_vec)){
@@ -99,15 +99,15 @@ denominator_pop <- function(agg, sex = "all", age_group_vec = "totals"){
     } else if(agg %in% c("regsaude_res", "regsaude_ocor")){
       denominador <- brpop::regsaude_male_pop() %>%
         dplyr::filter(.data$age_group %in% age_group_vec) %>%
-        dplyr::group_by(.data$regsaude, .data$year, .data$pop) %>%
+        dplyr::group_by(.data$codi_reg_saude, .data$year, .data$pop) %>%
         dplyr::summarise(pop = sum(.data$pop, na.rm = TRUE)) %>%
-        dplyr::rename(agg = .data$regsaude)
+        dplyr::rename(agg = .data$codi_reg_saude)
     } else if(agg %in% c("regsaude_449_res", "regsaude_449_ocor")){
       denominador <- brpop::regsaude_male_pop(type = "reg_saude_449") %>%
         dplyr::filter(.data$age_group %in% age_group_vec) %>%
-        dplyr::group_by(.data$regsaude, .data$year, .data$pop) %>%
+        dplyr::group_by(.data$codi_reg_saude, .data$year, .data$pop) %>%
         dplyr::summarise(pop = sum(.data$pop, na.rm = TRUE)) %>%
-        dplyr::rename(agg = .data$regsaude)
+        dplyr::rename(agg = .data$codi_reg_saude)
     }
     # Sex FEMALE and age NOT TOTALS
   } else if(sex == "female" & !("totals" %in% age_group_vec)){
@@ -126,19 +126,20 @@ denominator_pop <- function(agg, sex = "all", age_group_vec = "totals"){
     } else if(agg %in% c("regsaude_res", "regsaude_ocor")){
       denominador <- brpop::regsaude_female_pop() %>%
         dplyr::filter(.data$age_group %in% age_group_vec) %>%
-        dplyr::group_by(.data$regsaude, .data$year, .data$pop) %>%
+        dplyr::group_by(.data$codi_reg_saude, .data$year, .data$pop) %>%
         dplyr::summarise(pop = sum(.data$pop, na.rm = TRUE)) %>%
-        dplyr::rename(agg = .data$regsaude)
+        dplyr::rename(agg = .data$codi_reg_saude)
     } else if(agg %in% c("regsaude_449_res", "regsaude_449_ocor")){
       denominador <- brpop::regsaude_female_pop(type = "reg_saude_449") %>%
         dplyr::filter(.data$age_group %in% age_group_vec) %>%
-        dplyr::group_by(.data$regsaude, .data$year, .data$pop) %>%
+        dplyr::group_by(.data$codi_reg_saude, .data$year, .data$pop) %>%
         dplyr::summarise(pop = sum(.data$pop, na.rm = TRUE)) %>%
-        dplyr::rename(agg = .data$regsaude)
+        dplyr::rename(agg = .data$codi_reg_saude)
     }
   }
 
-  denominador <- dplyr::select(denominador, -dplyr::any_of(c("age_group")))
+  denominador <- dplyr::select(denominador, -dplyr::any_of(c("age_group"))) %>%
+    dplyr::mutate(agg = as.numeric(.data$agg))
 
   return(denominador)
 }

@@ -14,18 +14,22 @@ complete_with_zeros <- function(res, agg, agg_time, ano, save_args){
   if(agg %in% c("mun_res", "mun_ocor")){
     cod_full <- brpop::mun_pop_totals() %>%
       dplyr::select(cod = .data$code_muni) %>%
+      dplyr::mutate(cod = as.numeric(.data$cod)) %>%
       dplyr::distinct()
   } else if(agg %in% c("uf_res", "uf_ocor")){
     cod_full <- brpop::uf_pop_totals() %>%
       dplyr::select(cod = .data$uf) %>%
+      dplyr::mutate(cod = as.numeric(.data$cod)) %>%
       dplyr::distinct()
   } else if(agg %in% c("regsaude_res", "regsaude_ocor")){
     cod_full <- brpop::regsaude_pop_totals() %>%
-      dplyr::select(cod = .data$regsaude) %>%
+      dplyr::select(cod = .data$codi_reg_saude) %>%
+      dplyr::mutate(cod = as.numeric(.data$cod)) %>%
       dplyr::distinct()
   } else if(agg %in% c("regsaude_449_res", "regsaude_449_ocor")){
     cod_full <- brpop::regsaude_pop_totals(type = "reg_saude_449") %>%
-      dplyr::select(cod = .data$regsaude) %>%
+      dplyr::select(cod = .data$codi_reg_saude) %>%
+      dplyr::mutate(cod = as.numeric(.data$cod)) %>%
       dplyr::distinct()
   }
 
