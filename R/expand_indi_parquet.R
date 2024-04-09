@@ -20,18 +20,9 @@ expand_indi_parquet <- function(agg, agg_time, anos, dir, indi = "all"){
     indi_funs <- c(indi)
   }
 
-  # Creates progress bar
-  pb <- progress::progress_bar$new(
-    format = ":spin :current/:total [:bar] :percent in :elapsed ETA: :eta",
-    clear = FALSE, total = length(indi_funs))
-
-  pb$tick(0)
-  Sys.sleep(1)
-
   # Expand indi_functions and write parquet files
   for(i in indi_funs){
-    pb$tick(tokens = list(what = i))
     tmp <- expand_indi(agg = agg, agg_time = agg_time, anos = anos, indi_fun = i)
-    arrow::write_parquet(x = tmp, sink = paste0(dir, "/", as.character(i), ".parquet"))
+    arrow::write_parquet(x = tmp, sink = glue::glue("{dir}/{as.character(i)}_{agg}_{agg_time}.parquet"))
   }
 }
