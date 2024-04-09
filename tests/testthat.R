@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/reference/test_package.html#special-files
 
 library(testthat)
-library(bilis)
+library(brindi)
 
-test_check("bilis")
+test_check("brindi")

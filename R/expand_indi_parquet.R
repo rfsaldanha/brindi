@@ -12,7 +12,7 @@ expand_indi_parquet <- function(agg, agg_time, anos, dir, indi = "all"){
   # List indi_ functions or use supplied vector
   if(length(indi) == 1){
     if(indi == "all"){
-      indi_funs <- grep("^indi_", ls(getNamespace("bilis")), value = TRUE)
+      indi_funs <- grep("^indi_", ls(getNamespace("brindi")), value = TRUE)
     } else {
       indi_funs <- c(indi)
     }

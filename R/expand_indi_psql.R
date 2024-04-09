@@ -28,7 +28,7 @@ expand_indi_psql <- function(agg, agg_time, anos, indi = "all", psql_table, psql
   # List indi_ functions or use supplied vector
   if(length(indi) == 1){
     if(indi == "all"){
-      indi_funs <- grep("^indi_", ls(getNamespace("bilis")), value = TRUE)
+      indi_funs <- grep("^indi_", ls(getNamespace("brindi")), value = TRUE)
     } else {
       indi_funs <- c(indi)
     }
