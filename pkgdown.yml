@@ -1,10 +1,10 @@
-pandoc: 2.19.2
+pandoc: 3.1.11
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   indi_0014: indi_0014.html
   indi_0015: indi_0015.html
-last_built: 2023-07-17T10:02Z
+last_built: 2024-04-09T12:49Z
 urls:
   reference: https://rfsaldanha.github.io/bilis/reference
   article: https://rfsaldanha.github.io/bilis/articles
