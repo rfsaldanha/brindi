@@ -14,7 +14,7 @@ denominator_pop <- function(agg, sex = "all", age_group_vec = "totals"){
   if(sex == "all" & "totals" %in% age_group_vec){
     if(agg %in% c("mun_res", "mun_ocor")){
       denominador <- brpop::mun_pop_totals() %>%
-        dplyr::rename(agg = .data$mun)
+        dplyr::rename(agg = .data$code_muni)
     } else if(agg %in% c("uf_res", "uf_ocor")){
       denominador <- brpop::uf_pop_totals() %>%
         dplyr::rename(agg = .data$uf)
@@ -29,7 +29,7 @@ denominator_pop <- function(agg, sex = "all", age_group_vec = "totals"){
   } else if(sex == "male" & "totals" %in% age_group_vec){
     if(agg %in% c("mun_res", "mun_ocor")){
       denominador <- brpop::mun_male_pop_totals() %>%
-        dplyr::rename(agg = .data$mun)
+        dplyr::rename(agg = .data$code_muni)
     } else if(agg %in% c("uf_res", "uf_ocor")){
       denominador <- brpop::uf_male_pop_totals() %>%
         dplyr::rename(agg = .data$uf)
@@ -44,7 +44,7 @@ denominator_pop <- function(agg, sex = "all", age_group_vec = "totals"){
   } else if(sex == "female" & "totals" %in% age_group_vec){
     if(agg %in% c("mun_res", "mun_ocor")){
       denominador <- brpop::mun_female_pop_totals() %>%
-        dplyr::rename(agg = .data$mun)
+        dplyr::rename(agg = .data$code_muni)
     } else if(agg %in% c("uf_res", "uf_ocor")){
       denominador <- brpop::uf_female_pop_totals() %>%
         dplyr::rename(agg = .data$uf)
@@ -60,9 +60,9 @@ denominator_pop <- function(agg, sex = "all", age_group_vec = "totals"){
     if(agg %in% c("mun_res", "mun_ocor")){
       denominador <- brpop::mun_pop() %>%
         dplyr::filter(.data$age_group %in% age_group_vec) %>%
-        dplyr::group_by(.data$mun, .data$year, .data$pop) %>%
+        dplyr::group_by(.data$code_muni, .data$year, .data$pop) %>%
         dplyr::summarise(pop = sum(.data$pop, na.rm = TRUE)) %>%
-        dplyr::rename(agg = .data$mun)
+        dplyr::rename(agg = .data$code_muni)
     } else if(agg %in% c("uf_res", "uf_ocor")){
       denominador <- brpop::uf_pop() %>%
         dplyr::filter(.data$age_group %in% age_group_vec) %>%
@@ -87,9 +87,9 @@ denominator_pop <- function(agg, sex = "all", age_group_vec = "totals"){
     if(agg %in% c("mun_res", "mun_ocor")){
       denominador <- brpop::mun_male_pop %>%
         dplyr::filter(.data$age_group %in% age_group_vec) %>%
-        dplyr::group_by(.data$mun, .data$year, .data$pop) %>%
+        dplyr::group_by(.data$code_muni, .data$year, .data$pop) %>%
         dplyr::summarise(pop = sum(.data$pop, na.rm = TRUE)) %>%
-        dplyr::rename(agg = .data$mun)
+        dplyr::rename(agg = .data$code_muni)
     } else if(agg %in% c("uf_res", "uf_ocor")){
       denominador <- brpop::uf_male_pop %>%
         dplyr::filter(.data$age_group %in% age_group_vec) %>%
@@ -114,9 +114,9 @@ denominator_pop <- function(agg, sex = "all", age_group_vec = "totals"){
     if(agg %in% c("mun_res", "mun_ocor")){
       denominador <- brpop::mun_female_pop %>%
         dplyr::filter(.data$age_group %in% age_group_vec) %>%
-        dplyr::group_by(.data$mun, .data$year, .data$pop) %>%
+        dplyr::group_by(.data$code_muni, .data$year, .data$pop) %>%
         dplyr::summarise(pop = sum(.data$pop, na.rm = TRUE)) %>%
-        dplyr::rename(agg = .data$mun)
+        dplyr::rename(agg = .data$code_muni)
     } else if(agg %in% c("uf_res", "uf_ocor")){
       denominador <- brpop::uf_female_pop %>%
         dplyr::filter(.data$age_group %in% age_group_vec) %>%

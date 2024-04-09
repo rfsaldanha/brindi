@@ -13,7 +13,7 @@ complete_with_zeros <- function(res, agg, agg_time, ano, save_args){
   # Spatial aggregation reference table of cods
   if(agg %in% c("mun_res", "mun_ocor")){
     cod_full <- brpop::mun_pop_totals() %>%
-      dplyr::select(cod = .data$mun) %>%
+      dplyr::select(cod = .data$code_muni) %>%
       dplyr::distinct()
   } else if(agg %in% c("uf_res", "uf_ocor")){
     cod_full <- brpop::uf_pop_totals() %>%
