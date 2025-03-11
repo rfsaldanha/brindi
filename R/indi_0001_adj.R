@@ -39,7 +39,7 @@ indi_0001_adj <- function(
     # Creates denominator
     denominador <- denominator_pop(agg = agg)
 
-    # Perform indicator calculus
+    # Perform indicator computation
     res <- indicator_raw(
       numerador = numerador,
       denominador = denominador,
@@ -62,7 +62,7 @@ indi_0001_adj <- function(
       more_filters = filter_query
     )
 
-    # Age adjusted indicator calculus
+    # Age adjusted indicator computation
     res <- indicator_adjusted()
   }
 
