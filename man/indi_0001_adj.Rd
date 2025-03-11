@@ -9,6 +9,7 @@ indi_0001_adj(
   ano,
   multi = 1e+05,
   decimals = 2,
+  pop_source = "datasus",
   pcdas_token = NULL,
   adjust_rates = FALSE
 )
@@ -21,6 +22,8 @@ indi_0001_adj(
 \item{multi}{integer. Multiplicator for indicator.}
 
 \item{decimals}{integer. Number of decimals for indicator.}
+
+\item{pop_source}{character. Population source, from {brpop} package.}
 
 \item{pcdas_token}{character. PCDaS API token. If not provided, the function will look for it on renvirom.}
 }

@@ -4,7 +4,12 @@
 \alias{denominator_pop}
 \title{Population denominators}
 \usage{
-denominator_pop(agg, sex = "all", age_group_vec = "totals")
+denominator_pop(
+  agg,
+  sex = "all",
+  age_group_vec = "totals",
+  pop_source = "datasus"
+)
 }
 \arguments{
 \item{agg}{character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saude of occurence. \code{regsaude_449_res} for regiao de saude (449 units) of residence. \code{regsaude_449_ocor} for regiao de saude (449 units) of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.}
@@ -12,6 +17,8 @@ denominator_pop(agg, sex = "all", age_group_vec = "totals")
 \item{sex}{character. Defaults to \code{all}.}
 
 \item{age_group_vec}{character. Defaults to \code{all} for all age groups or a vector with specified age groups.}
+
+\item{pop_source}{character. Population source, from {brpop} package.}
 }
 \description{
 This function retrieves populatin denominators.

@@ -4,6 +4,7 @@
 #' @param ano numeric. Year of death.
 #' @param multi integer. Multiplicator for indicator.
 #' @param decimals integer. Number of decimals for indicator.
+#' @param pop_source character. Population source, from {brpop} package.
 #' @param pcdas_token character. PCDaS API token. If not provided, the function will look for it on renvirom.
 #'
 #' @examples
@@ -17,6 +18,7 @@ indi_0001_adj <- function(
   ano,
   multi = 100000,
   decimals = 2,
+  pop_source = "datasus",
   pcdas_token = NULL,
   adjust_rates = FALSE
 ) {
@@ -37,7 +39,7 @@ indi_0001_adj <- function(
     )
 
     # Creates denominator
-    denominador <- denominator_pop(agg = agg)
+    denominador <- denominator_pop(agg = agg, pop_source = pop_source)
 
     # Perform indicator computation
     res <- indicator_raw(

@@ -27,9 +27,22 @@ indicator_adjusted <- function(numerador, ano, nome, multi, decimals) {
     dplyr::summarise(freq = sum(freq, na.rm = TRUE), .groups = "drop") %>%
     dplyr::ungroup()
 
-  # Standard population
+  # Population data by age group
   mun_pop_age <- brpop::mun_pop_age()
 
+  # Join frequencies and population by age group
+  res3 <- dplyr::right_join(
+    res2,
+    mun_pop_age %>%
+      dplyr::filter(year == ano) %>%
+      dplyr::filter(age_group != "Total") %>%
+      dplyr::mutate(year = as.character(year)),
+    by = c("agg" = "code_muni", "agg_time" = "year", "age_group" = "age_group")
+  ) %>%
+    dplyr::rename(count = freq) %>%
+    tidyr::replace_na(list(count = 0))
+
+  # Standard population data
   stdpop <- mun_pop_age %>%
     dplyr::filter(year == 2010) %>%
     dplyr::group_by(age_group) %>%
@@ -37,22 +50,15 @@ indicator_adjusted <- function(numerador, ano, nome, multi, decimals) {
     dplyr::ungroup() %>%
     dplyr::filter(age_group != "Total")
 
-  # Join frequencies and population
-  res3 <- dplyr::inner_join(
-    res2,
-    mun_pop_age %>%
-      dplyr::filter(year == ano) %>%
-      dplyr::mutate(year = as.character(year)),
-    by = c("agg" = "code_muni", "agg_time" = "year", "age_group" = "age_group")
-  ) %>%
-    dplyr::rename(count = freq) %>%
+  # Join standard population
+  res4 <- res3 %>%
     dplyr::inner_join(stdpop, by = "age_group")
 
   # Split to list by aggregation
-  res4 <- split(res3, res3$agg)
+  res5 <- split(res4, res4$agg)
 
   # Apply age adjust direct mode to each item and convert to data frame
-  res5 <- furrr::future_map_dfr(.x = res4, .f = function(x) {
+  res6 <- furrr::future_map_dfr(.x = res5, .f = function(x) {
     c(
       id = x$agg[1],
       epitools::ageadjust.direct(
@@ -63,8 +69,8 @@ indicator_adjusted <- function(numerador, ano, nome, multi, decimals) {
     )
   })
 
-  # Rename fields and structure
-  res6 <- res5 %>%
+  # Rename fields and relocate
+  res7 <- res6 %>%
     dplyr::mutate(
       name = nome,
       date = ano
@@ -72,5 +78,14 @@ indicator_adjusted <- function(numerador, ano, nome, multi, decimals) {
     dplyr::rename(cod = id) |>
     dplyr::relocate(name, cod, date, .before = crude.rate)
 
-  return(res6)
+  # Round numbers
+  res8 <- res7 %>%
+    dplyr::mutate(
+      dplyr::across(
+        .cols = c(crude.rate, adj.rate, lci, uci),
+        .fns = ~ round(.x * multi, digits = decimals)
+      )
+    )
+
+  return(res8)
 }
