@@ -1,13 +1,11 @@
 #' Ajusted indicator calculus
 #'
 #' @param numerador list.
-#' @param nome character. PCDaS API token. If not provided, the function will look for it on renvirom.
-#' @param agg character. Aggregation acronymin.
 #' @param multi integer. Multiplicator for indicator.
 #' @param decimals integer. Number of decimals for indicator.
 #'
 #' @importFrom rlang .data
-indicator_adjusted <- function(numerador, year, nome, agg, multi, decimals) {
+indicator_adjusted <- function(numerador, ano) {
   res2 <- mapply(
     cbind,
     numerador,
@@ -41,7 +39,7 @@ indicator_adjusted <- function(numerador, year, nome, agg, multi, decimals) {
   res3 <- dplyr::inner_join(
     res2,
     mun_pop_age %>%
-      dplyr::filter(year == year) %>%
+      dplyr::filter(year == ano) %>%
       dplyr::mutate(year = as.character(year)),
     by = c("agg" = "code_muni", "agg_time" = "year", "age_group" = "age_group")
   ) %>%
