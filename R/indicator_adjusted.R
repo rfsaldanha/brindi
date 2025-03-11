@@ -3,11 +3,19 @@
 #' @param numerador list.
 #' @param ano Year of indicator
 #' @param nome character. Indicator name.
+#' @param pop_source character. Population source, from {brpop} package.
 #' @param multi integer. Multiplicator for indicator.
 #' @param decimals integer. Number of decimals for indicator.
 #'
 #' @importFrom rlang .data
-indicator_adjusted <- function(numerador, ano, nome, multi, decimals) {
+indicator_adjusted <- function(
+  numerador,
+  ano,
+  pop_source,
+  nome,
+  multi,
+  decimals
+) {
   res2 <- mapply(
     cbind,
     numerador,
@@ -28,7 +36,8 @@ indicator_adjusted <- function(numerador, ano, nome, multi, decimals) {
     dplyr::ungroup()
 
   # Population data by age group
-  mun_pop_age <- brpop::mun_pop_age()
+  mun_pop_age <- brpop::mun_pop_age(source = pop_source) %>%
+    dplyr::mutate(code_muni = as.numeric(substr(code_muni, 0, 6)))
 
   # Join frequencies and population by age group
   res3 <- dplyr::right_join(

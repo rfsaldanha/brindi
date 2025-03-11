@@ -68,6 +68,7 @@ indi_0001_adj <- function(
     res <- indicator_adjusted(
       numerador = numerador,
       ano = ano,
+      pop_source = pop_source,
       nome = "indi_0001",
       multi = multi,
       decimals = decimals
