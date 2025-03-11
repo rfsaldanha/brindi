@@ -3,7 +3,6 @@
 #' @param numerador character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saúde of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.
 #' @param denominador numeric. Year of death.
 #' @param denominador_type character. Type of denominator. \code{pop} or \code{arbitrary}.
-#' @param keep_raw_values logical. Keep numerator and denominator values on results. Defaults to \code{FALSE}.
 #' @param treat_inf_values logical. Treat positive infinite values caused by denominators equals to zero as NA. Defaults to \code{TRUE}.
 #' @param nome character. Indicator name.
 #' @param agg character. Aggregation acronymin.
@@ -15,7 +14,6 @@ indicator_raw <- function(
   numerador,
   denominador,
   denominador_type = "pop",
-  keep_raw_values = FALSE,
   treat_inf_values = TRUE,
   nome,
   agg,
@@ -73,21 +71,9 @@ indicator_raw <- function(
     dplyr::relocate(.data$agg, .before = .data$cod) %>%
     dplyr::relocate(.data$value, .after = .data$name)
 
-  # Keep numerator and denominator values on result
-  if (keep_raw_values == FALSE) {
-    res <- res %>%
-      dplyr::select(.data$name, .data$cod, date = .data$agg_time, .data$value)
-  } else if (keep_raw_values == TRUE) {
-    res <- res %>%
-      dplyr::select(
-        .data$name,
-        .data$cod,
-        date = .data$agg_time,
-        numerator = .data$freq,
-        denominator = .data$pop,
-        .data$value
-      )
-  }
+  # Select fields
+  res <- res %>%
+    dplyr::select(.data$name, .data$cod, date = .data$agg_time, .data$value)
 
   return(res)
 }

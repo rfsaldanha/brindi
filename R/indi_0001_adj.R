@@ -1,10 +1,12 @@
 #' Indicator: Mortalidade por causas externas
 #'
 #' @param agg character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saúde of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.
+#' @param agg_time character. Time aggregation level. \code{year} for yearly data. \code{month} for monthly data. \code{week} for weekly data. Defaults to \code{year}.
 #' @param ano numeric. Year of death.
 #' @param multi integer. Multiplicator for indicator.
 #' @param decimals integer. Number of decimals for indicator.
 #' @param pop_source character. Population source, from {brpop} package.
+#' @param complete_with_zeros logical. Complete indicator result with zeros considering combinations of spatial and temporal aggregation without results.
 #' @param pcdas_token character. PCDaS API token. If not provided, the function will look for it on renvirom.
 #'
 #' @examples
@@ -15,12 +17,14 @@
 #' @export
 indi_0001_adj <- function(
   agg,
+  agg_time = "year",
   ano,
   multi = 100000,
   decimals = 2,
   pop_source = "datasus",
   pcdas_token = NULL,
-  adjust_rates = FALSE
+  adjust_rates = FALSE,
+  complete_with_zeros = TRUE
 ) {
   # Try to get PCDaS API token from renviron if not provided
   if (is.null(pcdas_token)) {
@@ -33,6 +37,7 @@ indi_0001_adj <- function(
     # Creates numerator
     numerador <- rpcdas::get_sim(
       agg = agg,
+      agg_time = agg_time,
       ano = ano,
       pcdas_token = pcdas_token,
       more_filters = filter_query
@@ -60,6 +65,7 @@ indi_0001_adj <- function(
       .l = age_groups,
       .f = rpcdas::get_sim,
       agg = agg,
+      agg_time = agg_time,
       ano = ano,
       more_filters = filter_query
     )
@@ -72,6 +78,17 @@ indi_0001_adj <- function(
       nome = "indi_0001",
       multi = multi,
       decimals = decimals
+    )
+  }
+
+  # Complete with zeros
+  if (complete_with_zeros == TRUE) {
+    res <- complete_with_zeros(
+      res = res,
+      agg = agg,
+      agg_time = agg_time,
+      ano = ano,
+      pop_source = pop_source
     )
   }
 

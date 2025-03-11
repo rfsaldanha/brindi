@@ -9,7 +9,15 @@
 #' @param save_args logical. Save \code{agg} and \code{agg_time} arguments on results table.
 #'
 #' @export
-expand_indi <- function(agg, agg_time, anos, indi_fun, save_args = TRUE){
+expand_indi <- function(
+  agg,
+  agg_time,
+  anos,
+  indi_fun,
+  pop_source,
+  adjust_rates,
+  save_args = TRUE
+) {
   # Start parallel enviroment
   plan <- future::plan(future::multisession)
   on.exit(future::plan(plan))
@@ -26,6 +34,8 @@ expand_indi <- function(agg, agg_time, anos, indi_fun, save_args = TRUE){
     .y = job$agg_time,
     .f = get(indi_fun),
     ano = anos,
+    pop_source = pop_source,
+    adjust_rates = adjust_rates,
     save_args = save_args,
     .options = furrr::furrr_options(seed = TRUE)
   )

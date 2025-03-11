@@ -1,4 +1,4 @@
-#' Ajusted indicator calculus
+#' Ajusted indicator computation
 #'
 #' @param numerador list.
 #' @param ano Year of indicator
@@ -16,6 +16,8 @@ indicator_adjusted <- function(
   multi,
   decimals
 ) {
+  # Passar a usar o tidyrates nessa função, permitindo o uso de várias chaves (agg e agg_time)
+
   res2 <- mapply(
     cbind,
     numerador,
@@ -40,14 +42,15 @@ indicator_adjusted <- function(
     dplyr::mutate(code_muni = as.numeric(substr(code_muni, 0, 6)))
 
   # Join frequencies and population by age group
-  res3 <- dplyr::right_join(
-    res2,
-    mun_pop_age %>%
-      dplyr::filter(year == ano) %>%
-      dplyr::filter(age_group != "Total") %>%
-      dplyr::mutate(year = as.character(year)),
-    by = c("agg" = "code_muni", "agg_time" = "year", "age_group" = "age_group")
-  ) %>%
+  res3 <- res2 %>%
+    dplyr::mutate(year = substr(agg_time, 0, 4)) %>%
+    dplyr::right_join(
+      mun_pop_age %>%
+        dplyr::filter(year == ano) %>%
+        dplyr::filter(age_group != "Total") %>%
+        dplyr::mutate(year = as.character(year)),
+      by = c("agg" = "code_muni", "year" = "year", "age_group" = "age_group")
+    ) %>%
     dplyr::rename(count = freq) %>%
     tidyr::replace_na(list(count = 0))
 
@@ -64,12 +67,13 @@ indicator_adjusted <- function(
     dplyr::inner_join(stdpop, by = "age_group")
 
   # Split to list by aggregation
-  res5 <- split(res4, res4$agg)
+  res5 <- split(res4, ~ res4$agg + res4$agg_time)
 
   # Apply age adjust direct mode to each item and convert to data frame
   res6 <- furrr::future_map_dfr(.x = res5, .f = function(x) {
     c(
       id = x$agg[1],
+      time = x$agg_time[1],
       epitools::ageadjust.direct(
         count = x$count,
         pop = x$pop,
@@ -81,11 +85,10 @@ indicator_adjusted <- function(
   # Rename fields and relocate
   res7 <- res6 %>%
     dplyr::mutate(
-      name = nome,
-      date = ano
+      name = nome
     ) %>%
-    dplyr::rename(cod = id) |>
-    dplyr::relocate(name, cod, date, .before = crude.rate)
+    dplyr::rename(cod = id, agg_time = time) |>
+    dplyr::relocate(name, cod, agg_time, .before = crude.rate)
 
   # Round numbers
   res8 <- res7 %>%

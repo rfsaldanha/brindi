@@ -3,7 +3,9 @@ test_that("indi_expand works with several arguments", {
     agg = c("uf_res", "uf_ocor"),
     agg_time = c("year", "month"),
     anos = c(2010, 2011),
-    indi_fun = "indi_0001"
+    pop_source = "datasus",
+    adjust_rates = FALSE,
+    indi_fun = "indi_0001_adj"
   )
 
   expect_equal("tbl_df", class(res)[1])
