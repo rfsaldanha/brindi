@@ -27,7 +27,7 @@ indicator_raw(
 
 \item{treat_inf_values}{logical. Treat positive infinite values caused by denominators equals to zero as NA. Defaults to \code{TRUE}.}
 
-\item{nome}{character. PCDaS API token. If not provided, the function will look for it on renvirom.}
+\item{nome}{character. Indicator name.}
 
 \item{agg}{character. Aggregation acronymin.}
 

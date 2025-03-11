@@ -1,11 +1,13 @@
 #' Ajusted indicator calculus
 #'
 #' @param numerador list.
+#' @param ano Year of indicator
+#' @param nome character. Indicator name.
 #' @param multi integer. Multiplicator for indicator.
 #' @param decimals integer. Number of decimals for indicator.
 #'
 #' @importFrom rlang .data
-indicator_adjusted <- function(numerador, ano) {
+indicator_adjusted <- function(numerador, ano, nome, multi, decimals) {
   res2 <- mapply(
     cbind,
     numerador,
@@ -25,7 +27,7 @@ indicator_adjusted <- function(numerador, ano) {
     dplyr::summarise(freq = sum(freq, na.rm = TRUE), .groups = "drop") %>%
     dplyr::ungroup()
 
-  # Standart population
+  # Standard population
   mun_pop_age <- brpop::mun_pop_age()
 
   stdpop <- mun_pop_age %>%
@@ -61,5 +63,14 @@ indicator_adjusted <- function(numerador, ano) {
     )
   })
 
-  return(res5)
+  # Rename fields and structure
+  res6 <- res5 %>%
+    dplyr::mutate(
+      name = nome,
+      date = ano
+    ) %>%
+    dplyr::rename(cod = id) |>
+    dplyr::relocate(name, cod, date, .before = crude.rate)
+
+  return(res6)
 }

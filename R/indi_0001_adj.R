@@ -63,7 +63,13 @@ indi_0001_adj <- function(
     )
 
     # Age adjusted indicator computation
-    res <- indicator_adjusted()
+    res <- indicator_adjusted(
+      numerador = numerador,
+      ano = ano,
+      nome = "indi_0001",
+      multi = multi,
+      decimals = decimals
+    )
   }
 
   return(res)

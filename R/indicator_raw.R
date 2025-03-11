@@ -5,41 +5,64 @@
 #' @param denominador_type character. Type of denominator. \code{pop} or \code{arbitrary}.
 #' @param keep_raw_values logical. Keep numerator and denominator values on results. Defaults to \code{FALSE}.
 #' @param treat_inf_values logical. Treat positive infinite values caused by denominators equals to zero as NA. Defaults to \code{TRUE}.
-#' @param nome character. PCDaS API token. If not provided, the function will look for it on renvirom.
+#' @param nome character. Indicator name.
 #' @param agg character. Aggregation acronymin.
 #' @param multi integer. Multiplicator for indicator.
 #' @param decimals integer. Number of decimals for indicator.
 #'
 #' @importFrom rlang .data
-indicator_raw <- function(numerador, denominador, denominador_type = "pop", keep_raw_values = FALSE, treat_inf_values = TRUE, nome, agg, multi, decimals){
-
+indicator_raw <- function(
+  numerador,
+  denominador,
+  denominador_type = "pop",
+  keep_raw_values = FALSE,
+  treat_inf_values = TRUE,
+  nome,
+  agg,
+  multi,
+  decimals
+) {
   # Calculate indicator considering a population denominator
-  if(denominador_type == "pop"){
+  if (denominador_type == "pop") {
     numerador <- numerador %>%
       dplyr::mutate(year = as.numeric(substring(.data$agg_time, 0, 4)))
 
-    res <- dplyr::inner_join(x = numerador, y = denominador, by = c("agg" = "agg", "year" = "year")) %>%
-      dplyr::mutate(value = round(
-        x = (.data$freq/.data$pop) * multi,
-        digits = decimals
-      ))
+    res <- dplyr::inner_join(
+      x = numerador,
+      y = denominador,
+      by = c("agg" = "agg", "year" = "year")
+    ) %>%
+      dplyr::mutate(
+        value = round(
+          x = (.data$freq / .data$pop) * multi,
+          digits = decimals
+        )
+      )
     # Calculate indicator considering an arbitrary denominator
-  } else if(denominador_type == "arbitrary"){
-    res <- dplyr::inner_join(x = numerador, y = denominador, by = c("agg" = "agg", "agg_time" = "agg_time")) %>%
+  } else if (denominador_type == "arbitrary") {
+    res <- dplyr::inner_join(
+      x = numerador,
+      y = denominador,
+      by = c("agg" = "agg", "agg_time" = "agg_time")
+    ) %>%
       dplyr::rename(freq = .data$freq.x, pop = .data$freq.y) %>%
-      dplyr::mutate(value = round(
-        x = (.data$freq/.data$pop) * multi,
-        digits = decimals
-      ))
+      dplyr::mutate(
+        value = round(
+          x = (.data$freq / .data$pop) * multi,
+          digits = decimals
+        )
+      )
   }
 
   # Treat positive Inf values
-  if(treat_inf_values == TRUE){
+  if (treat_inf_values == TRUE) {
     res <- res %>%
-      dplyr::mutate(value = dplyr::case_when(
-        .data$pop == 0 ~ NA_real_,
-        .default = .data$value
-      ))
+      dplyr::mutate(
+        value = dplyr::case_when(
+          .data$pop == 0 ~ NA_real_,
+          .default = .data$value
+        )
+      )
   }
 
   # Organize results
@@ -51,12 +74,19 @@ indicator_raw <- function(numerador, denominador, denominador_type = "pop", keep
     dplyr::relocate(.data$value, .after = .data$name)
 
   # Keep numerator and denominator values on result
-  if(keep_raw_values == FALSE){
+  if (keep_raw_values == FALSE) {
     res <- res %>%
-       dplyr::select(.data$name, .data$cod, date = .data$agg_time, .data$value)
-  } else if(keep_raw_values == TRUE){
+      dplyr::select(.data$name, .data$cod, date = .data$agg_time, .data$value)
+  } else if (keep_raw_values == TRUE) {
     res <- res %>%
-      dplyr::select(.data$name, .data$cod, date = .data$agg_time, numerator = .data$freq, denominator = .data$pop, .data$value)
+      dplyr::select(
+        .data$name,
+        .data$cod,
+        date = .data$agg_time,
+        numerator = .data$freq,
+        denominator = .data$pop,
+        .data$value
+      )
   }
 
   return(res)
