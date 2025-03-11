@@ -12,17 +12,22 @@
 #'
 #' @importFrom rlang .data
 #' @export
-indi_0001 <- function(agg, ano, multi = 100000, decimals = 2, pcdas_token = NULL, adjust_rates = FALSE){
-
+indi_0001_adj <- function(
+  agg,
+  ano,
+  multi = 100000,
+  decimals = 2,
+  pcdas_token = NULL,
+  adjust_rates = FALSE
+) {
   # Try to get PCDaS API token from renviron if not provided
-  if(is.null(pcdas_token)){
+  if (is.null(pcdas_token)) {
     pcdas_token <- rpcdas::get_pcdas_token_renviron()
   }
 
-
   filter_query <- "LEFT(CAUSABAS, 1) IN ('V', 'W', 'X', 'Y')"
 
-  if(adjust_rates == FALSE){
+  if (adjust_rates == FALSE) {
     # Creates numerator
     numerador <- rpcdas::get_sim(
       agg = agg,
@@ -43,7 +48,7 @@ indi_0001 <- function(agg, ano, multi = 100000, decimals = 2, pcdas_token = NULL
       nome = "indi_0001",
       agg = agg
     )
-  } else if(adjust_rates == TRUE){
+  } else if (adjust_rates == TRUE) {
     # Prepate multission environment
     oplan <- future::plan(future::multisession)
     on.exit(future::plan(oplan))
@@ -58,10 +63,8 @@ indi_0001 <- function(agg, ano, multi = 100000, decimals = 2, pcdas_token = NULL
     )
 
     # Age adjusted indicator calculus
-    # res <- indicator_adjusted()
+    res <- indicator_adjusted()
   }
-
-
 
   return(res)
 }
