@@ -1,11 +1,10 @@
 pandoc: 3.1.11
-pkgdown: 2.0.7
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
-  indi_0014: indi_0014.html
-  indi_0015: indi_0015.html
-last_built: 2024-04-09T15:17Z
+  articles/indi_0014: indi_0014.html
+  articles/indi_0015: indi_0015.html
+last_built: 2025-03-11T14:40Z
 urls:
   reference: https://rfsaldanha.github.io/brindi/reference
   article: https://rfsaldanha.github.io/brindi/articles
-

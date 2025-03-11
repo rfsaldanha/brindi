@@ -1,123 +1,43 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/404.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/articles/indi_0014.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/articles/indi_0015.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/index.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/reference/complete_with_zeros.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/reference/denominator_pop.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/reference/expand_indi.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/reference/expand_indi_parquet.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/reference/expand_indi_psql.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/reference/expand_indi_sqlite.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/reference/get_psql_user.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/reference/indi_0001.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/reference/indi_0002.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/reference/indi_0003.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/reference/indi_0004.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/reference/indi_0005.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/reference/indi_0006.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/reference/indi_0007.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/reference/indi_0008.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/reference/indi_0009.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/reference/indi_0010.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/reference/indi_0011.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/reference/indi_0012.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/reference/indi_0013.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/reference/indi_0014.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/reference/indi_0015.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/reference/indi_0016.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/reference/indi_0017.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/reference/indi_0018.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/reference/indi_0019.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/reference/indi_0020.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/reference/indi_0021.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/reference/indicator_raw.html</loc>
-  </url>
-  <url>
-    <loc>https://rfsaldanha.github.io/brindi/reference/pipe.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://rfsaldanha.github.io/brindi/404.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/LICENSE-text.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/LICENSE.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/articles/index.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/articles/indi_0014.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/articles/indi_0015.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/authors.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/index.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/news/index.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/reference/complete_with_zeros.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/reference/denominator_pop.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/reference/expand_indi.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/reference/expand_indi_parquet.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/reference/expand_indi_psql.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/reference/expand_indi_sqlite.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/reference/get_psql_user.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/reference/index.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/reference/indi_0001.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/reference/indi_0002.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/reference/indi_0003.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/reference/indi_0004.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/reference/indi_0005.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/reference/indi_0006.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/reference/indi_0007.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/reference/indi_0008.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/reference/indi_0009.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/reference/indi_0010.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/reference/indi_0011.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/reference/indi_0012.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/reference/indi_0013.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/reference/indi_0014.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/reference/indi_0015.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/reference/indi_0016.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/reference/indi_0017.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/reference/indi_0018.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/reference/indi_0019.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/reference/indi_0020.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/reference/indi_0021.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/reference/indicator_raw.html</loc></url>
+<url><loc>https://rfsaldanha.github.io/brindi/reference/pipe.html</loc></url>
 </urlset>
+
