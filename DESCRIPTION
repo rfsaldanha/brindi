@@ -32,7 +32,8 @@ Imports:
     progress,
     stringr,
     RPostgres,
-    arrow
+    arrow,
+    tidyrates
 Remotes:
     rfsaldanha/brpop,
     rfsaldanha/rpcdas,

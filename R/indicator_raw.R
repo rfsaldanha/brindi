@@ -5,7 +5,10 @@
 #' @param denominador_type character. Type of denominator. \code{pop} or \code{arbitrary}.
 #' @param treat_inf_values logical. Treat positive infinite values caused by denominators equals to zero as NA. Defaults to \code{TRUE}.
 #' @param nome character. Indicator name.
+#' @param ano Year of indicator
 #' @param agg character. Aggregation acronymin.
+#' @param agg_time character. Time aggregation level. \code{year} for yearly data. \code{month} for monthly data. \code{week} for weekly data. Defaults to \code{year}.
+#' @param pop_source character. Population source, from {brpop} package.
 #' @param multi integer. Multiplicator for indicator.
 #' @param decimals integer. Number of decimals for indicator.
 #'
@@ -16,7 +19,10 @@ indicator_raw <- function(
   denominador_type = "pop",
   treat_inf_values = TRUE,
   nome,
+  ano,
   agg,
+  agg_time,
+  pop_source,
   multi,
   decimals
 ) {
@@ -74,6 +80,15 @@ indicator_raw <- function(
   # Select fields
   res <- res %>%
     dplyr::select(.data$name, .data$cod, date = .data$agg_time, .data$value)
+
+  # Complete with zeros
+  res <- complete_with_zeros(
+    res = res,
+    agg = agg,
+    agg_time = agg_time,
+    ano = ano,
+    pop_source = pop_source
+  )
 
   return(res)
 }

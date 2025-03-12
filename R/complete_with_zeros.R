@@ -14,7 +14,7 @@ complete_with_zeros <- function(res, agg, agg_time, ano, pop_source) {
   if (agg %in% c("mun_res", "mun_ocor")) {
     cod_full <- brpop::mun_pop_totals(source = pop_source) %>%
       dplyr::select(cod = .data$code_muni) %>%
-      dplyr::mutate(cod = as.numeric(.data$cod)) %>%
+      dplyr::mutate(cod = as.numeric(substr(.data$cod, 0, 6))) %>%
       dplyr::distinct()
   } else if (agg %in% c("uf_res", "uf_ocor")) {
     cod_full <- brpop::uf_pop_totals(source = pop_source) %>%
@@ -64,7 +64,16 @@ complete_with_zeros <- function(res, agg, agg_time, ano, pop_source) {
   }
 
   # Complete cod and date by reference tables, filling with zeros
-  if ("value" %in% names(res)) {
+  if ("freq" %in% names(res)) {
+    res <- res %>%
+      tidyr::complete(
+        agg = cod_full$cod,
+        agg_time = date_full$date,
+        age_group = age_groups_names,
+        fill = list(freq = 0),
+        explicit = FALSE
+      )
+  } else if ("value" %in% names(res)) {
     res <- res %>%
       tidyr::complete(
         cod = cod_full$cod,

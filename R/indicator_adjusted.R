@@ -11,6 +11,8 @@
 indicator_adjusted <- function(
   numerador,
   ano,
+  agg,
+  agg_time,
   pop_source,
   nome,
   multi,
@@ -18,14 +20,18 @@ indicator_adjusted <- function(
 ) {
   # Passar a usar o tidyrates nessa função, permitindo o uso de várias chaves (agg e agg_time)
 
-  res2 <- mapply(
+  # List to data.frame with age groups
+  res1 <- mapply(
     cbind,
     numerador,
     "age_group" = age_groups_names,
     SIMPLIFY = FALSE
   ) %>%
     dplyr::bind_rows() %>%
-    tibble::as_tibble() %>%
+    tibble::as_tibble()
+
+  # Fill missing spatial and time aggregations with zero on frequency
+  res2 <- complete_with_zeros(res1, agg, agg_time, ano, pop_source) %>%
     dplyr::mutate(
       age_group = dplyr::case_when(
         age_group == "From 80 to 99 years" ~ "From 80 years or more",
@@ -41,57 +47,40 @@ indicator_adjusted <- function(
   mun_pop_age <- brpop::mun_pop_age(source = pop_source) %>%
     dplyr::mutate(code_muni = as.numeric(substr(code_muni, 0, 6)))
 
-  # Join frequencies and population by age group
+  # Join frequencies and population by age group, correct age groups for compability
   res3 <- res2 %>%
     dplyr::mutate(year = substr(agg_time, 0, 4)) %>%
-    dplyr::right_join(
+    dplyr::inner_join(
       mun_pop_age %>%
         dplyr::filter(year == ano) %>%
         dplyr::filter(age_group != "Total") %>%
         dplyr::mutate(year = as.character(year)),
       by = c("agg" = "code_muni", "year" = "year", "age_group" = "age_group")
     ) %>%
-    dplyr::rename(count = freq) %>%
-    tidyr::replace_na(list(count = 0))
+    dplyr::select(-year) %>%
+    dplyr::rename(count = freq)
+
+  # Format data to tidyrates package
+  res4 <- res3 %>%
+    dplyr::rename(
+      population = pop,
+      events = count
+    ) %>%
+    tidyr::pivot_longer(cols = c(population, events))
 
   # Standard population data
   stdpop <- mun_pop_age %>%
     dplyr::filter(year == 2010) %>%
     dplyr::group_by(age_group) %>%
-    dplyr::summarise(stdpop = sum(pop, na.rm = TRUE)) %>%
+    dplyr::summarise(population = sum(pop, na.rm = TRUE)) %>%
     dplyr::ungroup() %>%
     dplyr::filter(age_group != "Total")
 
-  # Join standard population
-  res4 <- res3 %>%
-    dplyr::inner_join(stdpop, by = "age_group")
-
-  # Split to list by aggregation
-  res5 <- split(res4, ~ res4$agg + res4$agg_time)
-
-  # Apply age adjust direct mode to each item and convert to data frame
-  res6 <- furrr::future_map_dfr(.x = res5, .f = function(x) {
-    c(
-      id = x$agg[1],
-      time = x$agg_time[1],
-      epitools::ageadjust.direct(
-        count = x$count,
-        pop = x$pop,
-        stdpop = x$stdpop
-      )
-    )
-  })
-
-  # Rename fields and relocate
-  res7 <- res6 %>%
-    dplyr::mutate(
-      name = nome
-    ) %>%
-    dplyr::rename(cod = id, agg_time = time) |>
-    dplyr::relocate(name, cod, agg_time, .before = crude.rate)
+  # Compute standardized rates by direct mode
+  res5 <- tidyrates::rate_adj_direct(res4, stdpop, .keys = c("agg", "agg_time"))
 
   # Round numbers
-  res8 <- res7 %>%
+  res6 <- res5 %>%
     dplyr::mutate(
       dplyr::across(
         .cols = c(crude.rate, adj.rate, lci, uci),
@@ -99,5 +88,5 @@ indicator_adjusted <- function(
       )
     )
 
-  return(res8)
+  return(res6)
 }

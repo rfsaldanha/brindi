@@ -6,7 +6,6 @@
 #' @param multi integer. Multiplicator for indicator.
 #' @param decimals integer. Number of decimals for indicator.
 #' @param pop_source character. Population source, from {brpop} package.
-#' @param complete_with_zeros logical. Complete indicator result with zeros considering combinations of spatial and temporal aggregation without results.
 #' @param pcdas_token character. PCDaS API token. If not provided, the function will look for it on renvirom.
 #'
 #' @examples
@@ -23,8 +22,7 @@ indi_0001_adj <- function(
   decimals = 2,
   pop_source = "datasus",
   pcdas_token = NULL,
-  adjust_rates = FALSE,
-  complete_with_zeros = TRUE
+  adjust_rates = FALSE
 ) {
   # Try to get PCDaS API token from renviron if not provided
   if (is.null(pcdas_token)) {
@@ -50,10 +48,15 @@ indi_0001_adj <- function(
     res <- indicator_raw(
       numerador = numerador,
       denominador = denominador,
-      multi = multi,
-      decimals = decimals,
+      denominador_type = "pop",
+      treat_inf_values = TRUE,
       nome = "indi_0001",
-      agg = agg
+      ano = ano,
+      agg = agg,
+      agg_time = agg_time,
+      pop_source = pop_source,
+      multi = multi,
+      decimals = decimals
     )
   } else if (adjust_rates == TRUE) {
     # Prepate multission environment
@@ -74,21 +77,12 @@ indi_0001_adj <- function(
     res <- indicator_adjusted(
       numerador = numerador,
       ano = ano,
+      agg = agg,
+      agg_time = agg_time,
       pop_source = pop_source,
       nome = "indi_0001",
       multi = multi,
       decimals = decimals
-    )
-  }
-
-  # Complete with zeros
-  if (complete_with_zeros == TRUE) {
-    res <- complete_with_zeros(
-      res = res,
-      agg = agg,
-      agg_time = agg_time,
-      ano = ano,
-      pop_source = pop_source
     )
   }
 
