@@ -44,18 +44,36 @@ indicator_adjusted <- function(
     dplyr::ungroup()
 
   # Population data by age group
-  mun_pop_age <- brpop::mun_pop_age(source = pop_source) %>%
-    dplyr::mutate(code_muni = as.numeric(substr(code_muni, 0, 6)))
+  if (agg %in% c("mun_res", "mun_ocor")) {
+    pop_age <- brpop::mun_pop_age(source = pop_source) %>%
+      dplyr::rename(agg = code_muni) %>%
+      dplyr::mutate(agg = as.numeric(substr(agg, 0, 6)))
+  } else if (agg %in% c("uf_res", "uf_ocor")) {
+    pop_age <- brpop::uf_pop_age(source = pop_source) %>%
+      dplyr::rename(agg = uf) %>%
+      dplyr::mutate(agg = as.numeric(agg))
+  } else if (agg %in% c("regsaude_res", "regsaude_ocor")) {
+    pop_age <- brpop::regsaude_pop_age(source = pop_source) %>%
+      dplyr::rename(agg = codi_reg_saude) %>%
+      dplyr::mutate(agg = as.numeric(agg))
+  } else if (agg %in% c("regsaude_449_res", "regsaude_449_ocor")) {
+    pop_age <- brpop::regsaude_pop_age(
+      type = "reg_saude_449",
+      source = pop_source
+    ) %>%
+      dplyr::rename(agg = codi_reg_saude) %>%
+      dplyr::mutate(agg = as.numeric(agg))
+  }
 
   # Join frequencies and population by age group, correct age groups for compability
   res3 <- res2 %>%
     dplyr::mutate(year = substr(agg_time, 0, 4)) %>%
     dplyr::inner_join(
-      mun_pop_age %>%
+      pop_age %>%
         dplyr::filter(year == ano) %>%
         dplyr::filter(age_group != "Total") %>%
         dplyr::mutate(year = as.character(year)),
-      by = c("agg" = "code_muni", "year" = "year", "age_group" = "age_group")
+      by = c("agg" = "agg", "year" = "year", "age_group" = "age_group")
     ) %>%
     dplyr::select(-year) %>%
     dplyr::rename(count = freq)
@@ -69,7 +87,7 @@ indicator_adjusted <- function(
     tidyr::pivot_longer(cols = c(population, events))
 
   # Standard population data
-  stdpop <- mun_pop_age %>%
+  stdpop <- pop_age %>%
     dplyr::filter(year == 2010) %>%
     dplyr::group_by(age_group) %>%
     dplyr::summarise(population = sum(pop, na.rm = TRUE)) %>%
