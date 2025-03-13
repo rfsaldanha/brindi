@@ -51,6 +51,7 @@ indicator_adjusted <- function(
   } else if (agg %in% c("uf_res", "uf_ocor")) {
     pop_age <- brpop::uf_pop_age(source = pop_source) %>%
       dplyr::rename(agg = uf) %>%
+      dplyr::filter(agg != "5e") %>%
       dplyr::mutate(agg = as.numeric(agg))
   } else if (agg %in% c("regsaude_res", "regsaude_ocor")) {
     pop_age <- brpop::regsaude_pop_age(source = pop_source) %>%

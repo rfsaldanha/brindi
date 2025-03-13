@@ -22,7 +22,8 @@ denominator_pop <- function(
         dplyr::rename(agg = .data$code_muni)
     } else if (agg %in% c("uf_res", "uf_ocor")) {
       denominador <- brpop::uf_pop_totals(source = pop_source) %>%
-        dplyr::rename(agg = .data$uf)
+        dplyr::rename(agg = .data$uf) %>%
+        dplyr::filter(agg != "5e")
     } else if (agg %in% c("regsaude_res", "regsaude_ocor")) {
       denominador <- brpop::regsaude_pop_totals(source = pop_source) %>%
         dplyr::rename(agg = .data$codi_reg_saude)
@@ -40,7 +41,8 @@ denominator_pop <- function(
         dplyr::rename(agg = .data$code_muni)
     } else if (agg %in% c("uf_res", "uf_ocor")) {
       denominador <- brpop::uf_male_pop_totals(source = pop_source) %>%
-        dplyr::rename(agg = .data$uf)
+        dplyr::rename(agg = .data$uf) %>%
+        dplyr::filter(agg != "5e")
     } else if (agg %in% c("regsaude_res", "regsaude_ocor")) {
       denominador <- brpop::regsaude_male_pop_totals(source = pop_source) %>%
         dplyr::rename(agg = .data$codi_reg_saude)
@@ -58,7 +60,8 @@ denominator_pop <- function(
         dplyr::rename(agg = .data$code_muni)
     } else if (agg %in% c("uf_res", "uf_ocor")) {
       denominador <- brpop::uf_female_pop_totals(source = pop_source) %>%
-        dplyr::rename(agg = .data$uf)
+        dplyr::rename(agg = .data$uf) %>%
+        dplyr::filter(agg != "5e")
     } else if (agg %in% c("regsaude_res", "regsaude_ocor")) {
       denominador <- brpop::regsaude_female_pop_totals(source = pop_source) %>%
         dplyr::rename(agg = .data$codi_reg_saude)
@@ -82,7 +85,8 @@ denominator_pop <- function(
         dplyr::filter(.data$age_group %in% age_group_vec) %>%
         dplyr::group_by(.data$uf, .data$year, .data$pop) %>%
         dplyr::summarise(pop = sum(.data$pop, na.rm = TRUE)) %>%
-        dplyr::rename(agg = .data$uf)
+        dplyr::rename(agg = .data$uf) %>%
+        dplyr::filter(agg != "5e")
     } else if (agg %in% c("regsaude_res", "regsaude_ocor")) {
       denominador <- brpop::regsaude_pop_age(source = pop_source) %>%
         dplyr::filter(.data$age_group %in% age_group_vec) %>%

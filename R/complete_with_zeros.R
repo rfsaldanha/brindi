@@ -19,6 +19,7 @@ complete_with_zeros <- function(res, agg, agg_time, ano, pop_source) {
   } else if (agg %in% c("uf_res", "uf_ocor")) {
     cod_full <- brpop::uf_pop_totals(source = pop_source) %>%
       dplyr::select(cod = .data$uf) %>%
+      dplyr::filter(cod != "5e") %>%
       dplyr::mutate(cod = as.numeric(.data$cod)) %>%
       dplyr::distinct()
   } else if (agg %in% c("regsaude_res", "regsaude_ocor")) {
