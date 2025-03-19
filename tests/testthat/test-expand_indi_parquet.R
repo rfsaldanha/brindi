@@ -6,7 +6,9 @@ test_that("expand_indi_parquet works", {
     agg_time = "year",
     anos = 2010,
     dir = tmpdir,
-    indi = "indi_0001"
+    indi = "indi_0001_adj",
+    pop_source = "datasus",
+    adjust_rates = FALSE
   )
 
   res <- arrow::read_parquet(paste0(tmpdir, "/", "indi_0001", ".parquet"))
