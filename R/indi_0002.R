@@ -81,7 +81,8 @@ indi_0002 <- function(
       pop_source = pop_source,
       nome = "indi_0002",
       multi = multi,
-      decimals = decimals
+      decimals = decimals,
+      sex = "all"
     )
   }
 
