@@ -6,6 +6,7 @@
 #' @param pop_source character. Population source, from {brpop} package.
 #' @param multi integer. Multiplicator for indicator.
 #' @param decimals integer. Number of decimals for indicator.
+#' @param sex character. Population sex, for {brpop} package.
 #'
 #' @importFrom rlang .data
 indicator_adjusted <- function(
@@ -16,7 +17,8 @@ indicator_adjusted <- function(
   pop_source,
   nome,
   multi,
-  decimals
+  decimals,
+  sex
 ) {
   # List to data.frame with age groups
   res1 <- mapply(
@@ -43,22 +45,23 @@ indicator_adjusted <- function(
 
   # Population data by age group
   if (agg %in% c("mun_res", "mun_ocor")) {
-    pop_age <- brpop::mun_pop_age(source = pop_source) %>%
+    pop_age <- brpop::mun_pop_age(source = pop_source, sex = sex) %>%
       dplyr::rename(agg = code_muni) %>%
       dplyr::mutate(agg = as.numeric(substr(agg, 0, 6)))
   } else if (agg %in% c("uf_res", "uf_ocor")) {
-    pop_age <- brpop::uf_pop_age(source = pop_source) %>%
+    pop_age <- brpop::uf_pop_age(source = pop_source, sex = sex) %>%
       dplyr::rename(agg = uf) %>%
       dplyr::filter(agg != "5e") %>%
       dplyr::mutate(agg = as.numeric(agg))
   } else if (agg %in% c("regsaude_res", "regsaude_ocor")) {
-    pop_age <- brpop::regsaude_pop_age(source = pop_source) %>%
+    pop_age <- brpop::regsaude_pop_age(source = pop_source, sex = sex) %>%
       dplyr::rename(agg = codi_reg_saude) %>%
       dplyr::mutate(agg = as.numeric(agg))
   } else if (agg %in% c("regsaude_449_res", "regsaude_449_ocor")) {
     pop_age <- brpop::regsaude_pop_age(
       type = "reg_saude_449",
-      source = pop_source
+      source = pop_source,
+      sex = sex
     ) %>%
       dplyr::rename(agg = codi_reg_saude) %>%
       dplyr::mutate(agg = as.numeric(agg))
