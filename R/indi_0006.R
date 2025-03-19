@@ -41,7 +41,11 @@ indi_0006 <- function(
     )
 
     # Creates denominator
-    denominador <- denominator_pop(agg = agg, sex = "female")
+    denominador <- denominator_pop(
+      agg = agg,
+      sex = "female",
+      pop_source = pop_source
+    )
 
     # Perform indicator calculus
     res <- indicator_raw(
@@ -81,7 +85,8 @@ indi_0006 <- function(
       pop_source = pop_source,
       nome = "indi_0006",
       multi = multi,
-      decimals = decimals
+      decimals = decimals,
+      sex = "female"
     )
   }
 
