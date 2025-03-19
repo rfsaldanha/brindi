@@ -18,13 +18,11 @@ indicator_adjusted <- function(
   multi,
   decimals
 ) {
-  # Passar a usar o tidyrates nessa função, permitindo o uso de várias chaves (agg e agg_time)
-
   # List to data.frame with age groups
   res1 <- mapply(
     cbind,
-    numerador,
-    "age_group" = age_groups_names,
+    numerador[sapply(numerador, nrow) > 0],
+    "age_group" = age_groups_names[sapply(numerador, nrow) > 0],
     SIMPLIFY = FALSE
   ) %>%
     dplyr::bind_rows() %>%
