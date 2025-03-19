@@ -12,10 +12,19 @@
 #'
 #' @importFrom rlang .data
 #' @export
-indi_0008 <- function(agg, agg_time = "year", ano, multi = 100000, decimals = 2, complete_with_zeros = TRUE, keep_raw_values = FALSE, save_args = FALSE, pcdas_token = NULL){
-
+indi_0008 <- function(
+  agg,
+  agg_time = "year",
+  ano,
+  multi = 100000,
+  decimals = 2,
+  complete_with_zeros = TRUE,
+  keep_raw_values = FALSE,
+  save_args = FALSE,
+  pcdas_token = NULL
+) {
   # Try to get PCDaS API token from renviron if not provided
-  if(is.null(pcdas_token)){
+  if (is.null(pcdas_token)) {
     pcdas_token <- rpcdas::get_pcdas_token_renviron()
   }
 
@@ -43,7 +52,7 @@ indi_0008 <- function(agg, agg_time = "year", ano, multi = 100000, decimals = 2,
   )
 
   # Save arguments
-  if(save_args == TRUE){
+  if (save_args == TRUE) {
     res <- res %>%
       dplyr::mutate(
         agg = agg,
@@ -53,9 +62,14 @@ indi_0008 <- function(agg, agg_time = "year", ano, multi = 100000, decimals = 2,
   }
 
   # Complete with zeros
-  if(complete_with_zeros == TRUE){
-    res <- complete_with_zeros(res = res, agg = agg, agg_time = agg_time,
-                               ano = ano, save_args = save_args)
+  if (complete_with_zeros == TRUE) {
+    res <- complete_with_zeros(
+      res = res,
+      agg = agg,
+      agg_time = agg_time,
+      ano = ano,
+      save_args = save_args
+    )
   }
 
   return(res)
