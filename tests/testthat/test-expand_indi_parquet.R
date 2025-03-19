@@ -14,7 +14,7 @@ test_that("expand_indi_parquet works", {
   res <- arrow::read_parquet(paste0(
     tmpdir,
     "/",
-    "indi_0001_adj_uf_res_year",
+    "indi_0001_uf_res_year",
     ".parquet"
   ))
 
