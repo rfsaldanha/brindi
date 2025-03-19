@@ -10,14 +10,13 @@ indi_0001(
   ano,
   multi = 1e+05,
   decimals = 2,
-  complete_with_zeros = TRUE,
-  keep_raw_values = FALSE,
-  save_args = FALSE,
-  pcdas_token = NULL
+  pop_source = "datasus",
+  pcdas_token = NULL,
+  adjust_rates = FALSE
 )
 }
 \arguments{
-\item{agg}{character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saude of occurence. \code{regsaude_449_res} for regiao de saude (449 units) of residence. \code{regsaude_449_ocor} for regiao de saude (449 units) of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.}
+\item{agg}{character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saúde of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.}
 
 \item{agg_time}{character. Time aggregation level. \code{year} for yearly data. \code{month} for monthly data. \code{week} for weekly data. Defaults to \code{year}.}
 
@@ -27,14 +26,17 @@ indi_0001(
 
 \item{decimals}{integer. Number of decimals for indicator.}
 
-\item{complete_with_zeros}{logical. Complete indicator result with zeros considering combinations of spatial and temporal aggregation without results.}
-
-\item{keep_raw_values}{logical. Keep numerator and denominator values on results.}
-
-\item{save_args}{logical. Save \code{agg} and \code{agg_time} arguments on results table.}
+\item{pop_source}{character. Population source, from {brpop} package.}
 
 \item{pcdas_token}{character. PCDaS API token. If not provided, the function will look for it on renvirom.}
+
+\item{adjust_rates}{logical. Adjust rates by age.}
 }
 \description{
 Indicator: Mortalidade por causas externas
+}
+\examples{
+# Some examples
+indi_0001(agg = "mun_res", ano = 2013)
+
 }
