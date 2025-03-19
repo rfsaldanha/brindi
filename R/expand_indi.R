@@ -6,7 +6,6 @@
 #' @param agg_time character vector. Time aggregation levels. \code{year} for yearly data. \code{month} for monthly data. \code{week} for weekly data. Defaults to \code{year}.
 #' @param anos numeric vector. Years.
 #' @param indi_fun character. Function name.
-#' @param save_args logical. Save \code{agg} and \code{agg_time} arguments on results table.
 #'
 #' @export
 expand_indi <- function(
@@ -15,8 +14,7 @@ expand_indi <- function(
   anos,
   indi_fun,
   pop_source,
-  adjust_rates,
-  save_args = TRUE
+  adjust_rates
 ) {
   # Start parallel enviroment
   plan <- future::plan(future::multisession)
@@ -36,7 +34,6 @@ expand_indi <- function(
     ano = anos,
     pop_source = pop_source,
     adjust_rates = adjust_rates,
-    save_args = save_args,
     .options = furrr::furrr_options(seed = TRUE)
   )
 
