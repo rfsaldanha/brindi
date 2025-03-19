@@ -2,14 +2,25 @@
 % Please edit documentation in R/indicator_adjusted.R
 \name{indicator_adjusted}
 \alias{indicator_adjusted}
-\title{Ajusted indicator calculus}
+\title{Ajusted indicator computation}
 \usage{
-indicator_adjusted(numerador, ano, nome, multi, decimals)
+indicator_adjusted(
+  numerador,
+  ano,
+  agg,
+  agg_time,
+  pop_source,
+  nome,
+  multi,
+  decimals
+)
 }
 \arguments{
 \item{numerador}{list.}
 
 \item{ano}{Year of indicator}
+
+\item{pop_source}{character. Population source, from {brpop} package.}
 
 \item{nome}{character. Indicator name.}
 
@@ -18,5 +29,5 @@ indicator_adjusted(numerador, ano, nome, multi, decimals)
 \item{decimals}{integer. Number of decimals for indicator.}
 }
 \description{
-Ajusted indicator calculus
+Ajusted indicator computation
 }

@@ -4,7 +4,7 @@
 \alias{expand_indi}
 \title{Expand one indicator results with combination of arguments}
 \usage{
-expand_indi(agg, agg_time, anos, indi_fun, save_args = TRUE)
+expand_indi(agg, agg_time, anos, indi_fun, pop_source, adjust_rates)
 }
 \arguments{
 \item{agg}{character vector. Spatial aggregation levell. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saúde of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.}
@@ -14,8 +14,6 @@ expand_indi(agg, agg_time, anos, indi_fun, save_args = TRUE)
 \item{anos}{numeric vector. Years.}
 
 \item{indi_fun}{character. Function name.}
-
-\item{save_args}{logical. Save \code{agg} and \code{agg_time} arguments on results table.}
 }
 \description{
 With parallel processing.

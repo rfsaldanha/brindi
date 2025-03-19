@@ -6,6 +6,7 @@
 #' @param dir character. Directory to save parquet files.
 #' @param indi character function names vector. Defaults to `all` for all indi_ functions.
 #' @param pop_source character. Population source, from {brpop} package.
+#' @param adjust_rates logical. Adjust rates by age.
 #'
 #' @export
 expand_indi_parquet <- function(

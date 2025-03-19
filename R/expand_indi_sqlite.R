@@ -6,13 +6,23 @@
 #' @param db character. SQLite file address and name.
 #' @param indi character function names vector. Defaults to `all` for all indi_ functions.
 #' @param table_name character. Indicators table name.
+#' @param pop_source character. Population source, from {brpop} package.
+#' @param adjust_rates logical. Adjust rates by age.
 #'
 #' @export
-expand_indi_sqlite <- function(agg, agg_time, anos, db, indi = "all", table_name = "indi"){
-
+expand_indi_sqlite <- function(
+  agg,
+  agg_time,
+  anos,
+  db,
+  indi = "all",
+  table_name = "indi",
+  pop_source = "datasus",
+  adjust_rates = FALSE
+) {
   # List indi_ functions or use supplied vector
-  if(length(indi) == 1){
-    if(indi == "all"){
+  if (length(indi) == 1) {
+    if (indi == "all") {
       indi_funs <- grep("^indi_", ls(getNamespace("bilis")), value = TRUE)
     } else {
       indi_funs <- c(indi)
@@ -28,22 +38,36 @@ expand_indi_sqlite <- function(agg, agg_time, anos, db, indi = "all", table_name
   on.exit(DBI::dbDisconnect(conn = conn))
 
   # Remove table if exists
-  if(DBI::dbExistsTable(conn = conn, name = table_name)){
+  if (DBI::dbExistsTable(conn = conn, name = table_name)) {
     DBI::dbRemoveTable(conn = conn, table_name)
   }
 
   # Creates progress bar
   pb <- progress::progress_bar$new(
     format = ":spin :current/:total [:bar] :percent in :elapsed ETA: :eta",
-    clear = FALSE, total = length(indi_funs))
+    clear = FALSE,
+    total = length(indi_funs)
+  )
 
   pb$tick(0)
   Sys.sleep(1)
 
   # Expand indi_functions and write to table
-  for(i in indi_funs){
+  for (i in indi_funs) {
     pb$tick(tokens = list(what = i))
-    tmp <- expand_indi(agg = agg, agg_time = agg_time, anos = anos, indi_fun = i)
-    DBI::dbWriteTable(conn = conn, name = table_name, value = tmp, append = TRUE)
+    tmp <- expand_indi(
+      agg = agg,
+      agg_time = agg_time,
+      anos = anos,
+      indi_fun = i,
+      pop_source = pop_source,
+      adjust_rates = adjust_rates
+    )
+    DBI::dbWriteTable(
+      conn = conn,
+      name = table_name,
+      value = tmp,
+      append = TRUE
+    )
   }
 }

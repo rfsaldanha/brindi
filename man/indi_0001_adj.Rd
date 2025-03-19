@@ -6,6 +6,7 @@
 \usage{
 indi_0001_adj(
   agg,
+  agg_time = "year",
   ano,
   multi = 1e+05,
   decimals = 2,
@@ -17,6 +18,8 @@ indi_0001_adj(
 \arguments{
 \item{agg}{character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saúde of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.}
 
+\item{agg_time}{character. Time aggregation level. \code{year} for yearly data. \code{month} for monthly data. \code{week} for weekly data. Defaults to \code{year}.}
+
 \item{ano}{numeric. Year of death.}
 
 \item{multi}{integer. Multiplicator for indicator.}
@@ -26,6 +29,8 @@ indi_0001_adj(
 \item{pop_source}{character. Population source, from {brpop} package.}
 
 \item{pcdas_token}{character. PCDaS API token. If not provided, the function will look for it on renvirom.}
+
+\item{adjust_rates}{logical. Adjust rates by age.}
 }
 \description{
 Indicator: Mortalidade por causas externas

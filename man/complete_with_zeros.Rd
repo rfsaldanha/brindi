@@ -4,7 +4,7 @@
 \alias{complete_with_zeros}
 \title{Complete indicator result with zeros}
 \usage{
-complete_with_zeros(res, agg, agg_time, ano, save_args)
+complete_with_zeros(res, agg, agg_time, ano, pop_source)
 }
 \arguments{
 \item{res}{tibble. Indicator results table.}
@@ -15,7 +15,7 @@ complete_with_zeros(res, agg, agg_time, ano, save_args)
 
 \item{ano}{numeric. Year of death.}
 
-\item{save_args}{logical. Save \code{agg} and \code{agg_time} arguments on results table.}
+\item{pop_source}{character. Population source, from {brpop} package.}
 }
 \description{
 Complete indicator result with zeros considering combinations of spatial and temporal aggregation without results.

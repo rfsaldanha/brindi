@@ -6,6 +6,7 @@
 #' @param multi integer. Multiplicator for indicator.
 #' @param decimals integer. Number of decimals for indicator.
 #' @param pop_source character. Population source, from {brpop} package.
+#' @param adjust_rates logical. Adjust rates by age.
 #' @param pcdas_token character. PCDaS API token. If not provided, the function will look for it on renvirom.
 #'
 #' @examples

@@ -4,7 +4,16 @@
 \alias{expand_indi_sqlite}
 \title{Expand several indicators results to SQLite}
 \usage{
-expand_indi_sqlite(agg, agg_time, anos, db, indi = "all", table_name = "indi")
+expand_indi_sqlite(
+  agg,
+  agg_time,
+  anos,
+  db,
+  indi = "all",
+  table_name = "indi",
+  pop_source = "datasus",
+  adjust_rates = FALSE
+)
 }
 \arguments{
 \item{agg}{character vector. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saúde of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.}
@@ -18,6 +27,10 @@ expand_indi_sqlite(agg, agg_time, anos, db, indi = "all", table_name = "indi")
 \item{indi}{character function names vector. Defaults to \code{all} for all indi_ functions.}
 
 \item{table_name}{character. Indicators table name.}
+
+\item{pop_source}{character. Population source, from {brpop} package.}
+
+\item{adjust_rates}{logical. Adjust rates by age.}
 }
 \description{
 Expand several indicators results to SQLite

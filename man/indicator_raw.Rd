@@ -8,10 +8,12 @@ indicator_raw(
   numerador,
   denominador,
   denominador_type = "pop",
-  keep_raw_values = FALSE,
   treat_inf_values = TRUE,
   nome,
+  ano,
   agg,
+  agg_time,
+  pop_source,
   multi,
   decimals
 )
@@ -23,13 +25,17 @@ indicator_raw(
 
 \item{denominador_type}{character. Type of denominator. \code{pop} or \code{arbitrary}.}
 
-\item{keep_raw_values}{logical. Keep numerator and denominator values on results. Defaults to \code{FALSE}.}
-
 \item{treat_inf_values}{logical. Treat positive infinite values caused by denominators equals to zero as NA. Defaults to \code{TRUE}.}
 
 \item{nome}{character. Indicator name.}
 
+\item{ano}{Year of indicator}
+
 \item{agg}{character. Aggregation acronymin.}
+
+\item{agg_time}{character. Time aggregation level. \code{year} for yearly data. \code{month} for monthly data. \code{week} for weekly data. Defaults to \code{year}.}
+
+\item{pop_source}{character. Population source, from {brpop} package.}
 
 \item{multi}{integer. Multiplicator for indicator.}
 
