@@ -5,51 +5,78 @@
 #' @param ano numeric. Year of death.
 #' @param multi integer. Multiplicator for indicator.
 #' @param decimals integer. Number of decimals for indicator.
-#' @param complete_with_zeros logical. Complete indicator result with zeros considering combinations of spatial and temporal aggregation without results.
-#' @param keep_raw_values logical. Keep numerator and denominator values on results.
-#' @param save_args logical. Save \code{agg} and \code{agg_time} arguments on results table.
+#' @param pop_source character. Population source, from {brpop} package.
+#' @param adjust_rates logical. Adjust rates by age.
+#' @param pcdas_token character. PCDaS API token. If not provided, the function will look for it on renvirom.
+#'
+#' @examples
+#' # Some examples
+#' indi_0016(agg = "mun_res", ano = 2020)
 #'
 #' @importFrom rlang .data
 #' @export
-indi_0016 <- function(agg, agg_time = "year", ano, multi = 100000, decimals = 2, complete_with_zeros = TRUE, keep_raw_values = FALSE, save_args = FALSE){
+indi_0016 <- function(
+  agg,
+  agg_time = "year",
+  ano,
+  multi = 100000,
+  decimals = 2,
+  pop_source = "datasus",
+  pcdas_token = NULL,
+  adjust_rates = FALSE
+) {
+  if (adjust_rates == FALSE) {
+    # Creates numerator
+    numerador <- recbilis::get_zika(
+      agg = agg,
+      agg_time = agg_time,
+      ano = ano
+    )
 
-  # Creates numerator
-  numerador <- recbilis::get_zika(
-    agg = agg,
-    agg_time = agg_time,
-    ano = ano
-  )
+    # Creates denominator
+    denominador <- denominator_pop(agg = agg, pop_source = pop_source)
 
-  # Creates denominator
-  denominador <- denominator_pop(agg = agg)
+    # Perform indicator calculus
+    res <- indicator_raw(
+      numerador = numerador,
+      denominador = denominador,
+      denominador_type = "pop",
+      treat_inf_values = TRUE,
+      nome = "indi_0016",
+      ano = ano,
+      agg = agg,
+      agg_time = agg_time,
+      pop_source = pop_source,
+      multi = multi,
+      decimals = decimals
+    )
+  } else if (adjust_rates == TRUE) {
+    # Prepate multission environment
+    oplan <- future::plan(future::multisession)
+    on.exit(future::plan(oplan))
 
-  # Perform indicator calculus
-  res <- indicator_raw(
-    numerador = numerador,
-    denominador = denominador,
-    multi = multi,
-    decimals = decimals,
-    keep_raw_values = keep_raw_values,
-    nome = "indi_0016",
-    agg = agg
-  )
+    # Creates numerator
+    numerador <- furrr::future_pmap(
+      .l = age_groups,
+      .f = recbilis::get_zika,
+      agg = agg,
+      agg_time = agg_time,
+      ano = ano
+    )
 
-  # Save arguments
-  if(save_args == TRUE){
-    res <- res %>%
-      dplyr::mutate(
-        agg = agg,
-        agg_time = agg_time
-      ) %>%
-      dplyr::relocate("agg", "agg_time", .after = "name")
-  }
-
-  # Complete with zeros
-  if(complete_with_zeros == TRUE){
-    res <- complete_with_zeros(res = res, agg = agg, agg_time = agg_time,
-                               ano = ano, save_args = save_args)
+    # Age adjusted indicator computation
+    res <- indicator_adjusted(
+      numerador = numerador,
+      ano = ano,
+      agg = agg,
+      agg_time = agg_time,
+      pop_source = pop_source,
+      nome = "indi_0016",
+      multi = multi,
+      decimals = decimals,
+      sex = "all"
+    )
   }
 
   return(res)
 }
-
