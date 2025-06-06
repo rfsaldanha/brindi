@@ -12,7 +12,8 @@ indicator_adjusted(
   pop_source,
   nome,
   multi,
-  decimals
+  decimals,
+  sex
 )
 }
 \arguments{
@@ -27,6 +28,8 @@ indicator_adjusted(
 \item{multi}{integer. Multiplicator for indicator.}
 
 \item{decimals}{integer. Number of decimals for indicator.}
+
+\item{sex}{character. Population sex, for {brpop} package.}
 }
 \description{
 Ajusted indicator computation
