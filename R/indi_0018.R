@@ -23,7 +23,7 @@ indi_0018 <- function(
 ) {
   if (adjust_rates == FALSE) {
     # Creates numerator
-    numerador <- recbilis::get_chikungunya(
+    numerador <- recbilis::get_febre_amarela(
       agg = agg,
       agg_time = agg_time,
       ano = ano
