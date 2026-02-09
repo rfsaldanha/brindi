@@ -1,6 +1,6 @@
-#' Indicator: Mortalidade por exposição as forças da natureza  ####### aqui muda o nome
+#' Indicator:  Taxa de Mortalidade por Colera
 #'
-#' @param agg character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saúde of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.
+#' @param agg character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saude of occurence. \code{regsaude_449_res} for regiao de saude (449 units) of residence. \code{regsaude_449_ocor} for regiao de saude (449 units) of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.
 #' @param agg_time character. Time aggregation level. \code{year} for yearly data. \code{month} for monthly data. \code{week} for weekly data. Defaults to \code{year}.
 #' @param ano numeric. Year of death.
 #' @param multi integer. Multiplicator for indicator.
@@ -15,7 +15,7 @@
 #'
 #' @importFrom rlang .data
 #' @export
-indi_0022 <- function( ## aqui só muda o nome e o multi se for 10000 ou 100??
+indi_0022 <- function(
   agg,
   agg_time = "year",
   ano,
@@ -27,10 +27,8 @@ indi_0022 <- function( ## aqui só muda o nome e o multi se for 10000 ou 100??
 ) {
   # Try to get PCDaS API token from renviron if not provided
   if (is.null(pcdas_token)) {
-    pcdas_token <- rpcdas::get_pcdas_token_renviron() # até aqui igual a todos
+    pcdas_token <- rpcdas::get_pcdas_token_renviron()
   }
-
-  filter_query <- "LEFT(CAUSABAS, 1) IN ('V', 'W', 'X', 'Y')"  ###Como foi construido esse filtro? CAUSABAS é o nome da variável??
 
   if (adjust_rates == FALSE) {
     # Creates numerator
@@ -39,13 +37,13 @@ indi_0022 <- function( ## aqui só muda o nome e o multi se for 10000 ou 100??
       agg_time = agg_time,
       ano = ano,
       pcdas_token = pcdas_token,
-      more_filters = filter_query # aqui muda ou tem cid_like ou esse filtro pré estabelecido.
+      cid_like = "A00"
     )
 
     # Creates denominator
-    denominador <- denominator_pop(agg = agg, pop_source = pop_source) # Também muda dependendo se fará por sexo
+    denominador <- denominator_pop(agg = agg, pop_source = pop_source)
 
-    # Perform indicator computation #aparentemente igual
+    # Perform indicator computation
     res <- indicator_raw(
       numerador = numerador,
       denominador = denominador,
@@ -60,7 +58,7 @@ indi_0022 <- function( ## aqui só muda o nome e o multi se for 10000 ou 100??
       decimals = decimals
     )
   } else if (adjust_rates == TRUE) {
-    # Prepate multission environment # igual
+    # Prepate multission environment
     oplan <- future::plan(future::multisession)
     on.exit(future::plan(oplan))
 
@@ -71,7 +69,7 @@ indi_0022 <- function( ## aqui só muda o nome e o multi se for 10000 ou 100??
       agg = agg,
       agg_time = agg_time,
       ano = ano,
-      more_filters = filter_query #mesma coisa o cid_like
+      cid_like = "A00"
     )
 
     # Age adjusted indicator computation
@@ -84,7 +82,7 @@ indi_0022 <- function( ## aqui só muda o nome e o multi se for 10000 ou 100??
       nome = "indi_0022",
       multi = multi,
       decimals = decimals,
-      sex = "all" # pode mudar aqui pra male ou female
+      sex = "all"
     )
   }
 

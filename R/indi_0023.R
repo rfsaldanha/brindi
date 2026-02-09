@@ -1,4 +1,4 @@
-#' Indicator: Mortalidade por suicidio
+#' Indicator: Mortalidade por exposição as forças da natureza
 #'
 #' @param agg character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saude of occurence. \code{regsaude_449_res} for regiao de saude (449 units) of residence. \code{regsaude_449_ocor} for regiao de saude (449 units) of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.
 #' @param agg_time character. Time aggregation level. \code{year} for yearly data. \code{month} for monthly data. \code{week} for weekly data. Defaults to \code{year}.
@@ -11,11 +11,11 @@
 #'
 #' @examples
 #' # Some examples
-#' indi_0005(agg = "mun_res", ano = 2013)
+#' indi_0023(agg = "mun_res", ano = 2013)
 #'
 #' @importFrom rlang .data
 #' @export
-indi_0005 <- function(
+indi_0023 <- function(
   agg,
   agg_time = "year",
   ano,
@@ -31,11 +31,12 @@ indi_0005 <- function(
   }
 
   Q1 <- glue::glue_collapse(
-    sQuote(rpcdas::cid_seq("X60", "X84"), q = FALSE),
+    sQuote(rpcdas::cid_seq("X30", "X39"), q = FALSE),
     sep = ", "
   )
 
-  filter_query <- glue::glue("LEFT(CAUSABAS, 3) IN ({Q1}, 'X87')")
+  filter_query <- glue::glue("LEFT(CAUSABAS, 3) IN ({Q1})"
+  )
 
   if (adjust_rates == FALSE) {
     # Creates numerator
@@ -56,7 +57,7 @@ indi_0005 <- function(
       denominador = denominador,
       denominador_type = "pop",
       treat_inf_values = TRUE,
-      nome = "indi_0005",
+      nome = "indi_0023",
       ano = ano,
       agg = agg,
       agg_time = agg_time,
@@ -86,7 +87,7 @@ indi_0005 <- function(
       agg = agg,
       agg_time = agg_time,
       pop_source = pop_source,
-      nome = "indi_0005",
+      nome = "indi_0023",
       multi = multi,
       decimals = decimals,
       sex = "all"
