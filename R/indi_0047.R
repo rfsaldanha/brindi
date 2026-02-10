@@ -1,4 +1,4 @@
-#' Indicator: Taxa de mortalidade por neoplasia maligna da mama
+#' Indicator: Taxa de internação por infarto agudo do miocárdio (IAM)
 #'
 #' @param agg character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saude of occurence. \code{regsaude_449_res} for regiao de saude (449 units) of residence. \code{regsaude_449_ocor} for regiao de saude (449 units) of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.
 #' @param agg_time character. Time aggregation level. \code{year} for yearly data. \code{month} for monthly data. \code{week} for weekly data. Defaults to \code{year}.
@@ -11,15 +11,15 @@
 #'
 #' @examples
 #' # Some examples
-#' indi_0006(agg = "mun_res", ano = 2013)
+#' indi_0047(agg = "mun_res", ano = 2013)
 #'
 #' @importFrom rlang .data
 #' @export
-indi_0006 <- function(
+indi_0046 <- function(
   agg,
   agg_time = "year",
   ano,
-  multi = 100000,
+  multi = 100,
   decimals = 2,
   pop_source = "datasus",
   pcdas_token = NULL,
@@ -32,28 +32,24 @@ indi_0006 <- function(
 
   if (adjust_rates == FALSE) {
     # Creates numerator
-    numerador <- rpcdas::get_sim(
+    numerador <- rpcdas::get_sih(
       agg = agg,
       agg_time = agg_time,
       ano = ano,
       pcdas_token = pcdas_token,
-      cid_like = "C50"
+      cid_like = "I219"
     )
 
     # Creates denominator
-    denominador <- denominator_pop(
-      agg = agg,
-      sex = "female",
-      pop_source = pop_source
-    )
+    denominador <- denominator_pop(agg = agg, pop_source = pop_source)
 
-    # Perform indicator calculus
+    # Perform indicator computation
     res <- indicator_raw(
       numerador = numerador,
       denominador = denominador,
       denominador_type = "pop",
       treat_inf_values = TRUE,
-      nome = "indi_0006",
+      nome = "indi_0047",
       ano = ano,
       agg = agg,
       agg_time = agg_time,
@@ -69,11 +65,11 @@ indi_0006 <- function(
     # Creates numerator
     numerador <- furrr::future_pmap(
       .l = age_groups,
-      .f = rpcdas::get_sim,
+      .f = rpcdas::get_sih,
       agg = agg,
       agg_time = agg_time,
       ano = ano,
-      cid_like = "C50"
+      cid_like = "I219"
     )
 
     # Age adjusted indicator computation
@@ -83,10 +79,10 @@ indi_0006 <- function(
       agg = agg,
       agg_time = agg_time,
       pop_source = pop_source,
-      nome = "indi_0006",
+      nome = "indi_0047",
       multi = multi,
       decimals = decimals,
-      sex = "female"
+      sex = "all"
     )
   }
 
