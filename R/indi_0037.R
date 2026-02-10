@@ -1,4 +1,4 @@
-#' Indicator: Taxa de internação por esquistossomose
+#' Indicator: Taxa de mortalidade por malária (Sem especificação)
 #'
 #' @param agg character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saude of occurence. \code{regsaude_449_res} for regiao de saude (449 units) of residence. \code{regsaude_449_ocor} for regiao de saude (449 units) of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.
 #' @param agg_time character. Time aggregation level. \code{year} for yearly data. \code{month} for monthly data. \code{week} for weekly data. Defaults to \code{year}.
@@ -11,15 +11,15 @@
 #'
 #' @examples
 #' # Some examples
-#' indi_0029(agg = "mun_res", ano = 2013)
+#' indi_0037(agg = "mun_res", ano = 2013)
 #'
 #' @importFrom rlang .data
 #' @export
-indi_0029 <- function(
+indi_0037 <- function(
   agg,
   agg_time = "year",
   ano,
-  multi = 100,
+  multi = 100000,
   decimals = 2,
   pop_source = "datasus",
   pcdas_token = NULL,
@@ -31,16 +31,19 @@ indi_0029 <- function(
   }
 
   Q1 <- glue::glue_collapse(
-    sQuote(rpcdas::cid_seq("B650", "B659"), q = FALSE),
+    sQuote(rpcdas::cid_seq("B500", "B540"), q = FALSE),
+    sep = ", "
+  )
+  Q2 <- glue::glue_collapse(
+    sQuote(rpcdas::cid_seq("P373", "P374"), q = FALSE),
     sep = ", "
   )
 
-  filter_query <- glue::glue("LEFT(CAUSABAS, 3) IN ({Q1})"
-  )
+  filter_query <- glue::glue("LEFT(CAUSABAS, 3) IN ({Q1}, {Q2})")
 
   if (adjust_rates == FALSE) {
     # Creates numerator
-    numerador <- rpcdas::get_sih(
+    numerador <- rpcdas::get_sim(
       agg = agg,
       agg_time = agg_time,
       ano = ano,
@@ -57,7 +60,7 @@ indi_0029 <- function(
       denominador = denominador,
       denominador_type = "pop",
       treat_inf_values = TRUE,
-      nome = "indi_0029",
+      nome = "indi_0037",
       ano = ano,
       agg = agg,
       agg_time = agg_time,
@@ -73,7 +76,7 @@ indi_0029 <- function(
     # Creates numerator
     numerador <- furrr::future_pmap(
       .l = age_groups,
-      .f = rpcdas::get_sih,
+      .f = rpcdas::get_sim,
       agg = agg,
       agg_time = agg_time,
       ano = ano,
@@ -87,7 +90,7 @@ indi_0029 <- function(
       agg = agg,
       agg_time = agg_time,
       pop_source = pop_source,
-      nome = "indi_0029",
+      nome = "indi_0037",
       multi = multi,
       decimals = decimals,
       sex = "all"
@@ -96,4 +99,3 @@ indi_0029 <- function(
 
   return(res)
 }
-

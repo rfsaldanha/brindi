@@ -1,4 +1,4 @@
-#' Indicator: Taxa de internação por esquistossomose
+#' Indicator: Taxa de internação por hepatite A
 #'
 #' @param agg character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saude of occurence. \code{regsaude_449_res} for regiao de saude (449 units) of residence. \code{regsaude_449_ocor} for regiao de saude (449 units) of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.
 #' @param agg_time character. Time aggregation level. \code{year} for yearly data. \code{month} for monthly data. \code{week} for weekly data. Defaults to \code{year}.
@@ -11,11 +11,11 @@
 #'
 #' @examples
 #' # Some examples
-#' indi_0029(agg = "mun_res", ano = 2013)
+#' indi_0030(agg = "mun_res", ano = 2013)
 #'
 #' @importFrom rlang .data
 #' @export
-indi_0029 <- function(
+indi_0030 <- function(
   agg,
   agg_time = "year",
   ano,
@@ -31,7 +31,7 @@ indi_0029 <- function(
   }
 
   Q1 <- glue::glue_collapse(
-    sQuote(rpcdas::cid_seq("B650", "B659"), q = FALSE),
+    sQuote(rpcdas::cid_seq("B150", "B159"), q = FALSE),
     sep = ", "
   )
 
@@ -57,7 +57,7 @@ indi_0029 <- function(
       denominador = denominador,
       denominador_type = "pop",
       treat_inf_values = TRUE,
-      nome = "indi_0029",
+      nome = "indi_0030",
       ano = ano,
       agg = agg,
       agg_time = agg_time,
@@ -87,7 +87,7 @@ indi_0029 <- function(
       agg = agg,
       agg_time = agg_time,
       pop_source = pop_source,
-      nome = "indi_0029",
+      nome = "indi_0030",
       multi = multi,
       decimals = decimals,
       sex = "all"
