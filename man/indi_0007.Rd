@@ -2,7 +2,7 @@
 % Please edit documentation in R/indi_0007.R
 \name{indi_0007}
 \alias{indi_0007}
-\title{Indicator: Mortalidade por neoplasia maligna da colo de utero}
+\title{Indicator: Taxa de mortalidade por neoplasia maligna da colo de útero}
 \usage{
 indi_0007(
   agg,
@@ -33,7 +33,7 @@ indi_0007(
 \item{adjust_rates}{logical. Adjust rates by age.}
 }
 \description{
-Indicator: Mortalidade por neoplasia maligna da colo de utero
+Indicator: Taxa de mortalidade por neoplasia maligna da colo de útero
 }
 \examples{
 # Some examples

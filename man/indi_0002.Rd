@@ -2,7 +2,7 @@
 % Please edit documentation in R/indi_0002.R
 \name{indi_0002}
 \alias{indi_0002}
-\title{Indicator: Mortalidade por AVC}
+\title{Indicator:  Taxa de mortalidade por acidente vascular cerebral (AVC)}
 \usage{
 indi_0002(
   agg,
@@ -33,7 +33,7 @@ indi_0002(
 \item{adjust_rates}{logical. Adjust rates by age.}
 }
 \description{
-Indicator: Mortalidade por AVC
+Indicator:  Taxa de mortalidade por acidente vascular cerebral (AVC)
 }
 \examples{
 # Some examples

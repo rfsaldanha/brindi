@@ -1,5 +1,5 @@
 ---
-title: "indi_0001"
+title: "indi_0014"
 ---
 
 ```{r, include = FALSE}
@@ -9,7 +9,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Taxa de mortalidade por causas externas
+# Taxa de mortalidade por dengue
 
 ## Definição
 

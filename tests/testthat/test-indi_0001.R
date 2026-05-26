@@ -74,3 +74,4 @@ test_that("indi_0001 works with mun res and multiple years", {
   expect_equal("tbl_df", class(res)[1])
   expect_gt(nrow(res), 10000)
 })
+

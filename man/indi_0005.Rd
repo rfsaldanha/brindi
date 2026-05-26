@@ -2,7 +2,7 @@
 % Please edit documentation in R/indi_0005.R
 \name{indi_0005}
 \alias{indi_0005}
-\title{Indicator: Mortalidade por suicidio}
+\title{Indicator: Taxa de mortalidade por suicidio}
 \usage{
 indi_0005(
   agg,
@@ -33,7 +33,7 @@ indi_0005(
 \item{adjust_rates}{logical. Adjust rates by age.}
 }
 \description{
-Indicator: Mortalidade por suicidio
+Indicator: Taxa de mortalidade por suicidio
 }
 \examples{
 # Some examples
