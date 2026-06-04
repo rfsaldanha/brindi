@@ -38,7 +38,8 @@ Remotes:
     rfsaldanha/rpcdas,
     rfsaldanha/recbilis
 Suggests: 
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    quarto
 Config/testthat/parallel: true
 Config/testthat/edition: 3
 Depends: 
@@ -46,5 +47,5 @@ Depends:
 LazyData: true
 URL: https://rfsaldanha.github.io/brindi/,
      https://github.com/rfsaldanha/brindi
-Config/Needs/website: rmarkdown
+Config/Needs/website: rmarkdown, quarto
 Config/roxygen2/version: 8.0.0

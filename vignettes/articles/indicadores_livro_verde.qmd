@@ -1,0 +1,167 @@
+---
+title: "Indicadores calculáveis no BRINDI conforme Livro Verde"
+format: html
+execute:
+  eval: false
+---
+
+## Objetivo
+
+Este material organiza os indicadores já implementados no pacote `brindi`, identifica os que podem ser calculados com as fontes já disponíveis no código e aponta fontes abertas possíveis para os indicadores ainda não implementados.
+
+## Critério de inclusão
+
+Foram incluídos como calculáveis os indicadores com função `indi_*` existente em `R/`, fonte de numerador já acessada por `rpcdas` ou `recbilis`, denominador populacional por `brpop`/`denominator_pop()` ou denominador arbitrário já definido no script, e cálculo final por `indicator_raw()` ou `indicator_adjusted()`.
+
+## Fontes atualmente disponíveis no pacote
+
+| Fonte | Uso atual | Pacote/função |
+|----|----|----|
+| SIM | Óbitos por causa, idade e agregação territorial | `rpcdas::get_sim()` |
+| SINASC | Nascidos vivos para denominadores de mortalidade infantil | `rpcdas::get_sinasc()` |
+| SIH/SUS | Internações hospitalares por causa | `rpcdas::get_sih()` |
+| População | Denominadores por sexo, idade e território | `brpop` via `denominator_pop()` |
+| Agravos selecionados | Incidências de arboviroses e leishmanioses | `recbilis` |
+
+## Indicadores possíveis com os dados disponíveis
+
+### Mortalidade (MRT)
+
+| Código Livro Verde | Indicador | Função BRINDI | Fonte principal |
+|----|----|----|----|
+| MRT.1.01 | Taxa de mortalidade infantil | `indi_0010()` | SIM/SINASC via `rpcdas` |
+| MRT.1.05 | Taxa de mortalidade em menores de 5 anos | `indi_0011()` | SIM/SINASC via `rpcdas` |
+| MRT.4.02 | Taxa de mortalidade por lesão autoprovocada | `indi_0005()` | SIM via `rpcdas` |
+| MRT.4.03 | Taxa de mortalidade por lesão de trânsito | `indi_0004()` | SIM via `rpcdas` |
+| MRT.4.04 | Taxa de mortalidade por causas acidentais | `indi_0001()` | SIM via `rpcdas` |
+| MRT.5.02 | Taxa de mortalidade por neoplasias malignas | `indi_0006()`, `indi_0007()`, `indi_0008()` | SIM via `rpcdas` |
+| MRT.5.04 | Taxa de mortalidade por doenças cardiovasculares | `indi_0013()`, `indi_0002()`, `indi_0003()`, `indi_0046()` | SIM via `rpcdas` |
+| MRT.5.05 | Taxa de mortalidade por doenças respiratórias crônicas | `indi_0039()`, `indi_0041()`, `indi_0043()`, `indi_0045()` | SIM via `rpcdas` |
+| MRT.6.01 | Taxa de mortalidade específica por doenças infecciosas e parasitárias | `indi_0014()`, `indi_0022()`, `indi_0024()`, `indi_0031()`, `indi_0033()`, `indi_0035()`, `indi_0036()`, `indi_0037()` | SIM via `rpcdas` |
+
+### Morbidade (MRB)
+
+| Código Livro Verde | Indicador | Função BRINDI | Fonte principal |
+|----|----|----|----|
+| MRB.1.08 | Incidência de febre amarela | `indi_0018()` | SINAN/recbilis |
+| MRB.1.15 | Incidência de leptospirose | `indi_0032()` | SIH/SIM conforme função |
+| MRB.1.17 | Incidência de esquistossomose mansoni não grave | `indi_0029()` | SIH via `rpcdas` |
+| MRB.1.18 | Incidência de doença de Chagas aguda | `indi_0019()` | recbilis |
+| MRB.2.13 | Taxa de incidência de dengue | `indi_0015()` | recbilis |
+| MRB.2.15 | Taxa de incidência de chikungunya | `indi_0017()` | recbilis |
+| MRB.2.16 | Taxa de incidência de Zika | `indi_0016()` | recbilis |
+| MRB.4.01 | Taxa de internação hospitalar (SUS) por causas externas | `indi_0025()`, `indi_0026()`, `indi_0027()` | SIH via `rpcdas` |
+
+### Cobertura/uso hospitalar (COB)
+
+| Código Livro Verde | Indicador | Função BRINDI | Fonte principal |
+|----|----|----|----|
+| COB.2.01 | Taxa de internações hospitalares (SUS) por 100 habitantes | `indi_0025()` a `indi_0030()`, `indi_0032()`, `indi_0034()`, `indi_0038()`, `indi_0040()`, `indi_0042()`, `indi_0044()`, `indi_0047()`, `indi_0048()` | SIH via `rpcdas` |
+
+## Catálogo operacional das funções disponíveis
+
+| Função | Indicador | Numerador | Denominador | Multiplicador |
+|----|----|----|----|---:|
+| `indi_0001()` | Taxa de mortalidade por causas externas | SIM | População total | 100.000 |
+| `indi_0002()` | Taxa de mortalidade por AVC | SIM | População total | 100.000 |
+| `indi_0003()` | Taxa de mortalidade por doenças isquêmicas do coração | SIM | População total | 100.000 |
+| `indi_0004()` | Taxa de mortalidade por acidentes de transporte terrestre | SIM | População total | 100.000 |
+| `indi_0005()` | Taxa de mortalidade por suicídio | SIM | População total | 100.000 |
+| `indi_0006()` | Taxa de mortalidade por neoplasia maligna da mama | SIM | População feminina | 100.000 |
+| `indi_0007()` | Taxa de mortalidade por neoplasia maligna do colo do útero | SIM | População feminina | 100.000 |
+| `indi_0008()` | Taxa de mortalidade por neoplasia maligna de próstata | SIM | População masculina | 100.000 |
+| `indi_0009()` | Mortalidade proporcional por doença diarreica aguda em menores de 5 anos | SIM | Óbitos em menores de 5 anos | 100 |
+| `indi_0010()` | Taxa de mortalidade infantil | SIM | SINASC | 1.000 |
+| `indi_0011()` | Taxa de mortalidade em menores de 5 anos | SIM | SINASC | 1.000 |
+| `indi_0012()` | Mortalidade proporcional por infecção respiratória aguda em menores de 5 anos | SIM | Óbitos em menores de 5 anos | 100 |
+| `indi_0013()` a `indi_0014()` | Mortalidade por doenças circulatórias e dengue | SIM | População total | 100.000 |
+| `indi_0015()` a `indi_0021()` | Incidência de dengue, Zika, chikungunya, febre amarela, Chagas e leishmanioses | recbilis | População total | 100.000 |
+| `indi_0022()` a `indi_0024()` | Mortalidade por cólera, forças da natureza e esquistossomose | SIM | População total | 100.000 |
+| `indi_0025()` a `indi_0030()` | Internações por fratura, afogamento, quedas, cólera, esquistossomose e hepatite A | SIH | População total | 100 |
+| `indi_0031()` | Mortalidade por hepatite A | SIM | População total | 100.000 |
+| `indi_0032()` | Internação por leptospirose | SIH | População total | 100 |
+| `indi_0033()` | Mortalidade por leptospirose | SIM | População total | 100.000 |
+| `indi_0034()` | Internação por tripanossomíase | SIH | População total | 100 |
+| `indi_0035()` a `indi_0037()` | Mortalidade por Chagas, leishmaniose visceral e malária | SIM | População total | 100.000 |
+| `indi_0038()` | Internação por asma | SIH | População total | 100 |
+| `indi_0039()` | Mortalidade por asma | SIM | População total | 100.000 |
+| `indi_0040()` | Internação por bronquite | SIH | População total | 100 |
+| `indi_0041()` | Mortalidade por bronquite | SIM | População total | 100.000 |
+| `indi_0042()` | Internação por pneumonia | SIH | População total | 100 |
+| `indi_0043()` | Mortalidade por pneumonia | SIM | População total | 100.000 |
+| `indi_0044()` | Internação por DPOC | SIH | População total | 100 |
+| `indi_0045()` | Mortalidade por DPOC | SIM | População total | 100.000 |
+| `indi_0046()` | Mortalidade por infarto agudo do miocárdio | SIM | População total | 100.000 |
+| `indi_0047()` | Internação por infarto agudo do miocárdio | SIH | População total | 100 |
+| `indi_0048()` | Internação por AVC | SIH | População total | 100.000 |
+
+## Fichas dos indicadores calculáveis
+
+### Ficha padrão: mortalidade por população
+
+-   **Indicadores:** `indi_0001()` a `indi_0008()`, `indi_0013()`, `indi_0014()`, `indi_0022()` a `indi_0024()`, `indi_0031()`, `indi_0033()`, `indi_0035()` a `indi_0037()`, `indi_0039()`, `indi_0041()`, `indi_0043()`, `indi_0045()`, `indi_0046()`.
+-   **Numerador:** óbitos selecionados no SIM por CID/filtro do respectivo script.
+-   **Denominador:** população de `brpop`, total ou por sexo quando indicado.
+-   **Cálculo:** `(óbitos / população) * multiplicador`.
+-   **Saída:** `name`, `cod`, `date`, `value`.
+-   **Agregações:** municípios, UF e regiões de saúde conforme suporte de `rpcdas`/`brpop`.
+
+### Ficha padrão: mortalidade infantil e menores de 5 anos
+
+-   **Indicadores:** `indi_0010()`, `indi_0011()`.
+-   **Numerador:** óbitos do SIM em menores de 1 ano ou menores de 5 anos.
+-   **Denominador:** nascidos vivos do SINASC.
+-   **Cálculo:** `(óbitos / nascidos vivos) * 1.000`.
+-   **Observação:** usa denominador arbitrário via `indicator_raw(denominador_type = "arbitrary")`.
+
+### Ficha padrão: mortalidade proporcional
+
+-   **Indicadores:** `indi_0009()`, `indi_0012()`.
+-   **Numerador:** óbitos por causa específica em menores de 5 anos.
+-   **Denominador:** total de óbitos em menores de 5 anos.
+-   **Cálculo:** `(óbitos específicos / total de óbitos) * 100`.
+
+### Ficha padrão: incidência por agravos selecionados
+
+-   **Indicadores:** `indi_0015()` a `indi_0021()`.
+-   **Numerador:** casos obtidos por funções do `recbilis`.
+-   **Denominador:** população total de `brpop`.
+-   **Cálculo:** `(casos / população) * 100.000`.
+
+### Ficha padrão: internações hospitalares
+
+-   **Indicadores:** `indi_0025()` a `indi_0030()`, `indi_0032()`, `indi_0034()`, `indi_0038()`, `indi_0040()`, `indi_0042()`, `indi_0044()`, `indi_0047()`, `indi_0048()`.
+-   **Numerador:** internações selecionadas no SIH por CID/filtro do respectivo script.
+-   **Denominador:** população total de `brpop`.
+-   **Cálculo:** `(internações / população) * multiplicador`.
+
+## Exemplos de uso
+
+```{r}
+library(brindi)
+
+indi_0010(agg = "uf_res", ano = 2013)
+indi_0047(agg = "uf_res", ano = 2013)
+indi_0048(agg = "uf_res", ano = 2013)
+```
+
+## Indicadores ainda não disponíveis e fontes abertas possíveis
+
+| Códigos | Tema | Fonte aberta possível | Encaminhamento técnico |
+|----|----|----|----|
+| DEM.1.05 a DEM.1.07 | Idosos, envelhecimento e dependência | IBGE Censo/SIDRA, Projeções da População do IBGE, `brpop` | Criar funções por grupos etários e razão entre populações. |
+| DEM.2.01 a DEM.2.03 | Fecundidade e natalidade | SINASC/DATASUS, OpenDataSUS, IBGE/SIDRA | Exige nascidos vivos por idade da mãe e população feminina por idade. |
+| DEM.3.01 a DEM.3.05 | Mortalidade específica, padronizada e esperança de vida | SIM/DATASUS, IBGE Tábuas de Mortalidade, `brpop` | Taxas específicas são viáveis com SIM; esperança de vida exige tábua de vida. |
+| DEM.4.01 e DEM.4.02 | Cobertura SINASC/SIM | SVSA/MS, RIPSA/IDB, IBGE, DATASUS | Exige método de eventos esperados e avaliação de cobertura. |
+| SOC.1.01 a SOC.5.01 | Educação, trabalho, renda, saneamento e segurança alimentar | IBGE Censo, PNAD Contínua, PNS, POF, SIDRA, IPEADATA, CadÚnico/Vis Data, SISVAN | Criar conectores ou rotinas de importação para tabelas agregadas. |
+| MRB não cobertos | Doenças transmissíveis restantes | SINAN/DATASUS, OpenDataSUS, e-SUS Notifica, SIVEP-Gripe | Criar funções `get_*` por agravo e aplicar `indicator_raw()`. |
+| FRP.1.01 a FRP.9.02 | Fatores de risco e proteção | Vigitel, PNS/IBGE, PeNSE/IBGE, SISVAN, POF, SB Brasil | Indicadores de inquérito exigem pesos amostrais e desenho complexo. |
+| COB não cobertos | Consultas, saúde da mulher, parto e planos | SIA/SUS, SINASC, ANS Dados Abertos/TabNet, PNS/IBGE, e-Gestor AB | Parte segue padrão taxa/população; inquéritos e ANS precisam rotinas próprias. |
+| REC.1.01 a REC.6.01 | Recursos humanos, leitos, equipamentos e gastos | CNES/DATASUS, SIOPS, Conta-Satélite de Saúde/IBGE, Tesouro Transparente, Siga Brasil, Comex Stat | Criar conectores CNES/SIOPS/IBGE/MDIC e padronizar valores monetários. |
+
+## Próximos passos recomendados
+
+-   **Prioridade 1:** implementar DEM com `brpop`/IBGE e SINASC, pois há maior compatibilidade com a arquitetura atual.
+-   **Prioridade 2:** ampliar MRB com SINAN/OpenDataSUS quando houver função de aquisição dos dados.
+-   **Prioridade 3:** COB/REC via SIH, SIA, CNES, ANS e SIOPS.
+-   **Prioridade 4:** SOC/FRP por IBGE/Vigitel/PeNSE/PNS, com atenção a pesos amostrais.
