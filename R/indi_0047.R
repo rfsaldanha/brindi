@@ -15,7 +15,7 @@
 #'
 #' @importFrom rlang .data
 #' @export
-indi_0046 <- function(
+indi_0047 <- function(
   agg,
   agg_time = "year",
   ano,
