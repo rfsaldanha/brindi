@@ -2,7 +2,7 @@
 % Please edit documentation in R/indi_0010.R
 \name{indi_0010}
 \alias{indi_0010}
-\title{Indicator: Taxa de Mortalidade Infantil}
+\title{Indicator: Taxa de mortalidade Infantil}
 \usage{
 indi_0010(
   agg,
@@ -33,7 +33,7 @@ indi_0010(
 \item{adjust_rates}{logical. Adjust rates by age. Argument ignored for this indicator.}
 }
 \description{
-Indicator: Taxa de Mortalidade Infantil
+Indicator: Taxa de mortalidade Infantil
 }
 \examples{
 # Some examples

@@ -1,0 +1,33 @@
+---
+title: "indi_0014"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Taxa de mortalidade por dengue
+
+## Definição
+
+Total de óbitos por dengue, na população residente em determinado espaço geográfico, no ano considerado.
+
+## Limitações 
+
+A qualidade dos dados depende das condições técnico-operacionais do sistema de vigilância epidemiológica, em cada área geográfica, para detectar, notificar, investigar e realizar testes laboratoriais específicos para a confirmação diagnóstica da doença. As bases de dados nacionais sobre mortalidade apresentam cobertura insatisfatória em muitos municípios do País, havendo expressiva subenumeração de óbitos nas regiões Norte e Nordeste. Imprecisões na declaração da "causa da morte" podem comprometer a consistência do indicador.
+
+## Agregações
+
+* Município de residência, região de saúde de residência (449 unidades), UF de residência.
+* Ano, mês e semana.
+
+## Método de cálculo
+
+* Numerador: Número de óbitos por dengue. Fonte: SIM, DataSUS.
+* Denominador: População Total Residente. Fonte: Estimativas populacionais, DataSUS
+* Multiplicador: 100.000
+
+

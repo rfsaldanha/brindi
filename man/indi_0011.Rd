@@ -2,7 +2,7 @@
 % Please edit documentation in R/indi_0011.R
 \name{indi_0011}
 \alias{indi_0011}
-\title{Indicator: Taxa de Mortalidade em menores de 5 anos}
+\title{Indicator: Taxa de mortalidade em menores de 5 anos}
 \usage{
 indi_0011(
   agg,
@@ -33,7 +33,7 @@ indi_0011(
 \item{adjust_rates}{logical. Adjust rates by age. Argument ignored for this indicator.}
 }
 \description{
-Indicator: Taxa de Mortalidade em menores de 5 anos
+Indicator: Taxa de mortalidade em menores de 5 anos
 }
 \examples{
 # Some examples

@@ -2,7 +2,7 @@
 % Please edit documentation in R/indi_0001.R
 \name{indi_0001}
 \alias{indi_0001}
-\title{Indicator: Mortalidade por causas externas}
+\title{Indicator: Taxa de mortalidade por causas externas}
 \usage{
 indi_0001(
   agg,
@@ -33,7 +33,7 @@ indi_0001(
 \item{adjust_rates}{logical. Adjust rates by age.}
 }
 \description{
-Indicator: Mortalidade por causas externas
+Indicator: Taxa de mortalidade por causas externas
 }
 \examples{
 # Some examples

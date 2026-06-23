@@ -2,7 +2,7 @@
 % Please edit documentation in R/indi_0016.R
 \name{indi_0016}
 \alias{indi_0016}
-\title{Indicator: Taxa de incidência de zika}
+\title{Indicator: Taxa de incidência de Zika}
 \usage{
 indi_0016(
   agg,
@@ -33,7 +33,7 @@ indi_0016(
 \item{adjust_rates}{logical. Adjust rates by age.}
 }
 \description{
-Indicator: Taxa de incidência de zika
+Indicator: Taxa de incidência de Zika
 }
 \examples{
 # Some examples
