@@ -37,6 +37,8 @@ Indicator: Taxa de incidência de doença de chagas
 }
 \examples{
 # Some examples
+\dontrun{
 indi_0019(agg = "mun_res", ano = 2020)
+}
 
 }

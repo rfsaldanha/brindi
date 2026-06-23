@@ -37,6 +37,8 @@ Indicator: Mortalidade por suicidio
 }
 \examples{
 # Some examples
+\dontrun{
 indi_0005(agg = "mun_res", ano = 2013)
+}
 
 }

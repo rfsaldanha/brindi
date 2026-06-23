@@ -11,8 +11,9 @@
 #'
 #' @examples
 #' # Some examples
+#' \dontrun{
 #' indi_0004(agg = "mun_res", ano = 2013)
-#'
+#' }
 #' @importFrom rlang .data
 #' @export
 indi_0004 <- function(
@@ -29,26 +30,14 @@ indi_0004 <- function(
   if (is.null(pcdas_token)) {
     pcdas_token <- rpcdas::get_pcdas_token_renviron()
   }
-
-  Q1 <- glue::glue_collapse(
-    sQuote(rpcdas::cid_seq("V01", "V49"), q = FALSE),
-    sep = ", "
-  )
-  Q2 <- glue::glue_collapse(
-    sQuote(rpcdas::cid_seq("V50", "V89"), q = FALSE),
-    sep = ", "
-  )
-
-  filter_query <- glue::glue("LEFT(CAUSABAS, 3) IN ({Q1}, {Q2})")
-
   if (adjust_rates == FALSE) {
     # Creates numerator
-    numerador <- rpcdas::get_sim(
+    numerador <- .brindi_get_sim(
       agg = agg,
       agg_time = agg_time,
       ano = ano,
       pcdas_token = pcdas_token,
-      more_filters = filter_query
+      cid_in = rpcdas::cid_seq("V01", "V89")
     )
 
     # Creates denominator
@@ -76,11 +65,12 @@ indi_0004 <- function(
     # Creates numerator
     numerador <- furrr::future_pmap(
       .l = age_groups,
-      .f = rpcdas::get_sim,
+      .f = .brindi_get_sim,
       agg = agg,
       agg_time = agg_time,
       ano = ano,
-      more_filters = filter_query
+      pcdas_token = pcdas_token,
+      cid_in = rpcdas::cid_seq("V01", "V89")
     )
 
     # Age adjusted indicator computation

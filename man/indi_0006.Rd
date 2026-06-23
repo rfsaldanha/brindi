@@ -37,6 +37,8 @@ Indicator: Mortalidade por neoplasia maligna da mama
 }
 \examples{
 # Some examples
+\dontrun{
 indi_0006(agg = "mun_res", ano = 2013)
+}
 
 }

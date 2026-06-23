@@ -26,11 +26,13 @@ Imports:
     furrr,
     future,
     tidyr,
+    tibble,
     glue,
     DBI,
     RSQLite,
     progress,
     stringr,
+    httr2,
     RPostgres,
     arrow,
     tidyrates

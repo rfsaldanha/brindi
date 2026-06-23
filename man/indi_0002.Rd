@@ -37,6 +37,8 @@ Indicator: Mortalidade por AVC
 }
 \examples{
 # Some examples
+\dontrun{
 indi_0002(agg = "mun_res", ano = 2013)
+}
 
 }

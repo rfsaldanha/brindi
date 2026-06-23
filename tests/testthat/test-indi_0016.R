@@ -1,3 +1,8 @@
+testthat::skip_if_not(
+  identical(Sys.getenv("BRINDI_RUN_RECBILIS_TESTS"), "true"),
+  "recbilis/PostgreSQL integration tests require BRINDI_RUN_RECBILIS_TESTS=true"
+)
+
 # mun res
 
 test_that("indi_0016 works with mun res", {

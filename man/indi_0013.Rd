@@ -37,6 +37,8 @@ Indicator: Taxa de mortalidade específica por doenças do aparelho circulatóri
 }
 \examples{
 # Some examples
+\dontrun{
 indi_0013(agg = "mun_res", ano = 2013)
+}
 
 }

@@ -37,6 +37,8 @@ Indicator: Taxa de mortalidade por dengue
 }
 \examples{
 # Some examples
+\dontrun{
 indi_0014(agg = "mun_res", ano = 2013)
+}
 
 }

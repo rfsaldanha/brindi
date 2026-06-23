@@ -37,6 +37,8 @@ Indicator: Taxa de incidência de chikungunya
 }
 \examples{
 # Some examples
+\dontrun{
 indi_0017(agg = "mun_res", ano = 2020)
+}
 
 }

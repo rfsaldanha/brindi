@@ -37,6 +37,8 @@ Indicator: Mortalidade proporcional por doença diarreica aguda em menores de 5 
 }
 \examples{
 # Some examples
+\dontrun{
 indi_0009(agg = "mun_res", ano = 2013)
+}
 
 }

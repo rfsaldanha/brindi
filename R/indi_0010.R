@@ -11,8 +11,9 @@
 #'
 #' @examples
 #' # Some examples
+#' \dontrun{
 #' indi_0010(agg = "mun_res", ano = 2013)
-#'
+#' }
 #' @importFrom rlang .data
 #' @export
 indi_0010 <- function(
@@ -31,7 +32,7 @@ indi_0010 <- function(
   }
 
   # Creates numerator
-  numerador <- rpcdas::get_sim(
+  numerador <- .brindi_get_sim(
     agg = agg,
     agg_time = agg_time,
     ano = ano,
@@ -41,7 +42,7 @@ indi_0010 <- function(
   )
 
   # Creates denominator
-  denominador <- rpcdas::get_sinasc(
+  denominador <- .brindi_get_sinasc(
     agg = agg,
     agg_time = agg_time,
     ano = ano,

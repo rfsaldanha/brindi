@@ -37,6 +37,8 @@ Indicator: Taxa de incidência de zika
 }
 \examples{
 # Some examples
+\dontrun{
 indi_0016(agg = "mun_res", ano = 2020)
+}
 
 }

@@ -37,6 +37,8 @@ Indicator: Mortalidade proporcional por infecção respiratória aguda em menore
 }
 \examples{
 # Some examples
+\dontrun{
 indi_0012(agg = "mun_res", ano = 2013)
+}
 
 }

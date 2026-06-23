@@ -37,6 +37,8 @@ Indicator: Taxa de incidência de dengue clássico
 }
 \examples{
 # Some examples
+\dontrun{
 indi_0015(agg = "mun_res", ano = 2013)
+}
 
 }

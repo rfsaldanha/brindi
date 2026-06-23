@@ -37,6 +37,8 @@ Indicator: Mortalidade por neoplasia maligna de prostata
 }
 \examples{
 # Some examples
+\dontrun{
 indi_0008(agg = "mun_res", ano = 2013)
+}
 
 }

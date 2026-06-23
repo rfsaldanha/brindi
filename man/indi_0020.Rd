@@ -37,6 +37,8 @@ Indicator: Taxa de incidência de leishmaniose tegumentar
 }
 \examples{
 # Some examples
+\dontrun{
 indi_0020(agg = "mun_res", ano = 2020)
+}
 
 }

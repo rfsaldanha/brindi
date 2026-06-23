@@ -14,6 +14,10 @@ expand_indi(agg, agg_time, anos, indi_fun, pop_source, adjust_rates)
 \item{anos}{numeric vector. Years.}
 
 \item{indi_fun}{character. Function name.}
+
+\item{pop_source}{character. Population source, from {brpop} package.}
+
+\item{adjust_rates}{logical. Adjust rates by age.}
 }
 \description{
 With parallel processing.

@@ -37,6 +37,8 @@ Indicator: Mortalidade por doencas isquemicas do coracao
 }
 \examples{
 # Some examples
+\dontrun{
 indi_0003(agg = "mun_res", ano = 2013)
+}
 
 }
