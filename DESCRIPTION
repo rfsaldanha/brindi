@@ -31,7 +31,6 @@ Imports:
     RSQLite,
     progress,
     stringr,
-    httr2,
     RPostgres,
     arrow,
     tidyrates

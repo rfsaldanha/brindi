@@ -32,7 +32,7 @@ indi_0010 <- function(
   }
 
   # Creates numerator
-  numerador <- .brindi_get_sim(
+  numerador <- rpcdas::get_sim(
     agg = agg,
     agg_time = agg_time,
     ano = ano,
@@ -42,7 +42,7 @@ indi_0010 <- function(
   )
 
   # Creates denominator
-  denominador <- .brindi_get_sinasc(
+  denominador <- rpcdas::get_sinasc(
     agg = agg,
     agg_time = agg_time,
     ano = ano,

@@ -1,5 +1,5 @@
 test_that("PCDaS SIM helper returns data", {
-  res <- .brindi_get_sim(
+  res <- rpcdas::get_sim(
     agg = "uf_res",
     agg_time = "year",
     ano = 2013,
@@ -11,7 +11,7 @@ test_that("PCDaS SIM helper returns data", {
 })
 
 test_that("PCDaS SIH helper returns data", {
-  res <- .brindi_get_sih(
+  res <- rpcdas::get_sih(
     agg = "uf_res",
     agg_time = "year",
     ano = 2013,

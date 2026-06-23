@@ -34,7 +34,7 @@ indi_0047 <- function(
 
   if (adjust_rates == FALSE) {
     # Creates numerator
-    numerador <- .brindi_get_sih(
+    numerador <- rpcdas::get_sih(
       agg = agg,
       agg_time = agg_time,
       ano = ano,
@@ -67,7 +67,7 @@ indi_0047 <- function(
     # Creates numerator
     numerador <- furrr::future_pmap(
       .l = age_groups,
-      .f = .brindi_get_sih,
+      .f = rpcdas::get_sih,
       agg = agg,
       agg_time = agg_time,
       ano = ano,
