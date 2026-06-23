@@ -37,6 +37,8 @@ Indicator: Taxa de internação por tripanossomíase
 }
 \examples{
 # Some examples
+\dontrun{
 indi_0034(agg = "mun_res", ano = 2013)
 
+}
 }

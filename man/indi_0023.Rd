@@ -37,6 +37,8 @@ Indicator: Taxa de mortalidade por exposição as forças da natureza
 }
 \examples{
 # Some examples
+\dontrun{
 indi_0023(agg = "mun_res", ano = 2013)
 
+}
 }

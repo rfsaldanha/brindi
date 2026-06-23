@@ -37,6 +37,8 @@ Indicator: Taxa de internação por asma (todas especificações)
 }
 \examples{
 # Some examples
+\dontrun{
 indi_0038(agg = "mun_res", ano = 2013)
 
+}
 }

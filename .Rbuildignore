@@ -7,3 +7,5 @@
 ^pkgdown$
 ^\.github$
 ^vignettes/articles$
+^inst/extdata/livro_verde_02_04_2026_web_02_04_2026\.pdf$
+^inst/extdata/Matriz-de-indicadores\.pdf$

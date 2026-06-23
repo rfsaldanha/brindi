@@ -37,6 +37,8 @@ Indicator: Taxa de mortalidade por leptospirose
 }
 \examples{
 # Some examples
+\dontrun{
 indi_0033(agg = "mun_res", ano = 2013)
 
+}
 }

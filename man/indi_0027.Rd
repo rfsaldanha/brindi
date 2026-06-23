@@ -37,6 +37,8 @@ Indicator: Taxa de internação por quedas
 }
 \examples{
 # Some examples
+\dontrun{
 indi_0027(agg = "mun_res", ano = 2013)
 
+}
 }

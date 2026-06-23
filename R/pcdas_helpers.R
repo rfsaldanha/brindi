@@ -62,7 +62,7 @@
       regsaude_449_res = "res_codigo_adotado",
       regsaude_449_ocor = "ocor_codigo_adotado"
     )
-  } else {
+  } else if (source == "sinasc") {
     switch(
       agg,
       uf_res = "res_CODIGO_UF",
@@ -73,6 +73,18 @@
       regsaude_ocor = "nasc_RSAUDCOD",
       regsaude_449_res = "res_codigo_adotado",
       regsaude_449_ocor = "nasc_codigo_adotado"
+    )
+  } else if (source == "sih") {
+    switch(
+      agg,
+      uf_res = "res_CODIGO_UF",
+      uf_ocor = "int_CODIGO_UF",
+      mun_res = "res_codigo_adotado",
+      mun_ocor = "int_codigo_adotado",
+      regsaude_res = "res_RSAUDCOD",
+      regsaude_ocor = "int_RSAUDCOD",
+      regsaude_449_res = "res_codigo_adotado",
+      regsaude_449_ocor = "int_codigo_adotado"
     )
   }
 }
@@ -185,6 +197,79 @@
 
   if (!is.null(sexo)) {
     sql_where <- glue::glue(sql_where, "AND def_sexo = '{sexo}'", .sep = " ")
+  }
+  if (!is.null(more_filters)) {
+    sql_where <- glue::glue(sql_where, "AND {more_filters}", .sep = " ")
+  }
+
+  sql_query <- glue::glue(sql_select, sql_from, sql_where, sql_group_by, .sep = " ")
+  request_body <- list(
+    token = list(token = pcdas_token),
+    sql = list(sql = list(query = sql_query, fetch_size = fetch_size))
+  )
+  content <- .brindi_pcdas_query_request(request_body, pcdas_token)
+
+  if (length(content) == 0) {
+    content_df <- tibble::tibble(agg = as.numeric(), agg_time = as.character(), freq = as.numeric())
+  } else {
+    content_df <- .brindi_convert_list_content_to_df(content) %>%
+      tibble::as_tibble() %>%
+      dplyr::mutate(agg = as.numeric(.data$agg), freq = as.numeric(.data$freq)) %>%
+      dplyr::select("agg", "agg_time", "freq")
+  }
+
+  if (agg %in% c("regsaude_449_res", "regsaude_449_ocor")) {
+    content_df <- dplyr::left_join(
+      content_df,
+      rpcdas::mun_reg_saude_449,
+      by = c(agg = "cod_mun")
+    ) %>%
+      dplyr::group_by(agg = .data$cod_reg_saude, .data$agg_time) %>%
+      dplyr::summarise(freq = sum(.data$freq, na.rm = TRUE), .groups = "drop")
+  }
+
+  content_df
+}
+
+.brindi_get_sih <- function(agg, agg_time = "year", ano, pcdas_token = NULL,
+                            sexo = NULL, idade_a = NULL, idade_b = NULL,
+                            more_filters = NULL, fetch_size = 65000) {
+  if (is.null(pcdas_token)) {
+    pcdas_token <- rpcdas::get_pcdas_token_renviron()
+  }
+
+  agg_geo <- .brindi_pcdas_agg_geo(agg, "sih")
+  sql_select <- glue::glue("SELECT {agg_geo} AS agg, COUNT(1) AS freq")
+  sql_from <- 'FROM "datasus-sih"'
+  sql_where <- glue::glue("WHERE ano_internacao IN ({glue::glue_collapse(ano, sep = ', ')})")
+  sql_group_by <- glue::glue("GROUP BY {agg_geo}")
+
+  if (agg_time == "year") {
+    sql_select <- glue::glue(sql_select, ", DATETIME_FORMAT(dt_inter, 'yyyy') AS agg_time")
+    sql_group_by <- glue::glue(sql_group_by, ", agg_time")
+  } else if (agg_time == "month") {
+    sql_select <- glue::glue(sql_select, ", DATETIME_FORMAT(dt_inter, 'yyyy-MM') AS agg_time")
+    sql_group_by <- glue::glue(sql_group_by, ", agg_time")
+  } else if (agg_time == "week") {
+    sql_select <- glue::glue(sql_select, ", DATETIME_FORMAT(dt_inter, 'yyyy-ww') AS agg_time")
+    sql_group_by <- glue::glue(sql_group_by, ", agg_time")
+  }
+
+  if (!is.null(sexo)) {
+    sql_where <- glue::glue(sql_where, "AND def_sexo = '{sexo}'", .sep = " ")
+  }
+  if (!is.null(idade_a) && is.null(idade_b)) {
+    sql_where <- glue::glue(sql_where, "AND def_idade_anos <= '{idade_a}'", .sep = " ")
+  }
+  if (!is.null(idade_b) && is.null(idade_a)) {
+    sql_where <- glue::glue(sql_where, "AND def_idade_anos >= '{idade_b}'", .sep = " ")
+  }
+  if (!is.null(idade_a) && !is.null(idade_b)) {
+    sql_where <- glue::glue(
+      sql_where,
+      "AND def_idade_anos >= '{idade_a}' AND def_idade_anos <= '{idade_b}'",
+      .sep = " "
+    )
   }
   if (!is.null(more_filters)) {
     sql_where <- glue::glue(sql_where, "AND {more_filters}", .sep = " ")

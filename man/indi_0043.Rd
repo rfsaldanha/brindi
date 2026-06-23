@@ -37,6 +37,8 @@ Indicator: Taxa de mortalidade por pneumonia (todas especificações)
 }
 \examples{
 # Some examples
+\dontrun{
 indi_0043(agg = "mun_res", ano = 2013)
 
+}
 }

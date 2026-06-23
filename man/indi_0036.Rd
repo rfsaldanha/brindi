@@ -37,6 +37,8 @@ Indicator:  Taxa de mortalidade por leishmaniose visceral
 }
 \examples{
 # Some examples
+\dontrun{
 indi_0036(agg = "mun_res", ano = 2013)
 
+}
 }

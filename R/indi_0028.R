@@ -11,7 +11,9 @@
 #'
 #' @examples
 #' # Some examples
+#' \dontrun{
 #' indi_0028(agg = "mun_res", ano = 2013)
+#' }
 #'
 #' @importFrom rlang .data
 #' @export
@@ -32,12 +34,12 @@ indi_0028 <- function(
 
   if (adjust_rates == FALSE) {
     # Creates numerator
-    numerador <- rpcdas::get_sih(
+    numerador <- .brindi_get_sih(
       agg = agg,
       agg_time = agg_time,
       ano = ano,
       pcdas_token = pcdas_token,
-      cid_like = "A00"
+      more_filters = "DIAG_PRINC LIKE 'A00%'"
     )
 
     # Creates denominator
@@ -59,17 +61,18 @@ indi_0028 <- function(
     )
   } else if (adjust_rates == TRUE) {
     # Prepate multission environment
-    oplan <- future::plan(future::multisession)
+    oplan <- future::plan(future::sequential)
     on.exit(future::plan(oplan))
 
     # Creates numerator
     numerador <- furrr::future_pmap(
       .l = age_groups,
-      .f = rpcdas::get_sih,
+      .f = .brindi_get_sih,
       agg = agg,
       agg_time = agg_time,
       ano = ano,
-      cid_like = "A00"
+      pcdas_token = pcdas_token,
+      more_filters = "DIAG_PRINC LIKE 'A00%'"
     )
 
     # Age adjusted indicator computation

@@ -37,6 +37,8 @@ Indicator: Taxa de mortalidade por hepatite A
 }
 \examples{
 # Some examples
+\dontrun{
 indi_0031(agg = "mun_res", ano = 2013)
 
+}
 }

@@ -37,6 +37,8 @@ Indicator: Taxa de mortalidade por Doença Pulmonar Obstrutiva (DPOC)
 }
 \examples{
 # Some examples
+\dontrun{
 indi_0045(agg = "mun_res", ano = 2013)
 
+}
 }

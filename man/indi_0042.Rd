@@ -37,6 +37,8 @@ Indicator: Taxa de internação por pneumonia (todas especificações)
 }
 \examples{
 # Some examples
+\dontrun{
 indi_0042(agg = "mun_res", ano = 2013)
 
+}
 }

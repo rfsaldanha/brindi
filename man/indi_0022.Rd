@@ -37,6 +37,8 @@ Indicator:  Taxa de mortalidade por cólera
 }
 \examples{
 # Some examples
+\dontrun{
 indi_0022(agg = "mun_res", ano = 2020)
 
+}
 }

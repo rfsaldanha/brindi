@@ -1,3 +1,8 @@
+testthat::skip_if_not(
+  identical(Sys.getenv("BRINDI_RUN_PCDAS_INTEGRATION_TESTS"), "true"),
+  "PCDaS integration tests require BRINDI_RUN_PCDAS_INTEGRATION_TESTS=true"
+)
+
 # mun res
 
 test_that("indi_0022 works with mun res", {

@@ -37,6 +37,8 @@ Indicator: Taxa de mortalidade por bronquite (todas especificações)
 }
 \examples{
 # Some examples
+\dontrun{
 indi_0041(agg = "mun_res", ano = 2013)
 
+}
 }
