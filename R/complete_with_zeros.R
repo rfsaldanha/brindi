@@ -13,18 +13,18 @@ complete_with_zeros <- function(res, agg, agg_time, ano, pop_source) {
   # Spatial aggregation reference table of cods
   if (agg %in% c("mun_res", "mun_ocor")) {
     cod_full <- brpop::mun_pop_totals(source = pop_source) %>%
-      dplyr::select(cod = .data$code_muni) %>%
+      dplyr::select(cod = "code_muni") %>%
       dplyr::mutate(cod = as.numeric(substr(.data$cod, 0, 6))) %>%
       dplyr::distinct()
   } else if (agg %in% c("uf_res", "uf_ocor")) {
     cod_full <- brpop::uf_pop_totals(source = pop_source) %>%
-      dplyr::select(cod = .data$uf) %>%
+      dplyr::select(cod = "uf") %>%
       dplyr::filter(cod != "5e") %>%
       dplyr::mutate(cod = as.numeric(.data$cod)) %>%
       dplyr::distinct()
   } else if (agg %in% c("regsaude_res", "regsaude_ocor")) {
     cod_full <- brpop::regsaude_pop_totals(source = pop_source) %>%
-      dplyr::select(cod = .data$codi_reg_saude) %>%
+      dplyr::select(cod = "codi_reg_saude") %>%
       dplyr::mutate(cod = as.numeric(.data$cod)) %>%
       dplyr::distinct()
   } else if (agg %in% c("regsaude_449_res", "regsaude_449_ocor")) {
@@ -32,7 +32,7 @@ complete_with_zeros <- function(res, agg, agg_time, ano, pop_source) {
       type = "reg_saude_449",
       source = pop_source
     ) %>%
-      dplyr::select(cod = .data$codi_reg_saude) %>%
+      dplyr::select(cod = "codi_reg_saude") %>%
       dplyr::mutate(cod = as.numeric(.data$cod)) %>%
       dplyr::distinct()
   }

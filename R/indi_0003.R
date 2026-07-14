@@ -11,8 +11,9 @@
 #'
 #' @examples
 #' # Some examples
+#' \dontrun{
 #' indi_0003(agg = "mun_res", ano = 2013)
-#'
+#' }
 #' @importFrom rlang .data
 #' @export
 indi_0003 <- function(
@@ -29,9 +30,6 @@ indi_0003 <- function(
   if (is.null(pcdas_token)) {
     pcdas_token <- rpcdas::get_pcdas_token_renviron()
   }
-
-  filter_query <- "LEFT(CAUSABAS, 3) IN ('I20', 'I21', 'I22', 'I23', 'I24', 'I25')"
-
   if (adjust_rates == FALSE) {
     # Creates numerator
     numerador <- rpcdas::get_sim(
@@ -39,7 +37,7 @@ indi_0003 <- function(
       agg_time = agg_time,
       ano = ano,
       pcdas_token = pcdas_token,
-      more_filters = filter_query
+      cid_in = rpcdas::cid_seq("I20", "I25")
     )
 
     # Creates denominator
@@ -71,7 +69,8 @@ indi_0003 <- function(
       agg = agg,
       agg_time = agg_time,
       ano = ano,
-      more_filters = filter_query
+      pcdas_token = pcdas_token,
+      cid_in = rpcdas::cid_seq("I20", "I25")
     )
 
     # Age adjusted indicator computation

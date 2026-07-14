@@ -11,7 +11,9 @@
 #'
 #' @examples
 #' # Some examples
+#' \dontrun{
 #' indi_0032(agg = "mun_res", ano = 2013)
+#' }
 #'
 #' @importFrom rlang .data
 #' @export
@@ -35,7 +37,7 @@ indi_0032 <- function(
     sep = ", "
   )
 
-  filter_query <- glue::glue("LEFT(CAUSABAS, 3) IN ({Q1})"
+  filter_query <- glue::glue("LEFT(DIAG_PRINC, 3) IN ({Q1})"
   )
 
   if (adjust_rates == FALSE) {
@@ -67,7 +69,7 @@ indi_0032 <- function(
     )
   } else if (adjust_rates == TRUE) {
     # Prepate multission environment
-    oplan <- future::plan(future::multisession)
+    oplan <- future::plan(future::sequential)
     on.exit(future::plan(oplan))
 
     # Creates numerator
@@ -77,6 +79,7 @@ indi_0032 <- function(
       agg = agg,
       agg_time = agg_time,
       ano = ano,
+      pcdas_token = pcdas_token,
       more_filters = filter_query
     )
 

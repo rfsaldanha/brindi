@@ -1,4 +1,4 @@
-#' Indicator:  Taxa de internação por cólera
+#' Indicator:  Taxa de internação hospitalar por cólera
 #'
 #' @param agg character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saude of occurence. \code{regsaude_449_res} for regiao de saude (449 units) of residence. \code{regsaude_449_ocor} for regiao de saude (449 units) of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.
 #' @param agg_time character. Time aggregation level. \code{year} for yearly data. \code{month} for monthly data. \code{week} for weekly data. Defaults to \code{year}.
@@ -11,7 +11,9 @@
 #'
 #' @examples
 #' # Some examples
+#' \dontrun{
 #' indi_0028(agg = "mun_res", ano = 2013)
+#' }
 #'
 #' @importFrom rlang .data
 #' @export
@@ -37,7 +39,7 @@ indi_0028 <- function(
       agg_time = agg_time,
       ano = ano,
       pcdas_token = pcdas_token,
-      cid_like = "A00"
+      more_filters = "DIAG_PRINC LIKE 'A00%'"
     )
 
     # Creates denominator
@@ -59,7 +61,7 @@ indi_0028 <- function(
     )
   } else if (adjust_rates == TRUE) {
     # Prepate multission environment
-    oplan <- future::plan(future::multisession)
+    oplan <- future::plan(future::sequential)
     on.exit(future::plan(oplan))
 
     # Creates numerator
@@ -69,7 +71,8 @@ indi_0028 <- function(
       agg = agg,
       agg_time = agg_time,
       ano = ano,
-      cid_like = "A00"
+      pcdas_token = pcdas_token,
+      more_filters = "DIAG_PRINC LIKE 'A00%'"
     )
 
     # Age adjusted indicator computation

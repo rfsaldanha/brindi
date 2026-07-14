@@ -1,4 +1,4 @@
-#' Indicator: Taxa de mortalidade por neoplasia maligna da mama
+#' Indicator: Taxa de mortalidade por neoplasia de mama feminina
 #'
 #' @param agg character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saude of occurence. \code{regsaude_449_res} for regiao de saude (449 units) of residence. \code{regsaude_449_ocor} for regiao de saude (449 units) of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.
 #' @param agg_time character. Time aggregation level. \code{year} for yearly data. \code{month} for monthly data. \code{week} for weekly data. Defaults to \code{year}.
@@ -11,8 +11,9 @@
 #'
 #' @examples
 #' # Some examples
+#' \dontrun{
 #' indi_0006(agg = "mun_res", ano = 2013)
-#'
+#' }
 #' @importFrom rlang .data
 #' @export
 indi_0006 <- function(
@@ -73,6 +74,7 @@ indi_0006 <- function(
       agg = agg,
       agg_time = agg_time,
       ano = ano,
+      pcdas_token = pcdas_token,
       cid_like = "C50"
     )
 

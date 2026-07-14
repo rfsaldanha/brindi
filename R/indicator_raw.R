@@ -74,12 +74,12 @@ indicator_raw <- function(
     dplyr::mutate(name = nome) %>%
     dplyr::rename(cod = agg) %>%
     dplyr::mutate(agg = agg) %>%
-    dplyr::relocate(.data$agg, .before = .data$cod) %>%
-    dplyr::relocate(.data$value, .after = .data$name)
+    dplyr::relocate("agg", .before = "cod") %>%
+    dplyr::relocate("value", .after = "name")
 
   # Select fields
   res <- res %>%
-    dplyr::select(.data$name, .data$cod, date = .data$agg_time, .data$value)
+    dplyr::select("name", "cod", date = "agg_time", "value")
 
   # Complete with zeros
   res <- complete_with_zeros(
