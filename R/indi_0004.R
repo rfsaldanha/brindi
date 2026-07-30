@@ -7,29 +7,51 @@
 #' @param decimals integer. Number of decimals for indicator.
 #' @param pop_source character. Population source, from {brpop} package.
 #' @param adjust_rates logical. Adjust rates by age.
-#' @param pcdas_token character. PCDaS API token. If not provided, the function will look for it on renvirom.
+#' @param pcdas_token character. PCDaS API token. If not provided, the function will look for it on renviron.
 #'
 #' @examples
 #' # Some examples
 #' \dontrun{
 #' indi_0004(agg = "mun_res", ano = 2013)
 #' }
+#'
 #' @importFrom rlang .data
 #' @export
 indi_0004 <- function(
-  agg,
-  agg_time = "year",
-  ano,
-  multi = 100000,
-  decimals = 2,
-  pop_source = "datasus",
-  pcdas_token = NULL,
-  adjust_rates = FALSE
+    agg,
+    agg_time = "year",
+    ano,
+    multi = 100000,
+    decimals = 2,
+    pop_source = "datasus",
+    pcdas_token = NULL,
+    adjust_rates = FALSE
 ) {
   # Try to get PCDaS API token from renviron if not provided
   if (is.null(pcdas_token)) {
     pcdas_token <- rpcdas::get_pcdas_token_renviron()
   }
+  
+  cid_traffic_injury <- c(
+    # Pedestrian
+    rpcdas::cid_seq("V01", "V09"),
+    
+    # Cyclist
+    rpcdas::cid_seq("V10", "V19"),
+    
+    # Motorcyclist and occupant of three-wheeled motor vehicle
+    rpcdas::cid_seq("V20", "V39"),
+    
+    # Occupant of car, heavy transport vehicle and bus
+    rpcdas::cid_seq("V40", "V79"),
+    
+    # Occupant of other vehicles
+    rpcdas::cid_seq("V80", "V86"),
+    
+    # Occupant of unspecified vehicle
+    rpcdas::cid_seq("V87", "V89")
+  )
+  
   if (adjust_rates == FALSE) {
     # Creates numerator
     numerador <- rpcdas::get_sim(
@@ -37,12 +59,12 @@ indi_0004 <- function(
       agg_time = agg_time,
       ano = ano,
       pcdas_token = pcdas_token,
-      cid_in = rpcdas::cid_seq("V01", "V89")
+      cid_in = cid_traffic_injury
     )
-
+    
     # Creates denominator
     denominador <- denominator_pop(agg = agg, pop_source = pop_source)
-
+    
     # Perform indicator calculus
     res <- indicator_raw(
       numerador = numerador,
@@ -58,10 +80,10 @@ indi_0004 <- function(
       decimals = decimals
     )
   } else if (adjust_rates == TRUE) {
-    # Prepate multission environment
+    # Prepare multisession environment
     oplan <- future::plan(future::multisession)
     on.exit(future::plan(oplan))
-
+    
     # Creates numerator
     numerador <- furrr::future_pmap(
       .l = age_groups,
@@ -70,9 +92,9 @@ indi_0004 <- function(
       agg_time = agg_time,
       ano = ano,
       pcdas_token = pcdas_token,
-      cid_in = rpcdas::cid_seq("V01", "V89")
+      cid_in = cid_traffic_injury
     )
-
+    
     # Age adjusted indicator computation
     res <- indicator_adjusted(
       numerador = numerador,
@@ -86,6 +108,6 @@ indi_0004 <- function(
       sex = "all"
     )
   }
-
+  
   return(res)
 }

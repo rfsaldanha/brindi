@@ -1,6 +1,6 @@
-#' Indicator: Taxa de mortalidade por causas acidentais
+#' Indicator: Taxa de mortalidade por agressão
 #'
-#' @param agg character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saude of occurence. \code{regsaude_449_res} for regiao de saude (449 units) of residence. \code{regsaude_449_ocor} for regiao de saude (449 units) of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.
+#' @param agg character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for health region of residence. \code{regsaude_ocor} for health region of occurrence. \code{regsaude_449_res} for health region (449 units) of residence. \code{regsaude_449_ocor} for health region (449 units) of occurrence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of occurrence.
 #' @param agg_time character. Time aggregation level. \code{year} for yearly data. \code{month} for monthly data. \code{week} for weekly data. Defaults to \code{year}.
 #' @param ano numeric. Year of death.
 #' @param multi integer. Multiplicator for indicator.
@@ -12,12 +12,12 @@
 #' @examples
 #' # Some examples
 #' \dontrun{
-#' indi_0050(agg = "mun_res", ano = 2013)
+#' indi_0049(agg = "mun_res", ano = 2013)
 #' }
 #'
 #' @importFrom rlang .data
 #' @export
-indi_0050 <- function(
+indi_0049 <- function(
     agg,
     agg_time = "year",
     ano,
@@ -32,36 +32,6 @@ indi_0050 <- function(
     pcdas_token <- rpcdas::get_pcdas_token_renviron()
   }
   
-  cid_accidental_causes <- c(
-    # Falls
-    rpcdas::cid_seq("W00", "W19"),
-    
-    # Accidental firearm discharge
-    rpcdas::cid_seq("W32", "W34"),
-    
-    # Accidental drowning and submersion
-    rpcdas::cid_seq("W65", "W74"),
-    
-    # Other accidental threats to breathing
-    rpcdas::cid_seq("W75", "W84"),
-    
-    # Exposure to smoke, fire and flames / burns
-    rpcdas::cid_seq("X00", "X19"),
-    
-    # Contact with venomous animals and plants
-    rpcdas::cid_seq("X20", "X29"),
-    
-    # Accidental poisoning by and exposure to noxious substances
-    rpcdas::cid_seq("X40", "X49"),
-    
-    # Other accidental causes
-    rpcdas::cid_seq("W20", "W31"),
-    rpcdas::cid_seq("W35", "W64"),
-    rpcdas::cid_seq("W85", "W99"),
-    rpcdas::cid_seq("X30", "X39"),
-    rpcdas::cid_seq("X50", "X59")
-  )
-  
   if (adjust_rates == FALSE) {
     # Creates numerator
     numerador <- rpcdas::get_sim(
@@ -69,19 +39,42 @@ indi_0050 <- function(
       agg_time = agg_time,
       ano = ano,
       pcdas_token = pcdas_token,
-      cid_in = cid_accidental_causes
+      cid_in = c(
+        # Firearm assault
+        rpcdas::cid_seq("X93", "X95"),
+        
+        # Sharp object, cutting/piercing/blunt object assault
+        "X99",
+        "Y00",
+        
+        # Assault by strangulation
+        "X91",
+        
+        # Assault by bodily force
+        "Y04",
+        
+        # Other specified means
+        rpcdas::cid_seq("X85", "X90"),
+        "X92",
+        rpcdas::cid_seq("X96", "X98"),
+        rpcdas::cid_seq("Y01", "Y03"),
+        rpcdas::cid_seq("Y05", "Y08"),
+        
+        # Unspecified means
+        "Y09"
+      )
     )
     
     # Creates denominator
     denominador <- denominator_pop(agg = agg, pop_source = pop_source)
     
-    # Perform indicator calculus
+    # Performs indicator calculation
     res <- indicator_raw(
       numerador = numerador,
       denominador = denominador,
       denominador_type = "pop",
       treat_inf_values = TRUE,
-      nome = "indi_0050",
+      nome = "indi_0049",
       ano = ano,
       agg = agg,
       agg_time = agg_time,
@@ -102,17 +95,40 @@ indi_0050 <- function(
       agg_time = agg_time,
       ano = ano,
       pcdas_token = pcdas_token,
-      cid_in = cid_accidental_causes
+      cid_in = c(
+        # Firearm assault
+        rpcdas::cid_seq("X93", "X95"),
+        
+        # Sharp object, cutting/piercing/blunt object assault
+        "X99",
+        "Y00",
+        
+        # Assault by strangulation
+        "X91",
+        
+        # Assault by bodily force
+        "Y04",
+        
+        # Other specified means
+        rpcdas::cid_seq("X85", "X90"),
+        "X92",
+        rpcdas::cid_seq("X96", "X98"),
+        rpcdas::cid_seq("Y01", "Y03"),
+        rpcdas::cid_seq("Y05", "Y08"),
+        
+        # Unspecified means
+        "Y09"
+      )
     )
     
-    # Age adjusted indicator computation
+    # Age-adjusted indicator computation
     res <- indicator_adjusted(
       numerador = numerador,
       ano = ano,
       agg = agg,
       agg_time = agg_time,
       pop_source = pop_source,
-      nome = "indi_0050",
+      nome = "indi_0049",
       multi = multi,
       decimals = decimals,
       sex = "all"

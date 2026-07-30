@@ -1,4 +1,4 @@
-#' Indicator:  Taxa de mortalidade por acidente vascular cerebral (AVC)
+#' Indicator: Taxa de mortalidade por doenças cerebrovasculares
 #'
 #' @param agg character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saude of occurence. \code{regsaude_449_res} for regiao de saude (449 units) of residence. \code{regsaude_449_ocor} for regiao de saude (449 units) of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.
 #' @param agg_time character. Time aggregation level. \code{year} for yearly data. \code{month} for monthly data. \code{week} for weekly data. Defaults to \code{year}.
@@ -7,30 +7,33 @@
 #' @param decimals integer. Number of decimals for indicator.
 #' @param pop_source character. Population source, from {brpop} package.
 #' @param adjust_rates logical. Adjust rates by age.
-#' @param pcdas_token character. PCDaS API token. If not provided, the function will look for it on renvirom.
+#' @param pcdas_token character. PCDaS API token. If not provided, the function will look for it on renviron.
 #'
 #' @examples
 #' # Some examples
 #' \dontrun{
-#' indi_0002(agg = "mun_res", ano = 2013)
+#' indi_0013(agg = "mun_res", ano = 2013)
 #' }
+#'
 #' @importFrom rlang .data
 #' @export
-indi_0002 <- function(
-  agg,
-  agg_time = "year",
-  ano,
-  multi = 100000,
-  decimals = 2,
-  pop_source = "datasus",
-  pcdas_token = NULL,
-  adjust_rates = FALSE
+indi_0013 <- function(
+    agg,
+    agg_time = "year",
+    ano,
+    multi = 100000,
+    decimals = 2,
+    pop_source = "datasus",
+    pcdas_token = NULL,
+    adjust_rates = FALSE
 ) {
   # Try to get PCDaS API token from renviron if not provided
   if (is.null(pcdas_token)) {
     pcdas_token <- rpcdas::get_pcdas_token_renviron()
   }
-
+  
+  cid_cerebrovascular <- rpcdas::cid_seq("I60", "I69")
+  
   if (adjust_rates == FALSE) {
     # Creates numerator
     numerador <- rpcdas::get_sim(
@@ -38,13 +41,13 @@ indi_0002 <- function(
       agg_time = agg_time,
       ano = ano,
       pcdas_token = pcdas_token,
-      cid_like = "I6"
+      cid_in = cid_cerebrovascular
     )
-
+    
     # Creates denominator
     denominador <- denominator_pop(agg = agg, pop_source = pop_source)
-
-    # Perform indicator computation
+    
+    # Perform indicator calculus
     res <- indicator_raw(
       numerador = numerador,
       denominador = denominador,
@@ -59,10 +62,10 @@ indi_0002 <- function(
       decimals = decimals
     )
   } else if (adjust_rates == TRUE) {
-    # Prepate multission environment
+    # Prepare multisession environment
     oplan <- future::plan(future::multisession)
     on.exit(future::plan(oplan))
-
+    
     # Creates numerator
     numerador <- furrr::future_pmap(
       .l = age_groups,
@@ -70,9 +73,10 @@ indi_0002 <- function(
       agg = agg,
       agg_time = agg_time,
       ano = ano,
-      cid_like = "I6"
+      pcdas_token = pcdas_token,
+      cid_in = cid_cerebrovascular
     )
-
+    
     # Age adjusted indicator computation
     res <- indicator_adjusted(
       numerador = numerador,
@@ -86,6 +90,6 @@ indi_0002 <- function(
       sex = "all"
     )
   }
-
+  
   return(res)
 }
