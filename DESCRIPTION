@@ -33,7 +33,8 @@ Imports:
     stringr,
     RPostgres,
     arrow,
-    tidyrates
+    tidyrates,
+    sidrar
 Remotes:
     rfsaldanha/brpop,
     rfsaldanha/rpcdas,
