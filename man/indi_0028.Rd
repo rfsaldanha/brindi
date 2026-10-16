@@ -37,8 +37,6 @@ Indicator:  Taxa de internação por cólera
 }
 \examples{
 # Some examples
-\dontrun{
 indi_0028(agg = "mun_res", ano = 2013)
 
-}
 }

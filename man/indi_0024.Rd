@@ -37,8 +37,6 @@ Indicator: Taxa de mortalidade por esquistossomose
 }
 \examples{
 # Some examples
-\dontrun{
 indi_0024(agg = "mun_res", ano = 2013)
 
-}
 }

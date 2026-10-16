@@ -37,8 +37,6 @@ Indicator: Taxa de internação por hepatite A
 }
 \examples{
 # Some examples
-\dontrun{
 indi_0030(agg = "mun_res", ano = 2013)
 
-}
 }

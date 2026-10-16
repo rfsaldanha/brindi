@@ -37,8 +37,6 @@ Indicator: Taxa de mortalidade por neoplasia maligna da colo de útero
 }
 \examples{
 # Some examples
-\dontrun{
 indi_0007(agg = "mun_res", ano = 2013)
-}
 
 }

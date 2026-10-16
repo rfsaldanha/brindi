@@ -37,8 +37,6 @@ Indicator:  Taxa de mortalidade por acidente vascular cerebral (AVC)
 }
 \examples{
 # Some examples
-\dontrun{
 indi_0002(agg = "mun_res", ano = 2013)
-}
 
 }

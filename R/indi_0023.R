@@ -1,4 +1,4 @@
-#' Indicator: Taxa de mortalidade por causas acidentais
+#' Indicator: Taxa de mortalidade por exposição as forças da natureza
 #'
 #' @param agg character. Spatial aggregation level. \code{uf_res} for UF of residence. \code{uf_ocor} for UF of occurrence. \code{regsaude_res} for regiao de saude of residence. \code{regsaude_ocor} for regiao de saude of occurence. \code{regsaude_449_res} for regiao de saude (449 units) of residence. \code{regsaude_449_ocor} for regiao de saude (449 units) of occurence. \code{mun_res} for municipality of residence. \code{mun_ocor} for municipality of ocurrence.
 #' @param agg_time character. Time aggregation level. \code{year} for yearly data. \code{month} for monthly data. \code{week} for weekly data. Defaults to \code{year}.
@@ -7,61 +7,37 @@
 #' @param decimals integer. Number of decimals for indicator.
 #' @param pop_source character. Population source, from {brpop} package.
 #' @param adjust_rates logical. Adjust rates by age.
-#' @param pcdas_token character. PCDaS API token. If not provided, the function will look for it on renviron.
+#' @param pcdas_token character. PCDaS API token. If not provided, the function will look for it on renvirom.
 #'
 #' @examples
 #' # Some examples
-#' \dontrun{
-#' indi_0050(agg = "mun_res", ano = 2013)
-#' }
+#' indi_0023(agg = "mun_res", ano = 2013)
 #'
 #' @importFrom rlang .data
 #' @export
-indi_0050 <- function(
-    agg,
-    agg_time = "year",
-    ano,
-    multi = 100000,
-    decimals = 2,
-    pop_source = "datasus",
-    pcdas_token = NULL,
-    adjust_rates = FALSE
+indi_0023 <- function(
+  agg,
+  agg_time = "year",
+  ano,
+  multi = 100000,
+  decimals = 2,
+  pop_source = "datasus",
+  pcdas_token = NULL,
+  adjust_rates = FALSE
 ) {
   # Try to get PCDaS API token from renviron if not provided
   if (is.null(pcdas_token)) {
     pcdas_token <- rpcdas::get_pcdas_token_renviron()
   }
-  
-  cid_accidental_causes <- c(
-    # Falls
-    rpcdas::cid_seq("W00", "W19"),
-    
-    # Accidental firearm discharge
-    rpcdas::cid_seq("W32", "W34"),
-    
-    # Accidental drowning and submersion
-    rpcdas::cid_seq("W65", "W74"),
-    
-    # Other accidental threats to breathing
-    rpcdas::cid_seq("W75", "W84"),
-    
-    # Exposure to smoke, fire and flames / burns
-    rpcdas::cid_seq("X00", "X19"),
-    
-    # Contact with venomous animals and plants
-    rpcdas::cid_seq("X20", "X29"),
-    
-    # Accidental poisoning by and exposure to noxious substances
-    rpcdas::cid_seq("X40", "X49"),
-    
-    # Other accidental causes
-    rpcdas::cid_seq("W20", "W31"),
-    rpcdas::cid_seq("W35", "W64"),
-    rpcdas::cid_seq("W85", "W99"),
-    rpcdas::cid_seq("X30", "X39"),
-    rpcdas::cid_seq("X50", "X59")
+
+  Q1 <- glue::glue_collapse(
+    sQuote(rpcdas::cid_seq("X30", "X39"), q = FALSE),
+    sep = ", "
   )
-  
+
+  filter_query <- glue::glue("LEFT(CAUSABAS, 3) IN ({Q1})"
+  )
+
   if (adjust_rates == FALSE) {
     # Creates numerator
     numerador <- rpcdas::get_sim(
@@ -69,19 +45,19 @@ indi_0050 <- function(
       agg_time = agg_time,
       ano = ano,
       pcdas_token = pcdas_token,
-      cid_in = cid_accidental_causes
+      more_filters = filter_query
     )
-    
+
     # Creates denominator
     denominador <- denominator_pop(agg = agg, pop_source = pop_source)
-    
+
     # Perform indicator calculus
     res <- indicator_raw(
       numerador = numerador,
       denominador = denominador,
       denominador_type = "pop",
       treat_inf_values = TRUE,
-      nome = "indi_0050",
+      nome = "indi_0023",
       ano = ano,
       agg = agg,
       agg_time = agg_time,
@@ -90,10 +66,10 @@ indi_0050 <- function(
       decimals = decimals
     )
   } else if (adjust_rates == TRUE) {
-    # Prepare multisession environment
+    # Prepate multission environment
     oplan <- future::plan(future::multisession)
     on.exit(future::plan(oplan))
-    
+
     # Creates numerator
     numerador <- furrr::future_pmap(
       .l = age_groups,
@@ -101,10 +77,9 @@ indi_0050 <- function(
       agg = agg,
       agg_time = agg_time,
       ano = ano,
-      pcdas_token = pcdas_token,
-      cid_in = cid_accidental_causes
+      more_filters = filter_query
     )
-    
+
     # Age adjusted indicator computation
     res <- indicator_adjusted(
       numerador = numerador,
@@ -112,12 +87,13 @@ indi_0050 <- function(
       agg = agg,
       agg_time = agg_time,
       pop_source = pop_source,
-      nome = "indi_0050",
+      nome = "indi_0023",
       multi = multi,
       decimals = decimals,
       sex = "all"
     )
   }
-  
+
   return(res)
 }
+

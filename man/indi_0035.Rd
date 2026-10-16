@@ -37,8 +37,6 @@ Indicator: Taxa de mortalidade por doença de Chagas
 }
 \examples{
 # Some examples
-\dontrun{
 indi_0035(agg = "mun_res", ano = 2013)
 
-}
 }

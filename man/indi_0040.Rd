@@ -37,8 +37,6 @@ Indicator: Taxa de internação hospitalar por bronquite (todas especificações
 }
 \examples{
 # Some examples
-\dontrun{
 indi_0040(agg = "mun_res", ano = 2013)
 
-}
 }

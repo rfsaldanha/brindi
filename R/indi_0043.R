@@ -11,9 +11,7 @@
 #'
 #' @examples
 #' # Some examples
-#' \dontrun{
 #' indi_0043(agg = "mun_res", ano = 2013)
-#' }
 #'
 #' @importFrom rlang .data
 #' @export
@@ -78,7 +76,7 @@ indi_0043 <- function(
     )
   } else if (adjust_rates == TRUE) {
     # Prepate multission environment
-    oplan <- future::plan(future::sequential)
+    oplan <- future::plan(future::multisession)
     on.exit(future::plan(oplan))
     
     # Creates numerator

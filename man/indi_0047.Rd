@@ -37,7 +37,5 @@ Indicator: Taxa de internação por infarto agudo do miocárdio (IAM)
 }
 \examples{
 # Some examples
-\dontrun{
 indi_0047(agg = "mun_res", ano = 2013)
-}
 }

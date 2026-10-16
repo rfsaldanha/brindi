@@ -37,8 +37,6 @@ Indicator: Taxa de incidência de leishmaniose visceral
 }
 \examples{
 # Some examples
-\dontrun{
 indi_0021(agg = "mun_res", ano = 2020)
-}
 
 }

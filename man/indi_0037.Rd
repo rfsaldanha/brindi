@@ -37,8 +37,6 @@ Indicator: Taxa de mortalidade por malária (Sem especificação)
 }
 \examples{
 # Some examples
-\dontrun{
 indi_0037(agg = "mun_res", ano = 2013)
 
-}
 }
