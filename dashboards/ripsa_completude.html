@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Completude BRINDI x RIPSA (Livro Verde)</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="ripsa_completude_files/libs/clipboard/clipboard.min.js"></script>
+<script src="ripsa_completude_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="ripsa_completude_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="ripsa_completude_files/libs/quarto-html/popper.min.js"></script>
+<script src="ripsa_completude_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="ripsa_completude_files/libs/quarto-html/anchor.min.js"></script>
+<link href="ripsa_completude_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="ripsa_completude_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="ripsa_completude_files/libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="ripsa_completude_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="ripsa_completude_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="ripsa_completude_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="ripsa_completude_files/libs/bootstrap/bootstrap-4bacf1d111073711f14e836a00a2e61e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="ripsa_completude_files/libs/bootstrap/bootstrap-dark-4bacf1d111073711f14e836a00a2e61e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="ripsa_completude_files/libs/bootstrap/bootstrap-4bacf1d111073711f14e836a00a2e61e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="ripsa_completude_files/libs/quarto-dashboard/quarto-dashboard.js"></script>
+<script src="ripsa_completude_files/libs/quarto-dashboard/stickythead.js"></script>
+
+
+
+<script src="ripsa_completude_files/libs/quarto-dashboard/web-components.js" type="module"></script>
+<script src="ripsa_completude_files/libs/quarto-dashboard/components.js"></script>
+
+<link href="ripsa_completude_files/libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
+
+<script src="ripsa_completude_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+
+<link href="ripsa_completude_files/libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+
+<script src="ripsa_completude_files/libs/datatables-binding-0.34.0/datatables.js"></script>
+
+<script src="ripsa_completude_files/libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+
+<link href="ripsa_completude_files/libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+
+<link href="ripsa_completude_files/libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+
+<script src="ripsa_completude_files/libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+
+<link href="ripsa_completude_files/libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet">
+
+<script src="ripsa_completude_files/libs/nouislider-7.0.10/jquery.nouislider.min.js"></script>
+
+<link href="ripsa_completude_files/libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet">
+
+<script src="ripsa_completude_files/libs/selectize-0.12.0/selectize.min.js"></script>
+
+<link href="ripsa_completude_files/libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+
+<script src="ripsa_completude_files/libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+
+
+
+</head>
+
+<body class="quarto-dashboard dashboard-fill fullcontent quarto-light">
+
+<header id="quarto-dashboard-header">
+<nav class="navbar navbar-expand-md slim" data-bs-theme="dark">
+  <div class="navbar-container container-fluid">
+    <button class="navbar-toggler hidden" type="button" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-controls="dashboard-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>    
+
+
+    <div class="navbar-brand-container">
+
+
+      <div class="navbar-title">
+        <div class="navbar-title-text"><a href="#">Completude BRINDI x RIPSA (Livro Verde)</a></div>
+        
+        
+      </div>
+    </div>
+</div>
+</nav>
+</header>
+<div class="page-layout-custom quarto-dashboard-content bslib-gap-spacing html-fill-container bslib-page-fill">  
+
+<div class="bslib-grid-item html-fill-item bslib-grid" data-layout="fill" style="display: grid; grid-template-rows: minmax(3em, 20fr) minmax(3em, 45fr) minmax(3em, 35fr) minmax(3em, 35fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr) minmax(3em, 1fr) minmax(3em, 1fr) minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card valuebox cell bslib-card html-fill-container bslib-value-box bg-primary showcase-left-center" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div data-icon="list-ol" class="html-fill-item html-fill-container value-box-grid">
+<div class="value-box-showcase html-fill-item html-fill-container">
+
+<i class="bi bi-list-ol"></i></div>
+<div class="value-box-area">
+<p class="value-box-title">
+Indicadores RIPSA (Livro Verde)
+</p>
+<p class="value-box-value">
+168
+</p>
+</div>
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div><div class="card valuebox cell bslib-card html-fill-container bslib-value-box bg-success showcase-left-center" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div data-icon="check-circle" class="html-fill-item html-fill-container value-box-grid">
+<div class="value-box-showcase html-fill-item html-fill-container">
+
+<i class="bi bi-check-circle"></i></div>
+<div class="value-box-area">
+<p class="value-box-title">
+Confirmados (≥0.55)
+</p>
+<p class="value-box-value">
+22
+</p>
+</div>
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div><div class="card valuebox cell bslib-card html-fill-container bslib-value-box bg-warning showcase-left-center" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div data-icon="question-circle" class="html-fill-item html-fill-container value-box-grid">
+<div class="value-box-showcase html-fill-item html-fill-container">
+
+<i class="bi bi-question-circle"></i></div>
+<div class="value-box-area">
+<p class="value-box-title">
+Sugestivos (0.3-0.55)
+</p>
+<p class="value-box-value">
+0
+</p>
+</div>
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div><div class="card valuebox cell bslib-card html-fill-container bslib-value-box bg-info showcase-left-center" data-bslib-card-init="" data-require-bs-caller="card()">
+<div class="card-body html-fill-item html-fill-container">
+<div data-icon="percent" class="html-fill-item html-fill-container value-box-grid">
+<div class="value-box-showcase html-fill-item html-fill-container">
+
+<i class="bi bi-percent"></i></div>
+<div class="value-box-area">
+<p class="value-box-title">
+Completude geral
+</p>
+<p class="value-box-value">
+13.1%
+</p>
+</div>
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+<div class="bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 55fr) minmax(3em, 45fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="bslib-grid" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell bslib-card html-fill-container" data-title="Completude por dimensão" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-header"><div class="card-title"><span style="display: inline">
+Completude por dimensão
+</span></div></div>
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<img src="ripsa_completude_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-dashboard-img-contain">
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div><div class="bslib-grid" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell bslib-card html-fill-container" data-title="Resumo por dimensão" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-header"><div class="card-title"><span style="display: inline">
+Resumo por dimensão
+</span></div></div>
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 40%">
+<col style="width: 8%">
+<col style="width: 20%">
+<col style="width: 14%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Dimensão</th>
+<th style="text-align: right;">Total</th>
+<th style="text-align: right;">Implementados</th>
+<th style="text-align: right;">Pendentes</th>
+<th style="text-align: right;">% Completo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Socioeconomicos</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">37.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Morbidade</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">23.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Demograficos</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">23.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mortalidade</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">15.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Cobertura</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fatores de risco e protecao</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Recursos</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div>
+<div class="bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 100fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="bslib-grid" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell bslib-card html-fill-container" data-title="Todos os indicadores (verificação manual)" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-header"><div class="card-title"><span style="display: inline">
+Todos os indicadores (verificação manual)
+</span></div></div>
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<div class="datatables html-widget html-fill-item html-fill-container" id="htmlwidget-64e8786107addac634ba" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-64e8786107addac634ba">{"x":{"filter":"top","vertical":false,"filterHTML":"<tr>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none;position: absolute;width: 200px;opacity: 1\">\n      <div data-min=\"0\" data-max=\"1\" data-scale=\"3\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"character\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[["DEM.1.03","DEM.1.04","DEM.3.04","DEM.3.05","SOC.1.01","SOC.1.02","SOC.2.03","SOC.2.04","SOC.2.05","SOC.3.04","MRT.1.01","MRT.1.05","MRT.4.01","MRB.1.08","MRB.1.10","MRB.1.15","MRB.2.08","MRB.2.09","MRB.2.13","MRB.2.15","MRB.2.16","MRB.1.18","MRT.3.01","MRB.1.12","MRB.2.03","MRB.2.04","MRB.2.14","MRB.4.01","FRP.5.02","FRP.5.03","FRP.5.04","MRT.4.04","MRB.1.13","MRB.1.16","FRP.5.05","MRT.5.04","MRB.1.17","MRB.2.12","MRB.2.17","MRT.2.02","MRT.3.02","MRT.5.05","MRT.6.01","MRB.3.01","MRB.1.14","SOC.2.02","SOC.4.01","SOC.4.02","SOC.4.03","MRT.5.01","MRB.1.11","FRP.6.02","REC.2.02","REC.3.02","MRB.4.02","COB.2.03","COB.3.02.1","COB.3.02.2","SOC.5.01","COB.3.01.1","COB.3.01.2","FRP.3.01.1","FRP.3.01.2","FRP.3.03.1","FRP.3.03.2","FRP.6.01","FRP.7.02","FRP.9.02","FRP.5.01.1","FRP.5.01.2","FRP.8.01","FRP.8.02","REC.4.01","REC.4.02","SOC.3.03","FRP.1.01.1","FRP.1.01.2","FRP.1.02.1","FRP.1.02.2","FRP.4.02.1","FRP.4.02.2","MRT.5.06","FRP.3.02.3","FRP.2.03","FRP.3.02.1","FRP.3.02.2","FRP.2.01.1","FRP.2.01.2","FRP.2.02.1","FRP.2.02.2","FRP.4.01.1","FRP.4.01.2","DEM.1.01","DEM.1.02","DEM.1.05","DEM.1.06","DEM.1.07","DEM.2.01","DEM.2.02","DEM.2.03","DEM.3.01","DEM.3.02","DEM.3.03","DEM.4.01","DEM.4.02","SOC.2.01","SOC.3.01","SOC.3.02","SOC.3.05","MRT.1.02","MRT.1.03","MRT.1.04","MRT.2.01","MRT.4.02","MRT.4.03","MRT.5.02","MRT.5.03","MRB.1.01","MRB.1.02","MRB.1.03","MRB.1.04","MRB.1.05","MRB.1.06","MRB.1.07","MRB.1.09","MRB.2.01","MRB.2.02","MRB.2.05","MRB.2.06","MRB.2.07","MRB.2.10","MRB.2.11","FRP.6.03","FRP.7.01","FRP.7.03","FRP.9.01","COB.1.01","COB.1.02","COB.1.03","COB.1.04","COB.1.05","COB.1.06","COB.2.01","COB.2.02","COB.3.03.1","COB.3.03.2","COB.3.04.1","COB.3.04.2","COB.4.01","COB.4.02","COB.4.03","COB.4.04","COB.5.01","COB.5.02","REC.1.01","REC.2.01","REC.2.03","REC.3.01","REC.3.03","REC.3.04","REC.4.03","REC.4.04","REC.4.05","REC.4.06","REC.5.01","REC.5.02","REC.5.03","REC.6.01"],["Taxa de crescimento anual da população","Proporção de menores de 5 anos de idade na população","Esperança de vida ao nascer","Esperança de vida aos 60 anos de idade","Proporção de analfabetismo na população","Proporção da população sem educação básica","Proporção da população ocupada sem contribuição para a previdência social","Proporção de jovens que não estudam e não trabalham","Proporção da população de 5 a 17 anos de idade em situação de trabalho infantil","Razão entre a renda total dos 10% mais ricos e a dos 40% mais pobres","Taxa de mortalidade infantil","Taxa de mortalidade em menores de 5 anos","Taxa de mortalidade por agressão","Incidência de febre amarela","Incidência de cólera","Incidência de leptospirose","Taxa de incidência de leishmaniose tegumentar","Taxa de incidência de leishmaniose visceral","Taxa de incidência de dengue","Taxa de incidência de chikungunya","Taxa de incidência de Zika","Incidência de doença de Chagas aguda","Mortalidade proporcional por causas","Incidência de Zika em gestante","Taxa de incidência de hepatite B","Taxa de incidência de hepatite C","Taxa de incidência de dengue grave","Taxa de internação hospitalar (SUS) por causas externas","Prevalência de excesso de peso em crianças menores de 5 anos de idade","Prevalência de déficit ponderal para a idade em crianças menores de 5 anos de idade","Prevalência de déficit estatural para a idade em crianças menores de 5 anos de idade","Taxa de mortalidade por causas acidentais","Incidência de doença meningocócica","Incidência de febre maculosa","Prevalência de dupla carga da má nutrição em crianças menores de 5 anos de idade","Taxa de mortalidade por doenças cardiovasculares","Incidência de esquistossomose mansoni não grave","Taxa de incidência parasitária anual de malária","Taxa de incidência da síndrome respiratória aguda grave por COVID-19","Mortalidade materna segundo grupos de causas","Proporção de óbitos por causas mal definidas","Taxa de mortalidade por doenças respiratórias crônicas","Taxa de mortalidade específica por doenças infecciosas e parasitárias","Proporção de categoria de exposição de aids","Incidência de meningite não meningocócica","Proporção da população com força de trabalho subutilizada","Proporção da população urbana sem acesso seguro à água","Proporção da população urbana sem instalações sanitárias adequadas","Proporção da população sem coleta direta ou indireta de lixo","Taxa de mortalidade prematura por doenças crônicas não transmissíveis","Incidência de síndrome congênita associada à infecção pelo vírus Zika","Prevalência de aleitamento materno continuado em crianças menores de 2 anos","Distribuição proporcional de leitos hospitalares segundo natureza jurídica","Valor médio de referência por autorização de internação hospitalar","Taxa de internação hospitalar (SUS) por condições sensíveis à atenção primária","Proporção da população que referiu internação hospitalar nos últimos 12 meses (PNS)","Proporção da população do sexo feminino de 25 a 64 anos de idade que referiu nunca ter realizado exame preventivo do câncer do colo do útero (PNS)","Proporção da população do sexo feminino de 25 a 64 anos de idade que referiu nunca ter realizado exame preventivo do câncer do colo do útero (Vigitel)","Proporção da população em situação de insegurança alimentar moderada ou grave","Proporção da população do sexo feminino de 25 a 64 anos de idade que referiu ter realizado exame preventivo do câncer do colo do útero há menos de três anos (PNS)","Proporção da população do sexo feminino de 25 a 64 anos de idade que referiu ter realizado exame preventivo do câncer do colo do útero há menos de três anos (Vigitel)","Prevalência de fumantes atuais com 18 anos ou mais de idade (Vigitel)","Prevalência de fumantes atuais com 18 anos ou mais de idade (PNS)","Prevalência de ex-fumantes com 18 anos ou mais de idade (Vigitel)","Prevalência de ex-fumantes com 18 anos ou mais de idade (PNS)","Prevalência de aleitamento materno exclusivo durante os 6 primeiros meses de vida","Proporção de nascidos vivos com baixo peso ao nascer por idade gestacional no momento do parto","Proporção de criança de 5 a 6 anos de idade livres de cárie (índice ceo-d igual a 0)","Prevalência de excesso de peso em indivíduos com 18 anos ou mais de idade (Vigitel)","Prevalência de excesso de peso em indivíduos com 18 anos ou mais de idade (PNS)","Prevalência de violências contra mulheres com 18 anos ou mais de idade (PNS)","Prevalência de violência sexual contra meninas de 13 a 17 anos de idade (PeNSE)","Despesa com saúde autorreferida como proporção da renda familiar","Despesa com saúde estimada como proporção da renda familiar","Coeficiente de Gini da distribuição da renda domiciliar per capita","Prevalência de diabetes mellitus autorreferida em indivíduos com 18 anos ou mais de idade (Vigitel)","Prevalência de diabetes mellitus autorreferida em indivíduos com 18 anos ou mais de idade (PNS)","Prevalência de hipertensão arterial autorreferida em indivíduos com 18 anos ou mais de idade (Vigitel)","Prevalência de hipertensão arterial autorreferida em indivíduos com 18 anos ou mais de idade (PNS)","Prevalência de atividade física insuficiente em indivíduos com 18 anos ou mais de idade (Vigitel)","Prevalência de atividade física insuficiente em indivíduos com 18 anos ou mais de idade (PNS)","Probabilidade de morte prematura por doenças cardiovasculares, neoplasias malignas, diabetes mellitus e doenças respiratórias crônicas","Prevalência de uso atual de dispositivos eletrônicos para fumar em escolares de 13 a 17 anos de idade (PeNSE)","Consumo de álcool em litros de álcool puro per capita (entre pessoas com 15 anos ou mais de idade) por ano","Prevalência de uso atual de dispositivos eletrônicos para fumar em indivíduos com 18 anos ou mais de idade (Vigitel)","Prevalência de uso atual de dispositivos eletrônicos para fumar em indivíduos com 18 anos ou mais de idade (PNS)","Prevalência de consumo episódico pesado de bebidas alcoólicas referido por indivíduos com 18 anos ou mais de idade (Vigitel)","Prevalência de consumo episódico pesado de bebidas alcoólicas referido por indivíduos com 18 anos ou mais de idade (PNS)","Prevalência de indivíduos com 18 anos ou mais de idade dirigindo veículos motorizados após consumo de bebidas alcoólicas (Vigitel)","Prevalência de indivíduos com 18 anos ou mais de idade dirigindo veículos motorizados após consumo de bebidas alcoólicas (PNS)","Prevalência de prática de atividade física em nível recomendado no tempo livre em indivíduos com 18 anos ou mais de idade (Vigitel)","Prevalência de prática de atividade física em nível recomendado no tempo livre em indivíduos com 18 anos ou mais de idade (PNS)","População residente","Razão de sexo","Proporção de pessoas idosas na população","Índice de envelhecimento","Razão de dependência","Taxas específicas de fecundidade","Taxa de fecundidade total","Taxa bruta de natalidade","Taxas específicas de mortalidade por idade e sexo","Taxa bruta de mortalidade","Taxa de mortalidade padronizada por idade","Cobertura do Sistema de Informações sobre Nascidos Vivos (Sinasc)","Cobertura do Sistema de Informação sobre Mortalidade (SIM)","Proporção de desocupação na população","Rendimento domiciliar per capita a preços correntes","Proporção da população abaixo da linha de pobreza","Produto interno bruto per capita","Taxa de mortalidade neonatal precoce","Taxa de mortalidade neonatal tardia","Taxa de mortalidade pós-neonatal","Razão de mortalidade materna","Taxa de mortalidade por lesão autoprovocada","Taxa de mortalidade por lesão de trânsito","Taxa de mortalidade por neoplasias malignas","Taxa de mortalidade por diabetes mellitus","Incidência de sarampo","Incidência de rubéola","Incidência de síndrome da rubéola congênita","Incidência de difteria","Incidência de coqueluche","Incidência de tétano neonatal","Incidência de tétano acidental","Incidência de raiva humana","Taxa de incidência de aids","Taxa de incidência de sífilis congênita","Taxa de incidência de tuberculose","Taxa de incidência de hanseníase","Taxa de incidência de hanseníase na população menor de 15 anos","Taxa de incidência de toxoplasmose adquirida durante a gestação","Taxa de incidência de toxoplasmose congênita","Participação relativa diária per capita das calorias de frutas, verduras e legumes no total de calorias dos alimentos adquiridos no domicílio","Proporção de nascidos vivos por idade da parturiente","Prevalência de nascidos vivos com anomalias congênitas","Índice CPO-D (número de dentes cariados, perdidos e obturados) aos 12 anos de idade","Razão de consultas médicas (SUS) na Atenção Primária à Saúde por 100 habitantes​​","Razão de consultas médicas (SUS) na Atenção Especializada em Saúde por 100 habitantes​​","Razão de consultas médicas (saúde suplementar) por beneficiários de planos privados de saúde","Proporção da população que referiu ter consultado médico nos últimos 12 meses (PNS)","Proporção da população que referiu ter realizado consulta odontológica nos últimos 12 meses (PNS)","Proporção da população que referiu nunca ter realizado consulta odontológica (PNS)","Taxa de internações hospitalares (SUS) por 100 habitantes","Taxa de internações hospitalares (saúde suplementar) por 100 beneficiários de planos privados de saúde","Proporção da população do sexo feminino de 50 a 69 anos de idade que referiu ter realizado mamografia há menos de dois anos (PNS)​","Proporção da população do sexo feminino de 50 a 69 anos de idade que referiu ter realizado mamografia há menos de dois anos (Vigitel)","Proporção da população do sexo feminino de 50 a 69 anos de idade que referiu nunca ter realizado mamografia​​(PNS)","Proporção da população do sexo feminino de 50 a 69 anos de idade que referiu nunca ter realizado mamografia (Vigitel)","Proporção de nascidos vivos segundo o número de consultas de pré-natal","Proporção de partos hospitalares","Proporção de partos cesáreos","Proporção da população do sexo feminino de 18 a 49 anos de idade que referiu uso de métodos anticonceptivos ​(PNS)","Proporção da população coberta por planos privados de assistência à saúde","Proporção da população que referiu cobertura por planos de saúde (PNS)","Trabalhadores da saúde por população","Leitos hospitalares por população","Equipamentos de imagem por população","Valor médio de referência por atendimento ambulatorial no Sistema Único de Saúde","Gasto em ações e serviços públicos de saúde como percentual do produto interno bruto","Gasto em ações e serviços públicos de saúde per capita","Gasto nacional com saúde como percentual do produto interno bruto","Gasto nacional per capita com saúde","Gasto federal com saúde como percentual do produto interno bruto","Gasto federal com saúde como percentual do gasto federal total","Gasto público com saneamento básico como percentual do produto interno bruto","Gasto federal com saneamento básico como percentual do produto interno bruto","Gasto federal com saneamento básico como percentual do gasto federal total","Proporção das importações de bens e serviços de saúde na oferta nacional"],["indi_0054","indi_0011","indi_0055","indi_0056","indi_0057","indi_0058","indi_0050","indi_0051","indi_0052","indi_0053","indi_0010","indi_0011","indi_0049","indi_0018","indi_0022","indi_0032","indi_0020","indi_0021","indi_0014","indi_0017","indi_0016","indi_0019","indi_0001","indi_0016","indi_0030","indi_0030","indi_0014","indi_0001","indi_0011","indi_0011","indi_0011","indi_0001","indi_0019","indi_0018","indi_0011","indi_0003","indi_0024","indi_0054","indi_0012","indi_0001","indi_0001","indi_0003","indi_0003","indi_0023","indi_0051","indi_0052","indi_0037","indi_0037","indi_0037","indi_0003","indi_0016","indi_0011","indi_0023","indi_0040","indi_0040","indi_0040","indi_0007","indi_0007","indi_0052","indi_0007","indi_0007","indi_0053","indi_0053","indi_0053","indi_0053","indi_0055","indi_0055","indi_0011","indi_0053","indi_0053","indi_0053","indi_0052","indi_0053","indi_0053","indi_0053","indi_0053","indi_0053","indi_0053","indi_0053","indi_0053","indi_0053","indi_0003","indi_0052","indi_0053","indi_0053","indi_0053","indi_0053","indi_0053","indi_0053","indi_0053","indi_0053","indi_0053","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001","indi_0001"],["Taxa de crescimento anual da população","Taxa de mortalidade em menores de 5 anos","Esperança de vida ao nascer","Esperança de vida aos 60 anos de idade","Proporção de analfabetismo na população","Proporção da população sem educação básica","Proporção da população ocupada sem contribuição para a previdência social","Proporção de jovens que não estudam e não trabalham","Proporção da população de 5 a 17 anos em situação de trabalho infantil","Razão entre a renda total dos 10% mais ricos e a dos 40% mais pobres","Taxa de mortalidade Infantil","Taxa de mortalidade em menores de 5 anos","Taxa de mortalidade por agressão","Taxa de incidência de febre amarela","Taxa de mortalidade por cólera","Taxa de internação por leptospirose","Taxa de incidência de leishmaniose tegumentar","Taxa de incidência de leishmaniose visceral","Taxa de mortalidade por dengue","Taxa de incidência de chikungunya","Taxa de incidência de Zika","Taxa de incidência de doença de chagas","Taxa de mortalidade por causas externas","Taxa de incidência de Zika","Taxa de internação por hepatite A","Taxa de internação por hepatite A","Taxa de mortalidade por dengue","Taxa de mortalidade por causas externas","Taxa de mortalidade em menores de 5 anos","Taxa de mortalidade em menores de 5 anos","Taxa de mortalidade em menores de 5 anos","Taxa de mortalidade por causas externas","Taxa de incidência de doença de chagas","Taxa de incidência de febre amarela","Taxa de mortalidade em menores de 5 anos","Mortalidade por doencas isquemicas do coracao","Taxa de mortalidade por esquistossomose","Taxa de crescimento anual da população","Mortalidade proporcional por infecção respiratória aguda em menores de 5 anos de idade","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Mortalidade por doencas isquemicas do coracao","Mortalidade por doencas isquemicas do coracao","Taxa de mortalidade por exposição as forças da natureza","Proporção de jovens que não estudam e não trabalham","Proporção da população de 5 a 17 anos em situação de trabalho infantil","Taxa de mortalidade por malária (Sem especificação)","Taxa de mortalidade por malária (Sem especificação)","Taxa de mortalidade por malária (Sem especificação)","Mortalidade por doencas isquemicas do coracao","Taxa de incidência de Zika","Taxa de mortalidade em menores de 5 anos","Taxa de mortalidade por exposição as forças da natureza","Taxa de internação hospitalar por bronquite (todas especificações)","Taxa de internação hospitalar por bronquite (todas especificações)","Taxa de internação hospitalar por bronquite (todas especificações)","Taxa de mortalidade por neoplasia maligna da colo de útero","Taxa de mortalidade por neoplasia maligna da colo de útero","Proporção da população de 5 a 17 anos em situação de trabalho infantil","Taxa de mortalidade por neoplasia maligna da colo de útero","Taxa de mortalidade por neoplasia maligna da colo de útero","Razão entre a renda total dos 10% mais ricos e a dos 40% mais pobres","Razão entre a renda total dos 10% mais ricos e a dos 40% mais pobres","Razão entre a renda total dos 10% mais ricos e a dos 40% mais pobres","Razão entre a renda total dos 10% mais ricos e a dos 40% mais pobres","Esperança de vida ao nascer","Esperança de vida ao nascer","Taxa de mortalidade em menores de 5 anos","Razão entre a renda total dos 10% mais ricos e a dos 40% mais pobres","Razão entre a renda total dos 10% mais ricos e a dos 40% mais pobres","Razão entre a renda total dos 10% mais ricos e a dos 40% mais pobres","Proporção da população de 5 a 17 anos em situação de trabalho infantil","Razão entre a renda total dos 10% mais ricos e a dos 40% mais pobres","Razão entre a renda total dos 10% mais ricos e a dos 40% mais pobres","Razão entre a renda total dos 10% mais ricos e a dos 40% mais pobres","Razão entre a renda total dos 10% mais ricos e a dos 40% mais pobres","Razão entre a renda total dos 10% mais ricos e a dos 40% mais pobres","Razão entre a renda total dos 10% mais ricos e a dos 40% mais pobres","Razão entre a renda total dos 10% mais ricos e a dos 40% mais pobres","Razão entre a renda total dos 10% mais ricos e a dos 40% mais pobres","Razão entre a renda total dos 10% mais ricos e a dos 40% mais pobres","Mortalidade por doencas isquemicas do coracao","Proporção da população de 5 a 17 anos em situação de trabalho infantil","Razão entre a renda total dos 10% mais ricos e a dos 40% mais pobres","Razão entre a renda total dos 10% mais ricos e a dos 40% mais pobres","Razão entre a renda total dos 10% mais ricos e a dos 40% mais pobres","Razão entre a renda total dos 10% mais ricos e a dos 40% mais pobres","Razão entre a renda total dos 10% mais ricos e a dos 40% mais pobres","Razão entre a renda total dos 10% mais ricos e a dos 40% mais pobres","Razão entre a renda total dos 10% mais ricos e a dos 40% mais pobres","Razão entre a renda total dos 10% mais ricos e a dos 40% mais pobres","Razão entre a renda total dos 10% mais ricos e a dos 40% mais pobres","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas","Taxa de mortalidade por causas externas"],["sidrar","SIM","sidrar","sidrar","PNADcIBGE","PNADcIBGE","PNADcIBGE","PNADcIBGE","PNADcIBGE","PNADcIBGE","SIM","SIM","SIM","recbilis","SIM","SIH","recbilis","recbilis","SIM","recbilis","recbilis","recbilis","SIM","recbilis","SIH","SIH","SIM","SIM","SIM","SIM","SIM","SIM","recbilis","recbilis","SIM","SIM","SIM","sidrar","SIM","SIM","SIM","SIM","SIM","SIM","PNADcIBGE","PNADcIBGE","SIM","SIM","SIM","SIM","recbilis","SIM","SIM","SIH","SIH","SIH","SIM","SIM","PNADcIBGE","SIM","SIM","PNADcIBGE","PNADcIBGE","PNADcIBGE","PNADcIBGE","sidrar","sidrar","SIM","PNADcIBGE","PNADcIBGE","PNADcIBGE","PNADcIBGE","PNADcIBGE","PNADcIBGE","PNADcIBGE","PNADcIBGE","PNADcIBGE","PNADcIBGE","PNADcIBGE","PNADcIBGE","PNADcIBGE","SIM","PNADcIBGE","PNADcIBGE","PNADcIBGE","PNADcIBGE","PNADcIBGE","PNADcIBGE","PNADcIBGE","PNADcIBGE","PNADcIBGE","PNADcIBGE","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM","SIM"],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.667,0.5,0.5,0.5,0.5,0.5,0.5,0.4,0.4,0.4,0.333,0.333,0.333,0.286,0.25,0.25,0.25,0.222,0.2,0.2,0.2,0.2,0.2,0.167,0.143,0.143,0.143,0.143,0.143,0.143,0.143,0.143,0.143,0.125,0.125,0.125,0.125,0.111,0.111,0.111,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.091,0.091,0.091,0.091,0.091,0.091,0.083,0.083,0.083,0.083,0.083,0.083,0.083,0.077,0.077,0.07099999999999999,0.07099999999999999,0.07099999999999999,0.067,0.067,0.062,0.062,0.062,0.062,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],["confirmado","confirmado","confirmado","confirmado","confirmado","confirmado","confirmado","confirmado","confirmado","confirmado","confirmado","confirmado","confirmado","confirmado","confirmado","confirmado","confirmado","confirmado","confirmado","confirmado","confirmado","confirmado","sugerivo","sugerivo","sugerivo","sugerivo","sugerivo","sugerivo","sugerivo","sugerivo","sugerivo","sugerivo","sugerivo","sugerivo","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado","rejeitado"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Código<\/th>\n      <th>Indicador RIPSA<\/th>\n      <th>Função<\/th>\n      <th>Título BRINDI<\/th>\n      <th>Fonte<\/th>\n      <th>Similaridade<\/th>\n      <th>Status<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"bPaginate":false,"dom":"ifrt","language":{"info":"Showing _TOTAL_ entries"},"pageLength":15,"scrollX":true,"order":[[6,"desc"]],"columnDefs":[{"className":"dt-right","targets":5},{"name":"code","targets":0},{"name":"nome","targets":1},{"name":"funcao","targets":2},{"name":"titulo_brindi","targets":3},{"name":"fonte","targets":4},{"name":"similaridade","targets":5},{"name":"status","targets":6}],"autoWidth":false,"orderClasses":false,"orderCellsTop":true,"lengthMenu":[10,15,25,50,100],"rowCallback":"function(row, data, displayNum, displayIndex, dataIndex) {\nvar value=data[6]; $(this.api().cell(row, 6).node()).css({'font-weight':'bold','color':value == \"confirmado\" ? \"#155724\" : value == \"sugestivo\" ? \"#856404\" : value == \"rejeitado\" ? \"#721c24\" : null,'background-color':value == \"confirmado\" ? \"#d4edda\" : value == \"sugestivo\" ? \"#fff3cd\" : value == \"rejeitado\" ? \"#f8d7da\" : null});\nvar value=data[5]; $(this.api().cell(row, 5).node()).css({'background':isNaN(parseFloat(value)) || value <= 0.000000 ? '' : 'linear-gradient(90.000000deg, transparent ' + Math.max(1.000000 - value, 0)/1.000000 * 100 + '%, #de2d26 ' + Math.max(1.000000 - value, 0)/1.000000 * 100 + '%)','background-size':'98%','background-position':'left'});\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div>
+<div class="card tabset bslib-card html-fill-container" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-header dashboard-card-no-title bslib-navs-card-title">
+
+<ul class="nav nav-tabs card-header-tabs" role="tablist" data-tabsetid="card-tabset-8"><li class="nav-item" role="presentation"><a href="#card-tabset-8-1" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="Fonte dos dados" aria-selected="true" class="nav-link active">Fonte dos dados</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-8-2" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="Critério de correspondência" aria-selected="false" class="nav-link">Critério de correspondência</a></li></ul></div>
+
+
+<div class="tab-content html-fill-item html-fill-container" data-tabset-id="card-tabset-8"><div class="tab-pane active show html-fill-item html-fill-container" role="tabpanel" id="card-tabset-8-1"><div class="card-body html-fill-item html-fill-container" data-title="Fonte dos dados">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, max-content); grid-auto-columns: minmax(0, 1fr);">
+<div class="card html-fill-item html-fill-container bslib-card" data-fill="false" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<ul>
+<li>Matriz de indicadores: extraída do sumário oficial do Livro Verde da RIPSA (<code>ripsa_matrix()</code>), com 168 indicadores nas 7 dimensões (DEM, SOC, MRT, MRB, FRP, REC, COB).</li>
+<li>Catálogo BRINDI: títulos das 58 funções <code>indi_*</code> implementadas no pacote (<code>brindi_indicator_catalog()</code>).</li>
+</ul>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-8-2"><div class="card-body html-fill-item html-fill-container" data-title="Critério de correspondência">
+<div class="bslib-grid html-fill-item html-fill-container" style="display: grid; grid-template-rows: minmax(3em, max-content); grid-auto-columns: minmax(0, 1fr);">
+<div class="card html-fill-item html-fill-container bslib-card" data-fill="false" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<ul>
+<li>Pareamento por similaridade de tokens (Jaccard) entre o nome do indicador RIPSA e o título da função BRINDI, após remover termos genéricos (taxa, mortalidade, incidência, proporção etc.) que se repetem em quase todos os títulos.</li>
+<li><strong>Confirmado:</strong> similaridade ≥ 0.55 (match forte, específico)</li>
+<li><strong>Sugestivo:</strong> similaridade entre 0.3 e 0.55 (match possível, requer verificação manual)</li>
+<li><strong>Rejeitado:</strong> similaridade &lt; 0.3 (match fraco, provavelmente incorreto)</li>
+<li>Esse pareamento é heurístico: indicadores não encontrados podem estar implementados sob um título com redação muito diferente do Livro Verde, exigindo revisão manual. A tabela interativa permite filtrar e verificar cada match.</li>
+</ul>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+<div id="3ade8a4a-fb1d-4a6c-8409-ac45482d5fc9" class="hidden html-fill-item html-fill-container">
+
+</div>
+</div>
+</div></div></div><bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /container fluid -->
+
+<script type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (_event) {
+  if (window.bslib.Card) {
+    window.bslib.Card.initializeAllCards();
+  }
+}); 
+</script>
+  
+
+
+
+</body></html>
