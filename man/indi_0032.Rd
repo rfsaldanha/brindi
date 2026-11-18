@@ -37,8 +37,6 @@ Indicator: Taxa de internação por leptospirose
 }
 \examples{
 # Some examples
-\dontrun{
 indi_0032(agg = "mun_res", ano = 2013)
 
-}
 }

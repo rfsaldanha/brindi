@@ -11,9 +11,8 @@
 #'
 #' @examples
 #' # Some examples
-#' \dontrun{
 #' indi_0015(agg = "mun_res", ano = 2013)
-#' }
+#'
 #' @importFrom rlang .data
 #' @export
 indi_0015 <- function(

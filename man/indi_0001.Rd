@@ -37,8 +37,6 @@ Indicator: Taxa de mortalidade por causas externas
 }
 \examples{
 # Some examples
-\dontrun{
 indi_0001(agg = "mun_res", ano = 2013)
-}
 
 }

@@ -1,0 +1,129 @@
+---
+title: "Completude BRINDI x RIPSA (Livro Verde)"
+format:
+  dashboard:
+    orientation: rows
+    theme: cosmo
+logo: ""
+---
+
+```{r setup}
+#| include: false
+library(brindi)
+library(dplyr)
+library(ggplot2)
+library(DT)
+
+matched <- ripsa_match_indicators(show_all = TRUE)
+summ <- ripsa_completeness_summary()
+
+total_ind <- nrow(matched)
+total_impl <- sum(matched$implementado)
+total_sug <- sum(matched$status == "sugestivo")
+total_rej <- sum(matched$status == "rejeitado")
+pct_geral <- round(100 * total_impl / total_ind, 1)
+pct_sug <- round(100 * total_sug / total_ind, 1)
+```
+
+## Row {height="20%"}
+
+```{r}
+#| content: valuebox
+#| title: "Indicadores RIPSA (Livro Verde)"
+list(icon = "list-ol", color = "primary", value = total_ind)
+```
+
+```{r}
+#| content: valuebox
+#| title: "Confirmados (≥0.55)"
+list(icon = "check-circle", color = "success", value = total_impl)
+```
+
+```{r}
+#| content: valuebox
+#| title: "Sugestivos (0.3-0.55)"
+list(icon = "question-circle", color = "warning", value = total_sug)
+```
+
+```{r}
+#| content: valuebox
+#| title: "Completude geral"
+list(icon = "percent", color = "info", value = paste0(pct_geral, "%"))
+```
+
+## Row {height="45%"}
+
+### Column {width="55%"}
+
+```{r}
+#| title: "Completude por dimensão"
+ggplot(summ, aes(x = reorder(dimensao, percentual), y = percentual, fill = percentual)) +
+  geom_col() +
+  geom_text(aes(label = paste0(implementados, "/", total)), hjust = -0.1, size = 3.5) +
+  scale_fill_gradient(low = "#fee5d9", high = "#de2d26") +
+  coord_flip(ylim = c(0, 100)) +
+  labs(x = NULL, y = "% implementado", fill = "%") +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "none")
+```
+
+### Column {width="45%"}
+
+```{r}
+#| title: "Resumo por dimensão"
+knitr::kable(summ, col.names = c("Dimensão", "Total", "Implementados", "Pendentes", "% Completo"))
+```
+
+## Row {height="35%"}
+
+### Column {width="100%"}
+
+```{r}
+#| title: "Todos os indicadores (verificação manual)"
+datatable(
+  matched %>%
+    select(code, nome, funcao, titulo_brindi, fonte, similaridade, status) %>%
+    arrange(desc(similaridade)),
+  options = list(
+    pageLength = 15,
+    scrollX = TRUE,
+    order = list(list(6, 'desc'))
+  ),
+  filter = 'top',
+  colnames = c("Código", "Indicador RIPSA", "Função", "Título BRINDI", "Fonte", "Similaridade", "Status"),
+  rownames = FALSE
+) %>%
+  formatStyle(
+    'status',
+    backgroundColor = styleEqual(
+      c('confirmado', 'sugestivo', 'rejeitado'),
+      c('#d4edda', '#fff3cd', '#f8d7da')
+    ),
+    color = styleEqual(
+      c('confirmado', 'sugestivo', 'rejeitado'),
+      c('#155724', '#856404', '#721c24')
+    ),
+    fontWeight = 'bold'
+  ) %>%
+  formatStyle(
+    'similaridade',
+    background = styleColorBar(matched$similaridade, '#de2d26'),
+    backgroundSize = '98%',
+    backgroundPosition = 'left'
+  )
+```
+
+## Notas metodológicas {.tabset}
+
+### Fonte dos dados
+
+-   Matriz de indicadores: extraída do sumário oficial do Livro Verde da RIPSA (`ripsa_matrix()`), com 168 indicadores nas 7 dimensões (DEM, SOC, MRT, MRB, FRP, REC, COB).
+-   Catálogo BRINDI: títulos das 58 funções `indi_*` implementadas no pacote (`brindi_indicator_catalog()`).
+
+### Critério de correspondência
+
+-   Pareamento por similaridade de tokens (Jaccard) entre o nome do indicador RIPSA e o título da função BRINDI, após remover termos genéricos (taxa, mortalidade, incidência, proporção etc.) que se repetem em quase todos os títulos.
+-   **Confirmado:** similaridade ≥ 0.55 (match forte, específico)
+-   **Sugestivo:** similaridade entre 0.3 e 0.55 (match possível, requer verificação manual)
+-   **Rejeitado:** similaridade \< 0.3 (match fraco, provavelmente incorreto)
+-   Esse pareamento é heurístico: indicadores não encontrados podem estar implementados sob um título com redação muito diferente do Livro Verde, exigindo revisão manual. A tabela interativa permite filtrar e verificar cada match.

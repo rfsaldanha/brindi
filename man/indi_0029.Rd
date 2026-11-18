@@ -37,8 +37,6 @@ Indicator: Taxa de internação por esquistossomose
 }
 \examples{
 # Some examples
-\dontrun{
 indi_0029(agg = "mun_res", ano = 2013)
 
-}
 }

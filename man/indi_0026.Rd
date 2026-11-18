@@ -37,8 +37,6 @@ Indicator: Taxa de internação por afogamentos
 }
 \examples{
 # Some examples
-\dontrun{
 indi_0026(agg = "mun_res", ano = 2013)
 
-}
 }

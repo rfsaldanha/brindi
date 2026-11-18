@@ -16,19 +16,21 @@ Foram incluídos como calculáveis os indicadores com função `indi_*` existent
 ## Fontes atualmente disponíveis no pacote
 
 | Fonte | Uso atual | Pacote/função |
-|---|---|---|
+|----|----|----|
 | SIM | Óbitos por causa, idade e agregação territorial | `rpcdas::get_sim()` |
 | SINASC | Nascidos vivos para denominadores de mortalidade infantil | `rpcdas::get_sinasc()` |
 | SIH/SUS | Internações hospitalares por causa | `rpcdas::get_sih()` |
 | População | Denominadores por sexo, idade e território | `brpop` via `denominator_pop()` |
 | Agravos selecionados | Incidências de arboviroses e leishmanioses | `recbilis` |
+| PNAD Contínua | Indicadores socioeconômicos (trabalho, renda, educação) | `PNADcIBGE` |
+| IBGE/SIDRA | Indicadores demográficos (população, esperança de vida) | `sidrar` |
 
 ## Indicadores possíveis com os dados disponíveis
 
 ### Mortalidade (MRT)
 
 | Código Livro Verde | Indicador | Função BRINDI | Fonte principal |
-|---|---|---|---|
+|----|----|----|----|
 | MRT.1.01 | Taxa de mortalidade infantil | `indi_0010()` | SIM/SINASC via `rpcdas` |
 | MRT.1.05 | Taxa de mortalidade em menores de 5 anos | `indi_0011()` | SIM/SINASC via `rpcdas` |
 | MRT.4.02 | Taxa de mortalidade por lesão autoprovocada | `indi_0005()` | SIM via `rpcdas` |
@@ -42,7 +44,7 @@ Foram incluídos como calculáveis os indicadores com função `indi_*` existent
 ### Morbidade (MRB)
 
 | Código Livro Verde | Indicador | Função BRINDI | Fonte principal |
-|---|---|---|---|
+|----|----|----|----|
 | MRB.1.08 | Incidência de febre amarela | `indi_0018()` | SINAN/recbilis |
 | MRB.1.15 | Incidência de leptospirose | `indi_0032()` | SIH/SIM conforme função |
 | MRB.1.17 | Incidência de esquistossomose mansoni não grave | `indi_0029()` | SIH via `rpcdas` |
@@ -55,13 +57,34 @@ Foram incluídos como calculáveis os indicadores com função `indi_*` existent
 ### Cobertura/uso hospitalar (COB)
 
 | Código Livro Verde | Indicador | Função BRINDI | Fonte principal |
-|---|---|---|---|
+|----|----|----|----|
 | COB.2.01 | Taxa de internações hospitalares (SUS) por 100 habitantes | `indi_0025()` a `indi_0030()`, `indi_0032()`, `indi_0034()`, `indi_0038()`, `indi_0040()`, `indi_0042()`, `indi_0044()`, `indi_0047()`, `indi_0048()` | SIH via `rpcdas` |
+
+### Demográficos (DEM)
+
+| Código Livro Verde | Indicador | Função BRINDI | Fonte principal |
+|----|----|----|----|
+| DEM.3.04 | Esperança de vida ao nascer | `indi_0055()` | IBGE/SIDRA |
+| DEM.3.05 | Esperança de vida aos 60 anos | `indi_0056()` | IBGE/SIDRA |
+| DEM.1.01 | Taxa de crescimento anual da população | `indi_0054()` | IBGE/SIDRA |
+
+### Socioeconômicos (SOC)
+
+| Código Livro Verde | Indicador | Função BRINDI | Fonte principal |
+|----|----|----|----|
+| SOC.2.01 | Proporção de analfabetismo na população | `indi_0057()` | PNAD Contínua |
+| SOC.2.02 | Proporção da população sem educação básica | `indi_0058()` | PNAD Contínua |
+| SOC.3.01 | Proporção da população ocupada sem contribuição para a previdência | `indi_0050()` | PNAD Contínua |
+| SOC.3.02 | Proporção de jovens que não estudam e não trabalham | `indi_0051()` | PNAD Contínua |
+| SOC.3.03 | Proporção de crianças em trabalho infantil | `indi_0052()` | PNAD Contínua |
+| SOC.4.01 | Razão de renda (10% mais ricos / 40% mais pobres) | `indi_0053()` | PNAD Contínua |
 
 ## Catálogo operacional das funções disponíveis
 
+O pacote contém 58 funções de indicadores implementadas em `R/`, de `indi_0001()` a `indi_0058()`.
+
 | Função | Indicador | Numerador | Denominador | Multiplicador |
-|---|---|---|---|---:|
+|----|----|----|----|---:|
 | `indi_0001()` | Taxa de mortalidade por causas externas | SIM | População total | 100.000 |
 | `indi_0002()` | Taxa de mortalidade por AVC | SIM | População total | 100.000 |
 | `indi_0003()` | Taxa de mortalidade por doenças isquêmicas do coração | SIM | População total | 100.000 |
@@ -94,46 +117,65 @@ Foram incluídos como calculáveis os indicadores com função `indi_*` existent
 | `indi_0046()` | Mortalidade por infarto agudo do miocárdio | SIM | População total | 100.000 |
 | `indi_0047()` | Internação por infarto agudo do miocárdio | SIH | População total | 100 |
 | `indi_0048()` | Internação por AVC | SIH | População total | 100.000 |
+| `indi_0049()` | Taxa de mortalidade por agressão | SIM | População total | 100.000 |
+| `indi_0050()` | Proporção da população ocupada sem contribuição para a previdência social | PNADcIBGE | População ocupada | 100 |
+| `indi_0051()` | Proporção de jovens que não estudam e não trabalham | PNADcIBGE | Jovens 15-29 anos | 100 |
+| `indi_0052()` | Proporção da população de 5 a 17 anos em situação de trabalho infantil | PNADcIBGE | População 5-17 anos | 100 |
+| `indi_0053()` | Razão entre a renda total dos 10% mais ricos e a dos 40% mais pobres | PNADcIBGE | - | 1 |
+| `indi_0054()` | Taxa de crescimento anual da população | sidrar | População total | 1 |
+| `indi_0055()` | Esperança de vida ao nascer | sidrar | - | 1 |
+| `indi_0056()` | Esperança de vida aos 60 anos de idade | sidrar | - | 1 |
+| `indi_0057()` | Proporção de analfabetismo na população | PNADcIBGE | População 15+ anos | 100 |
+| `indi_0058()` | Proporção da população sem educação básica | PNADcIBGE | População 25+ anos | 100 |
 
 ## Fichas dos indicadores calculáveis
 
 ### Ficha padrão: mortalidade por população
 
-- **Indicadores:** `indi_0001()` a `indi_0008()`, `indi_0013()`, `indi_0014()`, `indi_0022()` a `indi_0024()`, `indi_0031()`, `indi_0033()`, `indi_0035()` a `indi_0037()`, `indi_0039()`, `indi_0041()`, `indi_0043()`, `indi_0045()`, `indi_0046()`.
-- **Numerador:** óbitos selecionados no SIM por CID/filtro do respectivo script.
-- **Denominador:** população de `brpop`, total ou por sexo quando indicado.
-- **Cálculo:** `(óbitos / população) * multiplicador`.
-- **Saída:** `name`, `cod`, `date`, `value`.
-- **Agregações:** municípios, UF e regiões de saúde conforme suporte de `rpcdas`/`brpop`.
+-   **Indicadores:** `indi_0001()` a `indi_0008()`, `indi_0013()`, `indi_0014()`, `indi_0022()` a `indi_0024()`, `indi_0031()`, `indi_0033()`, `indi_0035()` a `indi_0037()`, `indi_0039()`, `indi_0041()`, `indi_0043()`, `indi_0045()`, `indi_0046()`, `indi_0049()`.
+-   **Numerador:** óbitos selecionados no SIM por CID/filtro do respectivo script.
+-   **Denominador:** população de `brpop`, total ou por sexo quando indicado.
+-   **Cálculo:** `(óbitos / população) * multiplicador`.
+-   **Saída:** `name`, `cod`, `date`, `value`.
+-   **Agregações:** municípios, UF e regiões de saúde conforme suporte de `rpcdas`/`brpop`.
 
 ### Ficha padrão: mortalidade infantil e menores de 5 anos
 
-- **Indicadores:** `indi_0010()`, `indi_0011()`.
-- **Numerador:** óbitos do SIM em menores de 1 ano ou menores de 5 anos.
-- **Denominador:** nascidos vivos do SINASC.
-- **Cálculo:** `(óbitos / nascidos vivos) * 1.000`.
-- **Observação:** usa denominador arbitrário via `indicator_raw(denominador_type = "arbitrary")`.
+-   **Indicadores:** `indi_0010()`, `indi_0011()`.
+-   **Numerador:** óbitos do SIM em menores de 1 ano ou menores de 5 anos.
+-   **Denominador:** nascidos vivos do SINASC.
+-   **Cálculo:** `(óbitos / nascidos vivos) * 1.000`.
+-   **Observação:** usa denominador arbitrário via `indicator_raw(denominador_type = "arbitrary")`.
 
 ### Ficha padrão: mortalidade proporcional
 
-- **Indicadores:** `indi_0009()`, `indi_0012()`.
-- **Numerador:** óbitos por causa específica em menores de 5 anos.
-- **Denominador:** total de óbitos em menores de 5 anos.
-- **Cálculo:** `(óbitos específicos / total de óbitos) * 100`.
+-   **Indicadores:** `indi_0009()`, `indi_0012()`.
+-   **Numerador:** óbitos por causa específica em menores de 5 anos.
+-   **Denominador:** total de óbitos em menores de 5 anos.
+-   **Cálculo:** `(óbitos específicos / total de óbitos) * 100`.
 
 ### Ficha padrão: incidência por agravos selecionados
 
-- **Indicadores:** `indi_0015()` a `indi_0021()`.
-- **Numerador:** casos obtidos por funções do `recbilis`.
-- **Denominador:** população total de `brpop`.
-- **Cálculo:** `(casos / população) * 100.000`.
+-   **Indicadores:** `indi_0015()` a `indi_0021()`.
+-   **Numerador:** casos obtidos por funções do `recbilis`.
+-   **Denominador:** população total de `brpop`.
+-   **Cálculo:** `(casos / população) * 100.000`.
 
 ### Ficha padrão: internações hospitalares
 
-- **Indicadores:** `indi_0025()` a `indi_0030()`, `indi_0032()`, `indi_0034()`, `indi_0038()`, `indi_0040()`, `indi_0042()`, `indi_0044()`, `indi_0047()`, `indi_0048()`.
-- **Numerador:** internações selecionadas no SIH por CID/filtro do respectivo script.
-- **Denominador:** população total de `brpop`.
-- **Cálculo:** `(internações / população) * multiplicador`.
+-   **Indicadores:** `indi_0025()` a `indi_0030()`, `indi_0032()`, `indi_0034()`, `indi_0038()`, `indi_0040()`, `indi_0042()`, `indi_0044()`, `indi_0047()`, `indi_0048()`.
+-   **Numerador:** internações selecionadas no SIH por CID/filtro do respectivo script.
+-   **Denominador:** população total de `brpop`.
+-   **Cálculo:** `(internações / população) * multiplicador`.
+
+### Ficha padrão: indicadores socioeconômicos e demográficos
+
+-   **Indicadores:** `indi_0049()` a `indi_0058()`.
+-   **Numerador:** variáveis específicas de PNAD Contínua (trabalho, renda, educação) ou dados demográficos do IBGE via `sidrar`.
+-   **Denominador:** população total, população em idade específica, ou trabalhadores, conforme indicador.
+-   **Cálculo:** proporções calculadas com pesos amostrais complexos (PNADcIBGE) ou taxas demográficas (sidrar).
+-   **Fonte:** `PNADcIBGE` para indicadores socioeconômicos, `sidrar` para indicadores demográficos.
+-   **Observação:** indicadores de inquérito (PNAD Contínua) exigem desenho amostral complexo e pesos de expansão.
 
 ## Exemplos de uso
 
@@ -148,7 +190,7 @@ indi_0048(agg = "uf_res", ano = 2013)
 ## Indicadores ainda não disponíveis e fontes abertas possíveis
 
 | Códigos | Tema | Fonte aberta possível | Encaminhamento técnico |
-|---|---|---|---|
+|----|----|----|----|
 | DEM.1.05 a DEM.1.07 | Idosos, envelhecimento e dependência | IBGE Censo/SIDRA, Projeções da População do IBGE, `brpop` | Criar funções por grupos etários e razão entre populações. |
 | DEM.2.01 a DEM.2.03 | Fecundidade e natalidade | SINASC/DATASUS, OpenDataSUS, IBGE/SIDRA | Exige nascidos vivos por idade da mãe e população feminina por idade. |
 | DEM.3.01 a DEM.3.05 | Mortalidade específica, padronizada e esperança de vida | SIM/DATASUS, IBGE Tábuas de Mortalidade, `brpop` | Taxas específicas são viáveis com SIM; esperança de vida exige tábua de vida. |
@@ -161,7 +203,7 @@ indi_0048(agg = "uf_res", ano = 2013)
 
 ## Próximos passos recomendados
 
-- **Prioridade 1:** implementar DEM com `brpop`/IBGE e SINASC, pois há maior compatibilidade com a arquitetura atual.
-- **Prioridade 2:** ampliar MRB com SINAN/OpenDataSUS quando houver função de aquisição dos dados.
-- **Prioridade 3:** COB/REC via SIH, SIA, CNES, ANS e SIOPS.
-- **Prioridade 4:** SOC/FRP por IBGE/Vigitel/PeNSE/PNS, com atenção a pesos amostrais.
+-   **Prioridade 1:** implementar DEM com `brpop`/IBGE e SINASC, pois há maior compatibilidade com a arquitetura atual.
+-   **Prioridade 2:** ampliar MRB com SINAN/OpenDataSUS quando houver função de aquisição dos dados.
+-   **Prioridade 3:** COB/REC via SIH, SIA, CNES, ANS e SIOPS.
+-   **Prioridade 4:** SOC/FRP por IBGE/Vigitel/PeNSE/PNS, com atenção a pesos amostrais.

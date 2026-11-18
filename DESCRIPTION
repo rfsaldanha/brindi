@@ -33,13 +33,15 @@ Imports:
     stringr,
     RPostgres,
     arrow,
-    tidyrates
+    tidyrates,
+    sidrar
 Remotes:
     rfsaldanha/brpop,
     rfsaldanha/rpcdas,
     rfsaldanha/recbilis
 Suggests: 
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    DT
 Config/testthat/parallel: true
 Config/testthat/edition: 3
 Depends: 

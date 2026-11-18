@@ -37,8 +37,6 @@ Indicator: Taxa de mortalidade Infantil
 }
 \examples{
 # Some examples
-\dontrun{
 indi_0010(agg = "mun_res", ano = 2013)
-}
 
 }

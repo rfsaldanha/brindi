@@ -11,9 +11,8 @@
 #'
 #' @examples
 #' # Some examples
-#' \dontrun{
 #' indi_0007(agg = "mun_res", ano = 2013)
-#' }
+#'
 #' @importFrom rlang .data
 #' @export
 indi_0007 <- function(
@@ -74,7 +73,6 @@ indi_0007 <- function(
       agg = agg,
       agg_time = agg_time,
       ano = ano,
-      pcdas_token = pcdas_token,
       cid_like = "C53"
     )
 

@@ -21,10 +21,6 @@ indicator_adjusted(
 
 \item{ano}{Year of indicator}
 
-\item{agg}{character. Spatial aggregation level.}
-
-\item{agg_time}{character. Time aggregation level.}
-
 \item{pop_source}{character. Population source, from {brpop} package.}
 
 \item{nome}{character. Indicator name.}

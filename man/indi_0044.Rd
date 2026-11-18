@@ -37,8 +37,6 @@ Indicator: Taxa de internação por Doença Pulmonar Obstrutiva (DPOC)
 }
 \examples{
 # Some examples
-\dontrun{
 indi_0044(agg = "mun_res", ano = 2013)
 
-}
 }
